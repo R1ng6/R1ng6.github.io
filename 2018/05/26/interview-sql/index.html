@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>SQL-injection | welcome to my blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="思路0x01  参数包裹测试1&apos; &quot; ( &amp;#123; 0x02  测试waf">
+  <meta name="description" content="思路0x01  参数包裹测试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL-injection">
 <meta property="og:url" content="http://yoursite.com/2018/05/26/interview-sql/index.html">
 <meta property="og:site_name" content="welcome to my blogs">
-<meta property="og:description" content="思路0x01  参数包裹测试1&apos; &quot; ( &amp;#123; 0x02  测试waf">
+<meta property="og:description" content="思路0x01  参数包裹测试">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-28T15:02:15.386Z">
+<meta property="og:updated_time" content="2018-06-01T09:56:54.267Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL-injection">
-<meta name="twitter:description" content="思路0x01  参数包裹测试1&apos; &quot; ( &amp;#123; 0x02  测试waf">
+<meta name="twitter:description" content="思路0x01  参数包裹测试">
   
     <link rel="alternative" href="/atom.xml" title="welcome to my blogs" type="application/atom+xml">
   
@@ -169,9 +169,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="0x01-参数包裹"><a href="#0x01-参数包裹" class="headerlink" title="0x01  参数包裹"></a>0x01  参数包裹</h3><p>测试<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">' " ( &#123;</span><br></pre></td></tr></table></figure></p>
-<h3 id="0x02-测试waf"><a href="#0x02-测试waf" class="headerlink" title="0x02  测试waf"></a>0x02  测试waf</h3><a id="more"></a>
-<p>测试空格 uname=adm in 和uname=admin 有没有被过滤为空<br>用burp里的intruder功能fuzz单字符，字典包含所有的字符标点，–+等<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1$'$</span><br></pre></td></tr></table></figure></p>
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="0x01-参数包裹"><a href="#0x01-参数包裹" class="headerlink" title="0x01  参数包裹"></a>0x01  参数包裹</h3><p>测试<br><a id="more"></a><br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">' " ( &#123;</span><br></pre></td></tr></table></figure></p>
+<h3 id="0x02-测试waf"><a href="#0x02-测试waf" class="headerlink" title="0x02  测试waf"></a>0x02  测试waf</h3><p>测试空格 uname=adm in 和uname=admin 有没有被过滤为空<br>用burp里的intruder功能fuzz单字符，字典包含所有的字符标点，–+等<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1$'$</span><br></pre></td></tr></table></figure></p>
 <p>测试关键字waf，and，select等<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1$and$</span><br></pre></td></tr></table></figure></p>
 <p>依据有差别的注入点，测试替换<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1' or ''='$and$ //测试有没有被替换为空等</span><br></pre></td></tr></table></figure></p>
 <h3 id="0x03-测试payload"><a href="#0x03-测试payload" class="headerlink" title="0x03  测试payload"></a>0x03  测试payload</h3><p>根据被waf的关键字和测试出的能被绕过的关键字去构造payload，确定注入的类型，再用脚本</p>
@@ -314,8 +313,17 @@
   
 <nav id="article-nav">
   
+    <a href="/2018/05/31/interview-file-upload/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          文件包含
+        
+      </div>
+    </a>
   
-    <a href="/2018/05/20/essay_2/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2018/05/20/essay-2/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">const和指针</div>
       <i class="icon-circle-right"></i>
     </a>
