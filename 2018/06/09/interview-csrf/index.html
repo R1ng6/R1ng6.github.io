@@ -6,21 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>文件上传 | welcome to my blogs</title>
+  <title>interview-csrf | welcome to my blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="客户端检验一般使用js代码检验后缀名可以先命名为jpg然后再抓包更改为php上传或者直接禁用js">
-<meta property="og:type" content="article">
-<meta property="og:title" content="文件上传">
-<meta property="og:url" content="http://yoursite.com/2018/05/31/interview-file-upload/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="interview-csrf">
+<meta property="og:url" content="http://yoursite.com/2018/06/09/interview-csrf/index.html">
 <meta property="og:site_name" content="welcome to my blogs">
-<meta property="og:description" content="客户端检验一般使用js代码检验后缀名可以先命名为jpg然后再抓包更改为php上传或者直接禁用js">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/05/31/interview-file-upload/1.png">
-<meta property="og:updated_time" content="2018-06-09T03:47:21.409Z">
+<meta property="og:updated_time" content="2018-06-09T09:18:33.543Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="文件上传">
-<meta name="twitter:description" content="客户端检验一般使用js代码检验后缀名可以先命名为jpg然后再抓包更改为php上传或者直接禁用js">
-<meta name="twitter:image" content="http://yoursite.com/2018/05/31/interview-file-upload/1.png">
+<meta name="twitter:title" content="interview-csrf">
   
     <link rel="alternative" href="/atom.xml" title="welcome to my blogs" type="application/atom+xml">
   
@@ -151,55 +146,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="interview-file upload-interview-file-upload" class="article article-type-interview-file upload " itemscope itemprop="blogPost">
+            <article id="post-interview-csrf" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      文件上传
+      interview-csrf
     </h1>
   
 
         
-        <a href="/2018/05/31/interview-file-upload/" class="archive-article-date">
-  	<time datetime="2018-05-31T13:11:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-31</time>
+        <a href="/2018/06/09/interview-csrf/" class="archive-article-date">
+  	<time datetime="2018-06-09T09:18:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="客户端检验"><a href="#客户端检验" class="headerlink" title="客户端检验"></a>客户端检验</h2><p>一般使用js代码检验后缀名<br>可以先命名为jpg然后再抓包更改为php上传<br>或者直接禁用js<br><a id="more"></a></p>
-<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><h3 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h3><p>拓展名黑名单绕过<br>在黑名单里设有php,php2,php3.phtml等</p>
-<ul>
-<li>可以用evil.Php.aaa，apache如果解析不了.aaa拓展名，会继续向前寻找可以解析的拓展名</li>
-<li>尝试大小写绕过或者找拓展名的漏网之鱼<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jsp：jspx、jspf；</span><br><span class="line">asp：asa、cer、aspx；</span><br><span class="line">php：php、php2、php3、php4、php5、phps、pht、phtm、phtml；</span><br><span class="line">exe：exee</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="白名单"><a href="#白名单" class="headerlink" title="白名单"></a>白名单</h3><p>0x01 content-type文件类型</p>
-<ul>
-<li>抓包的时候改为image/gif<br>0x02 文件头绕过</li>
-<li>在文件头加上文件信息，比如<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GIF89a<span class="meta">&lt;?php</span> phpinfo();<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="00截断"><a href="#00截断" class="headerlink" title="%00截断"></a>%00截断</h3><p>00在ascii里表示NULL，当系统读取到0x00时认为文件名已经结束</p>
-<ul>
-<li>通过抓包将evil.php1.jpg的1换成0x00从而上传evil.php</li>
-<li>也可以是路径/upload/1.php(0x00) 文件名1.jpg 结合后为/upload/1.php(0x00)/1.jpg存入<br><img src="/2018/05/31/interview-file-upload/1.png" alt="1"><h3 id="重写解析规则"><a href="#重写解析规则" class="headerlink" title="重写解析规则"></a>重写解析规则</h3>上传.htaccess文件，重写解析规则，将图片用脚本方式解析<br>在可以上传.htaccess文件时上传这个文件，文件内容如下,然后再上传evil.gif就可以让它以php方式解析<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;FilesMatch "evil.gif"&gt;</span></span><br><span class="line"><span class="attribute"><span class="nomarkup">SetHandler</span></span> application/x-httpd-php</span><br><span class="line"><span class="section">&lt;/FilesMatch&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="ADS流文件"><a href="#ADS流文件" class="headerlink" title="ADS流文件"></a>ADS流文件</h3><p>ADS是NTFS磁盘格式的一个特性。在NTFS文件系统下，每个文件都可以存在多个数据流，即除了主文件流之外还可以有许多非主文件流寄宿在主文件流中。</p>
-<ul>
-<li>上传1.php文件的时候改包为1.php:1.jpg即就是上传一个1.jpg的内容为上传前的1.php的内容的数据流文件，且与宿主文件1.php关联。<br>最后上传到服务器的是1.php文件，文件内容为空，在目录下使用命令<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">notepad</span> 1<span class="selector-class">.php</span><span class="selector-pseudo">:1.jpg</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>就可以看到1.jpg文件的内容即之前的1.php的内容<br>可以再结合文件包含把1.php:1.jpg包含进来，达到代码执行的作用</p>
-<ul>
-<li>:$DATA默认数据流<br>NTFS文件系统包含对备用数据流的支持，备用数据流允许文件包含多个数据流。每个文件至少有一个数据流，windows中的默认数据流就是:$DATA<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.php::$DATA 生成<span class="number">1</span>.php &lt;?php phpinfo();?&gt;</span><br><span class="line"><span class="number">1</span>.php::$INDEX_ALLOCATION 生成<span class="number">1</span>.php文件夹</span><br></pre></td></tr></table></figure></li>
-</ul>
-
+        
       
 
       
@@ -229,17 +196,6 @@
       
       
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/interview//" class="article-tag-list-link color5">interview</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -289,7 +245,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/05/31/interview-file-upload/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/06/09/interview-csrf/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -303,18 +259,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/06/01/interview-file-iuclude/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          文件包含
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/05/26/interview-sql/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">SQL-injection</div>
+    <a href="/2018/06/02/interview-xxe/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">xxe</div>
       <i class="icon-circle-right"></i>
     </a>
   
