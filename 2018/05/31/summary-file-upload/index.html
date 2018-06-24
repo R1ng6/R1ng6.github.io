@@ -16,7 +16,7 @@
 <meta property="og:description" content="客户端检验一般使用js代码检验后缀名可以先命名为jpg然后再抓包更改为php上传或者直接禁用js">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/05/31/summary-file-upload/1.png">
-<meta property="og:updated_time" content="2018-06-23T09:23:33.479Z">
+<meta property="og:updated_time" content="2018-06-24T15:06:00.545Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件上传">
 <meta name="twitter:description" content="客户端检验一般使用js代码检验后缀名可以先命名为jpg然后再抓包更改为php上传或者直接禁用js">
@@ -184,8 +184,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="客户端检验"><a href="#客户端检验" class="headerlink" title="客户端检验"></a>客户端检验</h2><p>一般使用js代码检验后缀名<br>可以先命名为jpg然后再抓包更改为php上传<br>或者直接禁用js<br><a id="more"></a></p>
-<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><h3 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h3><p>拓展名黑名单绕过<br>在黑名单里设有php,php2,php3.phtml等</p>
-<ul>
+<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><ul>
+<li>将文件后缀名改为1.aaaaa这种不存在的文件</li>
+<li>如果正常上传，说明黑名单规则</li>
+<li>反之白名单规则<h3 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h3>拓展名黑名单绕过<br>在黑名单里设有php,php2,php3.phtml等</li>
 <li>可以用evil.Php.aaa，apache如果解析不了.aaa拓展名，会继续向前寻找可以解析的拓展名</li>
 <li>尝试大小写绕过或者找拓展名的漏网之鱼<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jsp：jspx、jspf；</span><br><span class="line">asp：asa、cer、aspx；</span><br><span class="line">php：php、php2、php3、php4、php5、phps、pht、phtm、phtml；</span><br><span class="line">exe：exee</span><br></pre></td></tr></table></figure>
 </li>
@@ -209,7 +211,14 @@
 </ul>
 <p>就可以看到1.jpg文件的内容即之前的1.php的内容<br>可以再结合文件包含把1.php:1.jpg包含进来，达到代码执行的作用</p>
 <ul>
-<li>:$DATA默认数据流<br>NTFS文件系统包含对备用数据流的支持，备用数据流允许文件包含多个数据流。每个文件至少有一个数据流，windows中的默认数据流就是:$DATA<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.php::$DATA 生成<span class="number">1</span>.php &lt;?php phpinfo();?&gt;</span><br><span class="line"><span class="number">1</span>.php::$INDEX_ALLOCATION 生成<span class="number">1</span>.php文件夹</span><br></pre></td></tr></table></figure></li>
+<li>:$DATA默认数据流<br>NTFS文件系统包含对备用数据流的支持，备用数据流允许文件包含多个数据流。每个文件至少有一个数据流，windows中的默认数据流就是:$DATA<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.php::$DATA 生成<span class="number">1</span>.php &lt;?php phpinfo();?&gt;</span><br><span class="line"><span class="number">1</span>.php::$INDEX_ALLOCATION 生成<span class="number">1</span>.php文件夹</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="windows系统"><a href="#windows系统" class="headerlink" title="windows系统"></a>windows系统</h2><p>windows系统不允许文件名包含下列任何字符<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/\:*?&lt;&gt;|"</span><br></pre></td></tr></table></figure></p>
+<p>可以在发包的时候改为1.php/1.jpg上传的时候会自动删除不规范字符后面的内容，但是<strong>文件内容为空</strong><br>如果服务器使用<strong>黑名单</strong>的思想去校验我们可以覆盖文件内容，并且<strong>没有重命名文件</strong>，那么就可以再次上传覆盖<br>由windows搜索文件名的特性: <code>&lt;</code> 符号可以匹配任意字符<br>如果我们的文件为1.php，那么再上传一个1.&lt;&lt;&lt;，内容为webshell，那么就可以把webshell写入1.php了<br>补充：</p>
+<ul>
+<li>php对文件做处理的函数使用的时候会调用一个windows的底层api</li>
+<li>使用<code>&lt;</code>可以匹配任意单字符，<code>&lt;&lt;</code>则可以匹配任意字符，相当于正则表达式里的<code>.+</code><h2 id="linux系统"><a href="#linux系统" class="headerlink" title="linux系统"></a>linux系统</h2>尝试大小写绕过</li>
 </ul>
 
       
@@ -353,7 +362,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#客户端检验"><span class="toc-number">1.</span> <span class="toc-text">客户端检验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端"><span class="toc-number">2.</span> <span class="toc-text">服务端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#黑名单"><span class="toc-number">2.1.</span> <span class="toc-text">黑名单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#白名单"><span class="toc-number">2.2.</span> <span class="toc-text">白名单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#00截断"><span class="toc-number">2.3.</span> <span class="toc-text">%00截断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重写解析规则"><span class="toc-number">2.4.</span> <span class="toc-text">重写解析规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ADS流文件"><span class="toc-number">2.5.</span> <span class="toc-text">ADS流文件</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#客户端检验"><span class="toc-number">1.</span> <span class="toc-text">客户端检验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端"><span class="toc-number">2.</span> <span class="toc-text">服务端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#黑名单"><span class="toc-number">2.1.</span> <span class="toc-text">黑名单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#白名单"><span class="toc-number">2.2.</span> <span class="toc-text">白名单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#00截断"><span class="toc-number">2.3.</span> <span class="toc-text">%00截断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重写解析规则"><span class="toc-number">2.4.</span> <span class="toc-text">重写解析规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ADS流文件"><span class="toc-number">2.5.</span> <span class="toc-text">ADS流文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#windows系统"><span class="toc-number">3.</span> <span class="toc-text">windows系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux系统"><span class="toc-number">4.</span> <span class="toc-text">linux系统</span></a></li></ol>
                     </div>
                 </span>
             </div>
