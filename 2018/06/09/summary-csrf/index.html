@@ -168,10 +168,6 @@
 
 
 
-  <a href="javascript:;" class="archive-article-date">
-      <i class="icon-smile icon"></i> 阅读数:<span id="/2018/06/09/summary-csrf/" class="pageViews">0</span>次
-  </a>
-
         
         <a href="/2018/06/09/summary-csrf/" class="archive-article-date">
   	<time datetime="2018-06-09T09:18:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-09</time>
@@ -427,67 +423,6 @@
 		showTags: true
 	}
 </script>
-
-
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-
-
-
-<script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
-<script type="text/javascript"> 
-if(true){
-    var leancloud_app_id  = 'mHKT7Lc4p1PkIGiyGF8Dv7KG-gzGzoHsz';
-    var leancloud_app_key = 'J09297VQ2MEgWKc6OWoLi291';
-
-    AV.init({
-        appId: leancloud_app_id,
-        appKey: leancloud_app_key
-    });
-
-    var pageViewsLength = $(".pageViews").length;
-
-    var isIndex = $(".pageViews").length > 1 ?true:false;
-
-    function showTime() {
-        var Counter = AV.Object.extend("Counter");
-        if(isIndex){
-            $(".pageViews").each(function(){
-                showPageViewsNum($(this),Counter);
-                addPageViewsNum($(this));
-            });
-        }else{
-            showPageViewsNum($(".pageViews"),Counter);
-            addPageViewsNum($(".pageViews"));
-        }
-    }
-
-    //��ʾ�Ķ���
-    function showPageViewsNum(ele,Counter){
-        var query = new AV.Query("Counter");
-        var url = ele.attr('id').trim();
-            query.equalTo("words", url);
-            query.count().then(function (number) {
-                $(document.getElementById(url)).text(number?  number : '0');
-            }, function (error) {
-                 $(document.getElementById(url)).text('0');
-            });
-    }
-
-    //׷���Ķ���
-    function addPageViewsNum(ele){
-        var url = ele.attr('id').trim();
-        var Counter = AV.Object.extend("Counter");
-        var query = new Counter;
-        query.save({
-            words: url
-        }).then(function (object) {});
-    }
-
-    if(pageViewsLength){ //�˴��жϵ��� 1 ��ִ�� ��ȥ��ѭ��
-        showTime();
-    }
-}
-</script> 
 
 
 
