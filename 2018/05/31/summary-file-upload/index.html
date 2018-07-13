@@ -207,7 +207,7 @@
 </ul>
 <p>就可以看到1.jpg文件的内容即之前的1.php的内容<br>可以再结合文件包含把1.php:1.jpg包含进来，达到代码执行的作用</p>
 <ul>
-<li>:$DATA默认数据流<br>NTFS文件系统包含对备用数据流的支持，备用数据流允许文件包含多个数据流。每个文件至少有一个数据流，windows中的默认数据流就是:$DATA<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>php::$DATA 生成<span class="number">1.</span>php <span class="meta">&lt;?php</span> phpinfo();<span class="meta">?&gt;</span></span><br><span class="line"><span class="number">1.</span>php::$INDEX_ALLOCATION 生成<span class="number">1.</span>php文件夹</span><br></pre></td></tr></table></figure>
+<li>:$DATA默认数据流<br>NTFS文件系统包含对备用数据流的支持，备用数据流允许文件包含多个数据流。每个文件至少有一个数据流，windows中的默认数据流就是:$DATA<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.php::$DATA 生成<span class="number">1</span>.php &lt;?php phpinfo();?&gt;</span><br><span class="line"><span class="number">1</span>.php::$INDEX_ALLOCATION 生成<span class="number">1</span>.php文件夹</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="windows系统"><a href="#windows系统" class="headerlink" title="windows系统"></a>windows系统</h2><p>windows系统不允许文件名包含下列任何字符<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/\:*?&lt;&gt;|"</span><br></pre></td></tr></table></figure></p>
