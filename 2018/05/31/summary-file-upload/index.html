@@ -16,7 +16,7 @@
 <meta property="og:description" content="客户端检验一般使用js代码检验后缀名可以先命名为jpg然后再抓包更改为php上传或者直接禁用js">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/05/31/summary-file-upload/1.png">
-<meta property="og:updated_time" content="2018-06-24T15:06:00.545Z">
+<meta property="og:updated_time" content="2018-07-17T15:34:59.670Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件上传">
 <meta name="twitter:description" content="客户端检验一般使用js代码检验后缀名可以先命名为jpg然后再抓包更改为php上传或者直接禁用js">
@@ -181,13 +181,21 @@
       
         <h2 id="客户端检验"><a href="#客户端检验" class="headerlink" title="客户端检验"></a>客户端检验</h2><p>一般使用js代码检验后缀名<br>可以先命名为jpg然后再抓包更改为php上传<br>或者直接禁用js<br><a id="more"></a></p>
 <h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><ul>
-<li>将文件后缀名改为1.aaaaa这种不存在的文件</li>
-<li>如果正常上传，说明黑名单规则</li>
-<li>反之白名单规则<h3 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h3>拓展名黑名单绕过<br>在黑名单里设有php,php2,php3.phtml等</li>
-<li>可以用evil.Php.aaa，apache如果解析不了.aaa拓展名，会继续向前寻找可以解析的拓展名</li>
-<li>尝试大小写绕过或者找拓展名的漏网之鱼<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jsp：jspx、jspf；</span><br><span class="line">asp：asa、cer、aspx；</span><br><span class="line">php：php、php2、php3、php4、php5、phps、pht、phtm、phtml；</span><br><span class="line">exe：exee</span><br></pre></td></tr></table></figure>
+<li><p>将文件后缀名改为1.aaaaa这种不存在的文件</p>
+</li>
+<li><p>如果正常上传，说明黑名单规则</p>
+</li>
+<li><p>反之白名单规则</p>
 </li>
 </ul>
+<h3 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h3><p>拓展名黑名单绕过<br>在黑名单里设有php,php2,php3.phtml等</p>
+<ul>
+<li><p>可以用evil.Php.aaa，apache如果解析不了.aaa拓展名，会继续向前寻找可以解析的拓展名</p>
+</li>
+<li><p>尝试大小写绕过或者找拓展名的漏网之鱼</p>
+</li>
+</ul>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jsp：jspx、jspf；</span><br><span class="line">asp：asa、cer、aspx；</span><br><span class="line">php：php、php2、php3、php4、php5、phps、pht、phtm、phtml；</span><br><span class="line">exe：exee</span><br></pre></td></tr></table></figure>
 <h3 id="白名单"><a href="#白名单" class="headerlink" title="白名单"></a>白名单</h3><p>0x01 content-type文件类型</p>
 <ul>
 <li>抓包的时候改为image/gif<br>0x02 文件头绕过</li>
@@ -196,20 +204,23 @@
 </ul>
 <h3 id="00截断"><a href="#00截断" class="headerlink" title="%00截断"></a>%00截断</h3><p>00在ascii里表示NULL，当系统读取到0x00时认为文件名已经结束</p>
 <ul>
-<li>通过抓包将evil.php1.jpg的1换成0x00从而上传evil.php</li>
-<li>也可以是路径/upload/1.php(0x00) 文件名1.jpg 结合后为/upload/1.php(0x00)/1.jpg存入<br><img src="/2018/05/31/summary-file-upload/1.png" alt="1"><h3 id="重写解析规则"><a href="#重写解析规则" class="headerlink" title="重写解析规则"></a>重写解析规则</h3>上传.htaccess文件，重写解析规则，将图片用脚本方式解析<br>在可以上传.htaccess文件时上传这个文件，文件内容如下,然后再上传evil.gif就可以让它以php方式解析<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;FilesMatch "evil.gif"&gt;</span></span><br><span class="line"><span class="attribute"><span class="nomarkup">SetHandler</span></span> application/x-httpd-php</span><br><span class="line"><span class="section">&lt;/FilesMatch&gt;</span></span><br></pre></td></tr></table></figure>
+<li><p>通过抓包将evil.php1.jpg的1换成0x00从而上传evil.php</p>
+</li>
+<li><p>也可以是路径/upload/1.php(0x00) 文件名1.jpg 结合后为/upload/1.php(0x00)/1.jpg存入<br><img src="/2018/05/31/summary-file-upload/1.png" alt="1"></p>
+<h3 id="重写解析规则"><a href="#重写解析规则" class="headerlink" title="重写解析规则"></a>重写解析规则</h3><p>上传.htaccess文件，重写解析规则，将图片用脚本方式解析<br>在可以上传.htaccess文件时上传这个文件，文件内容如下,然后再上传evil.gif就可以让它以php方式解析</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;FilesMatch "evil.gif"&gt;</span></span><br><span class="line"><span class="attribute"><span class="nomarkup">SetHandler</span></span> application/x-httpd-php</span><br><span class="line"><span class="section">&lt;/FilesMatch&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="ADS流文件"><a href="#ADS流文件" class="headerlink" title="ADS流文件"></a>ADS流文件</h3><p>ADS是NTFS磁盘格式的一个特性。在NTFS文件系统下，每个文件都可以存在多个数据流，即除了主文件流之外还可以有许多非主文件流寄宿在主文件流中。</p>
 <ul>
-<li>上传1.php文件的时候改包为1.php:1.jpg即就是上传一个1.jpg的内容为上传前的1.php的内容的数据流文件，且与宿主文件1.php关联。<br>最后上传到服务器的是1.php文件，文件内容为空，在目录下使用命令<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">notepad</span> 1<span class="selector-class">.php</span><span class="selector-pseudo">:1.jpg</span></span><br></pre></td></tr></table></figure>
-</li>
+<li>上传1.php文件的时候改包为1.php:1.jpg即就是上传一个1.jpg的内容为上传前的1.php的内容的数据流文件，且与宿主文件1.php关联。</li>
 </ul>
+<p>最后上传到服务器的是1.php文件，文件内容为空，在目录下使用命令<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">notepad</span> 1<span class="selector-class">.php</span><span class="selector-pseudo">:1.jpg</span></span><br></pre></td></tr></table></figure></p>
 <p>就可以看到1.jpg文件的内容即之前的1.php的内容<br>可以再结合文件包含把1.php:1.jpg包含进来，达到代码执行的作用</p>
 <ul>
-<li>:$DATA默认数据流<br>NTFS文件系统包含对备用数据流的支持，备用数据流允许文件包含多个数据流。每个文件至少有一个数据流，windows中的默认数据流就是:$DATA<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.php::$DATA 生成<span class="number">1</span>.php &lt;?php phpinfo();?&gt;</span><br><span class="line"><span class="number">1</span>.php::$INDEX_ALLOCATION 生成<span class="number">1</span>.php文件夹</span><br></pre></td></tr></table></figure>
-</li>
+<li>:$DATA默认数据流</li>
 </ul>
+<p>NTFS文件系统包含对备用数据流的支持，备用数据流允许文件包含多个数据流。每个文件至少有一个数据流，windows中的默认数据流就是:$DATA<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.php::$DATA 生成<span class="number">1</span>.php &lt;?php phpinfo();?&gt;</span><br><span class="line"><span class="number">1</span>.php::$INDEX_ALLOCATION 生成<span class="number">1</span>.php文件夹</span><br></pre></td></tr></table></figure></p>
 <h2 id="windows系统"><a href="#windows系统" class="headerlink" title="windows系统"></a>windows系统</h2><p>windows系统不允许文件名包含下列任何字符<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/\:*?&lt;&gt;|"</span><br></pre></td></tr></table></figure></p>
 <p>可以在发包的时候改为1.php/1.jpg上传的时候会自动删除不规范字符后面的内容，但是<strong>文件内容为空</strong><br>如果服务器使用<strong>黑名单</strong>的思想去校验我们可以覆盖文件内容，并且<strong>没有重命名文件</strong>，那么就可以再次上传覆盖<br>由windows搜索文件名的特性: <code>&lt;</code> 符号可以匹配任意字符<br>如果我们的文件为1.php，那么再上传一个1.&lt;&lt;&lt;，内容为webshell，那么就可以把webshell写入1.php了<br>补充：</p>
 <ul>
