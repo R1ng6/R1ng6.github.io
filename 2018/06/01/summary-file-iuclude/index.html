@@ -186,7 +186,7 @@
 <h3 id="限制目录"><a href="#限制目录" class="headerlink" title="限制目录"></a>限制目录</h3><p>在php.ini中配置open_basedir限制目录包含于某一个绝对路径，如果包含了父目录的文件会报错，子目录不会<br><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Warning</span>: include(): open_basedir restriction <span class="keyword">in</span> <span class="keyword">effect</span>. File(<span class="type">C</span>:\1.jpg) is not within the allowed path(s): (<span class="type">C</span>:\<span class="type">PHPstudy</span>\<span class="type">WWW</span>)</span><br></pre></td></tr></table></figure></p>
 <h2 id="远程文件包含"><a href="#远程文件包含" class="headerlink" title="远程文件包含"></a>远程文件包含</h2><ul>
 <li>当php.ini里配置allow_url_fopen=On并且allow_url_include=On时允许包含远程服务器的文件</li>
-<li>但是并不能读取本服务器的内容，比如当你包含远程服务器的phpinfo()的时候，看到的是远程服务器的phpinfo而不是自己的。<h2 id="php伪协议"><a href="#php伪协议" class="headerlink" title="php伪协议"></a>php伪协议</h2><h3 id="file-协议"><a href="#file-协议" class="headerlink" title="file//协议"></a>file//协议</h3>双off<br>用于读取服务器www以外的文件，需要知道文件的绝对路径<h3 id="php-input协议"><a href="#php-input协议" class="headerlink" title="php://input协议"></a>php://input协议</h3>需要allow_url_include为on<br>用于访问请求的原始数据的只读流，如果是php代码则执行代码比如&lt;?php phpinfo()?&gt;<br>可以用来生成一句话木马文件：<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> fputs(fopen(<span class="string">'shell.php'</span>,<span class="string">'w'</span>), <span class="string">'&lt;?php eval($_POST["cmd"]);?&gt;'</span>) <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<li>但是并不能读取本服务器的内容，比如当你包含远程服务器的phpinfo()的时候，看到的是远程服务器的phpinfo而不是自己的。<h2 id="php伪协议"><a href="#php伪协议" class="headerlink" title="php伪协议"></a>php伪协议</h2><h3 id="file-协议"><a href="#file-协议" class="headerlink" title="file//协议"></a>file//协议</h3>双off<br>用于读取服务器www以外的文件，需要知道文件的绝对路径<h3 id="php-input协议"><a href="#php-input协议" class="headerlink" title="php://input协议"></a>php://input协议</h3>需要allow_url_include为on<br>用于访问请求的原始数据的只读流，如果是php代码则执行代码比如&lt;?php phpinfo()?&gt;<br>可以用来生成一句话木马文件：<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span>php fputs(fopen(<span class="string">'shell.php'</span>,<span class="string">'w'</span>), <span class="string">'&lt;?php eval($_POST["cmd"]);?&gt;'</span>) <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="php-filter协议"><a href="#php-filter协议" class="headerlink" title="php://filter协议"></a>php://filter协议</h3><p>双off，是一种数据流打开时的筛选过滤应用<br>最常用于读取文件源代码<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php://<span class="built_in">filter</span>/<span class="built_in">read</span>=<span class="built_in">convert</span>.base64-encode/resource=index.php</span><br></pre></td></tr></table></figure></p>
@@ -495,11 +495,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">homepage</a>
+                <a href="javascript:void(0)" class="js-tag color5">内网渗透</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内网渗透</a>
+                <a href="javascript:void(0)" class="js-tag color4">homepage</a>
               </li>
             
             <div class="clearfix"></div>
