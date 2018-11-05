@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="welcome to my blogs">
 <meta property="og:description" content="AESSSS0x00 前言官方的环境第二天已经崩掉了，还好留下了脚本，稍作修改就可以本地搭建">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-05T13:03:30.968Z">
+<meta property="og:updated_time" content="2018-11-05T13:18:47.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="上海杯-crypto">
 <meta name="twitter:description" content="AESSSS0x00 前言官方的环境第二天已经崩掉了，还好留下了脚本，稍作修改就可以本地搭建">
@@ -210,7 +210,7 @@
 <h2 id="0x02-第二关"><a href="#0x02-第二关" class="headerlink" title="0x02 第二关"></a>0x02 第二关</h2><p>还是有一点意思的，看了别人的wp，听说在今年的SUCTF里面考过</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">number_theory</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        e, d, n, m, c = rsa_gen()</span><br><span class="line">        print_output(<span class="string">"n=0x%x\ne=0x%x\nc=0x%x\n"</span> % (n, e, c))</span><br><span class="line">        print_output(<span class="string">"Now, you have a chance to decrypt something(but no c):"</span>)</span><br><span class="line">        C = int(raw_input().strip())</span><br><span class="line">        <span class="keyword">if</span> C == c:</span><br><span class="line">            print_output(<span class="string">"Nonono~"</span>)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        M = pow(C, d, n)</span><br><span class="line">        print_output(<span class="string">"message:0x%x"</span> % M)</span><br><span class="line">        print_output(<span class="string">"Give me right message:"</span>)</span><br><span class="line">        MM = int(raw_input().strip())</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> MM == m:</span><br><span class="line">            exit(<span class="number">1</span>)</span><br><span class="line">        print_output(<span class="string">"Master in math!"</span>)</span><br><span class="line">        <span class="keyword">return</span> m</span><br></pre></td></tr></table></figure>
 <p>在我们已知n, e, c的情况下去求另外一个c1，使得pow(c1, d, n)  = M 然后你通过这个输出的M就能得到m</p>
-<p>我们来看看会得到什么东西</p>
+<p>如果给c1赋以下面的值，我们来看看会得到什么东西</p>
 <figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">c1</span> = (c * pow(<span class="number">2</span>, e, <span class="built_in">n</span>)) % <span class="built_in">n</span></span><br><span class="line">   = (pow(m, e, <span class="built_in">n</span>) * pow(<span class="number">2</span>, e, <span class="built_in">n</span>)) % <span class="built_in">n</span></span><br><span class="line">   = ((m ^ e % <span class="built_in">n</span>) * (<span class="number">2</span> ^ e % <span class="built_in">n</span>)) % <span class="built_in">n</span></span><br><span class="line">   = ((m ^ e) * (<span class="number">2</span> ^ e)) % <span class="built_in">n</span></span><br><span class="line">   = (<span class="number">2</span> * m) ^ e % <span class="built_in">n</span></span><br><span class="line">  </span><br><span class="line">pow(<span class="symbol">c1</span>, d, <span class="built_in">n</span>) = <span class="number">2</span> * m = M</span><br></pre></td></tr></table></figure>
 <p>那么通过回显的M处以2就能得到m了</p>
 <p>最后，IV有了，key有了，cipher有了，再通过这一步计算就能拿到flag了</p>
@@ -521,15 +521,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Crypto</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内网渗透</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">homepage</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Crypto</a>
               </li>
             
             <div class="clearfix"></div>

