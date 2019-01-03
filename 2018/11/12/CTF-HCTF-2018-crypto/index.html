@@ -15,7 +15,7 @@
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/Tomorrow.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/plugins/gitment.css">
   <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
@@ -139,7 +139,23 @@
 <p><img src="/2018/11/12/CTF-HCTF-2018-crypto/1.jpg" alt=""></p>
 <a id="more"></a>
 <h2 id="xor-game"><a href="#xor-game" class="headerlink" title="xor game"></a>xor game</h2><h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>题目代码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.strxor <span class="keyword">import</span> strxor</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">enc</span><span class="params">(data, key)</span>:</span></span><br><span class="line">    key = (key * (len(data) / len(key) + <span class="number">1</span>))[:len(data)]</span><br><span class="line">    <span class="keyword">return</span> strxor(data, key)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">poem = open(<span class="string">'poem.txt'</span>, <span class="string">'r'</span>).read()</span><br><span class="line">flag = <span class="string">"hctf&#123;xxxxxxxxxxx&#125;"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'cipher.txt'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(base64.b64encode(enc(poem, flag[<span class="number">5</span>:<span class="number">-1</span>])))</span><br><span class="line">    f.close()</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-python">from Crypto.Util.strxor import strxor
+import base64
+import random
+
+
+def enc(data, key):
+    key = (key * (len(data) / len(key) + 1))[:len(data)]
+    return strxor(data, key)
+
+
+poem = open(&#39;poem.txt&#39;, &#39;r&#39;).read()
+flag = &quot;hctf{xxxxxxxxxxx}&quot;
+
+with open(&#39;cipher.txt&#39;, &#39;w&#39;) as f:
+    f.write(base64.b64encode(enc(poem, flag[5:-1])))
+    f.close()
+</code></pre>
 <p>之前在DCTF上遇到过类似的题目，<a href="https://github.com/scai16/CTF/tree/master/2018/DefCamp%20CTF%202018/XORnigma" target="_blank" rel="noopener">writeup</a></p>
 <p>但是这道题至少可以依据前四个字节都是0和flag格式为DCTF{…}来有依据猜，但是这道题猜都不能猜</p>
 <p>在google上搜索ctf xor repeate key ，我发现了这篇文章<a href="https://ehsandev.com/pico2014/cryptography/repeated_xor.html" target="_blank" rel="noopener">Repeated XOR - 70</a></p>
@@ -152,7 +168,25 @@
 <p><code>6o7i6_i+te7es1ing!@#</code></p>
 <p>第3位是一个不可见字符，flag里面肯定不可能是不可见的字符，所以我们暂时令他为1</p>
 <p>然后我们跑一下下面的代码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.strxor <span class="keyword">import</span> strxor</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">from</span> string <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">enc</span><span class="params">(data, key)</span>:</span></span><br><span class="line">    key = (key * (len(data) / len(key) + <span class="number">1</span>))[:len(data)]</span><br><span class="line">    <span class="keyword">return</span> strxor(data, key)</span><br><span class="line"></span><br><span class="line">poem = open(<span class="string">'cipher'</span>, <span class="string">'r'</span>).read()</span><br><span class="line">flag = <span class="string">'6o71i6_i+te7es1ing!@#'</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> letters + digits +<span class="string">'_'</span>:</span><br><span class="line">    l = list(flag)</span><br><span class="line">    l[<span class="number">0</span>] = i</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'</span></span><br><span class="line">    <span class="keyword">print</span> i</span><br><span class="line">    <span class="keyword">print</span> enc(base64.b64decode(poem), <span class="string">''</span>.join(l))</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'-----------------------------------------------------------------------'</span></span><br></pre></td></tr></table></figure>
+<pre><code class="lang-python">from Crypto.Util.strxor import strxor
+import base64
+from string import *
+
+
+def enc(data, key):
+    key = (key * (len(data) / len(key) + 1))[:len(data)]
+    return strxor(data, key)
+
+poem = open(&#39;cipher&#39;, &#39;r&#39;).read()
+flag = &#39;6o71i6_i+te7es1ing!@#&#39;
+for i in letters + digits +&#39;_&#39;:
+    l = list(flag)
+    l[0] = i
+    print &#39;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++&#39;
+    print i
+    print enc(base64.b64decode(poem), &#39;&#39;.join(l))
+    print &#39;-----------------------------------------------------------------------&#39;
+</code></pre>
 <p>可以看到，最后一行那个单词明显应该是autumn</p>
 <p><img src="/2018/11/12/CTF-HCTF-2018-crypto/4.jpg" alt=""></p>
 <p>那么对应的字母是x，然后我们再用这个密钥<code>xo71i6_i+te7es1ing!@#</code>，通过查看poem里面残缺了一个字母的单词，找到对应的位置，依此去跑就能得到flag</p>
@@ -163,10 +197,16 @@
 <p>我实际测了一下，这个工具和那个作者的脚本效果差不多</p>
 <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>我觉得还是要研究一下原理，那个作者的文章是全英文的，不太容易看懂，我做一个补充</p>
 <p>依据原文的两个加密的例子：</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">84</span>, <span class="number">72</span>, <span class="number">73</span>, <span class="number">83</span>, <span class="number">32</span>, <span class="number">73</span>, <span class="number">83</span>, <span class="number">32</span>, <span class="number">65</span>, <span class="number">32</span>, <span class="number">77</span>, <span class="number">69</span>, <span class="number">83</span>, <span class="number">83</span>, <span class="number">65</span>, <span class="number">71</span>, <span class="number">69</span></span><br><span class="line"><span class="number">89</span>, <span class="number">79</span>, <span class="number">85</span>, <span class="number">89</span>, <span class="number">79</span>, <span class="number">85</span>, <span class="number">89</span>, <span class="number">79</span>, <span class="number">85</span>, <span class="number">89</span>, <span class="number">79</span>, <span class="number">85</span>, <span class="number">89</span>, <span class="number">79</span>, <span class="number">85</span>, <span class="number">89</span>, <span class="number">79</span></span><br><span class="line">xor --------------------------------------------------------------</span><br><span class="line"><span class="number">13</span>,  <span class="number">7</span>, <span class="number">28</span>, <span class="number">10</span>,<span class="number">111</span>, <span class="number">28</span>, <span class="number">10</span>,<span class="number">111</span>, <span class="number">20</span>,<span class="number">121</span>,  <span class="number">2</span>, <span class="number">16</span>, <span class="number">10</span>, <span class="number">28</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">10</span></span><br></pre></td></tr></table></figure>
-<p>首先之所以有<code>28, 10,111</code>的重复，是因为明文里面有一个<code>is</code>的重复，这两个重复间隔的位数是0（3的倍数）</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">84</span>, <span class="number">72</span>, <span class="number">73</span>, <span class="number">83</span>, <span class="number">32</span>, <span class="number">77</span>, <span class="number">69</span>, <span class="number">83</span>, <span class="number">83</span>, <span class="number">65</span>, <span class="number">71</span>, <span class="number">69</span>, <span class="number">32</span>, <span class="number">73</span>, <span class="number">83</span>, <span class="number">32</span>, <span class="number">78</span>, <span class="number">79</span>, <span class="number">84</span></span><br><span class="line"><span class="number">89</span>, <span class="number">79</span>, <span class="number">85</span>, <span class="number">89</span>, <span class="number">79</span>, <span class="number">85</span>, <span class="number">89</span>, <span class="number">79</span>, <span class="number">85</span>, <span class="number">89</span>, <span class="number">79</span>, <span class="number">85</span>, <span class="number">89</span>, <span class="number">79</span>, <span class="number">85</span>, <span class="number">89</span>, <span class="number">79</span>, <span class="number">85</span>, <span class="number">89</span></span><br><span class="line">xor ----------------------------------------------------------------------</span><br><span class="line"><span class="number">13</span>,  <span class="number">7</span>, <span class="number">28</span>, <span class="number">10</span>,<span class="number">111</span>, <span class="number">24</span>, <span class="number">28</span>, <span class="number">28</span>,  <span class="number">6</span>, <span class="number">24</span>,  <span class="number">8</span>, <span class="number">16</span>,<span class="number">121</span>,  <span class="number">6</span>,  <span class="number">6</span>,<span class="number">121</span>,  <span class="number">1</span>, <span class="number">26</span>, <span class="number">13</span></span><br></pre></td></tr></table></figure>
-<p>如果<code>is</code>隔了8个字符，不是3的倍数了，那么这个<code>28, 10,111</code>的重复也就不存在</p>
+<pre><code>84, 72, 73, 83, 32, 73, 83, 32, 65, 32, 77, 69, 83, 83, 65, 71, 69
+89, 79, 85, 89, 79, 85, 89, 79, 85, 89, 79, 85, 89, 79, 85, 89, 79
+xor --------------------------------------------------------------
+13,  7, 28, 10,111, 28, 10,111, 20,121,  2, 16, 10, 28, 20, 30, 10
+</code></pre><p>首先之所以有<code>28, 10,111</code>的重复，是因为明文里面有一个<code>is</code>的重复，这两个重复间隔的位数是0（3的倍数）</p>
+<pre><code>84, 72, 73, 83, 32, 77, 69, 83, 83, 65, 71, 69, 32, 73, 83, 32, 78, 79, 84
+89, 79, 85, 89, 79, 85, 89, 79, 85, 89, 79, 85, 89, 79, 85, 89, 79, 85, 89
+xor ----------------------------------------------------------------------
+13,  7, 28, 10,111, 24, 28, 28,  6, 24,  8, 16,121,  6,  6,121,  1, 26, 13
+</code></pre><p>如果<code>is</code>隔了8个字符，不是3的倍数了，那么这个<code>28, 10,111</code>的重复也就不存在</p>
 <p>也就是说，通过长度为3的key，使得明文进行了分组，而至少有些时候，重复的明文会因此而偏移（情况一），我们通过一个粗略的算法（代码里的shift函数）， 使密文经过len(key)偏移一次，然后与之前的密文对比，有多少bytes相同，如果相同的次数比较多，就说明明文加密后很可能进行了这么长的偏移，而这么长的偏移就是key的长度造成的，所以可以大致推测出key的长度</p>
 <p>一旦我们得到了key的长度，那么我们可以说，明文其实可以想象成分成了很多行进行加密，然后再将他们加密的结果拼接起来，那么对于每一列，都使用的是同一个key的某一位进行加密，那么对于加密的结果应该符合频率分布规律， 出现最高的频率应该是空格（这也就是为什么键盘的空格键在最下方中间而且那么长的原因了= =）被加密的密文，因此将密文和空格异或就能推测出这位key了。从0到len(key)列做重复的操作就能粗略的得到一个key，也就可以用来加密明文了</p>
 <hr>
@@ -179,7 +219,24 @@
 <p>在百度上找到了一个现成的轮子，<a href="https://github.com/ValarDragon/CTF-Crypto/blob/master/RSA/FranklinReiter.sage" target="_blank" rel="noopener">github地址</a></p>
 <p>这个轮子是sage代码，在命令行里面用<code>sage ***.sage</code>直接运行，<a href="https://sagecell.sagemath.org/" target="_blank" rel="noopener">也可以在线运行</a></p>
 <p>直接抄过来跑的话会报错，Eur3kA队的wp是对<code>CoppersmithShortPadAttack</code>函数以及传入eps的值做了一点改动，不是很懂怎么改的（太菜了）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">CoppersmithShortPadAttack</span><span class="params">(e,n,C1,C2,eps=<span class="number">1</span>/<span class="number">30</span>)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> binascii</span><br><span class="line">    P.&lt;x,y&gt; = PolynomialRing(ZZ)</span><br><span class="line">    ZmodN = Zmod(n)</span><br><span class="line">    g1 = x^e - C1</span><br><span class="line">    g2 = (x+y)^e - C2</span><br><span class="line">    res = g1.resultant(g2)</span><br><span class="line">    P.&lt;y&gt; = PolynomialRing(ZmodN)</span><br><span class="line">    rres = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(res.coefficients())):</span><br><span class="line">        rres += res.coefficients()[i]*(y^(res.exponents()[i][<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line">    diff = rres.small_roots(epsilon=eps)</span><br><span class="line">    recoveredM1 = franklinReiter(n,e,diff[<span class="number">0</span>],C1,C2)</span><br><span class="line">    print(diff)</span><br><span class="line">    print(recoveredM1)</span><br><span class="line">    print(recoveredM1 + diff[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-python">def CoppersmithShortPadAttack(e,n,C1,C2,eps=1/30):
+    import binascii
+    P.&lt;x,y&gt; = PolynomialRing(ZZ)
+    ZmodN = Zmod(n)
+    g1 = x^e - C1
+    g2 = (x+y)^e - C2
+    res = g1.resultant(g2)
+    P.&lt;y&gt; = PolynomialRing(ZmodN)
+    rres = 0
+    for i in range(len(res.coefficients())):
+        rres += res.coefficients()[i]*(y^(res.exponents()[i][1]))
+
+    diff = rres.small_roots(epsilon=eps)
+    recoveredM1 = franklinReiter(n,e,diff[0],C1,C2)
+    print(diff)
+    print(recoveredM1)
+    print(recoveredM1 + diff[0])
+</code></pre>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>首先第一题，我觉得当时如果仔细看了明文，能够注意到已经还原了部分单词的话，就能坚持做下去的，虽然同队的师傅后来也做出了这道题，影响不是很大，但是对于自己来说，还是欠了一点坚持</p>
 <p>对于第二题，这种不能用简单的数论解决的题目应该都是一种单独的攻击面，后续的学习可能要参照ctf-wiki了= =</p>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>[1]<a href="https://xz.aliyun.com/t/3242#toc-18" target="_blank" rel="noopener">HCTF 2018 Writeup — Whitzard</a></p>
@@ -243,7 +300,7 @@
 <script>
   (function () {
     var url = 'http://yoursite.com/2018/11/12/CTF-HCTF-2018-crypto/';
-    var banner = 'undefined'
+    var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'
@@ -324,7 +381,7 @@
 </script>
 
 <script>
-  var disqus_shortname = 'null';
+  var disqus_shortname = '';
   
   var disqus_url = 'http://yoursite.com/2018/11/12/CTF-HCTF-2018-crypto/';
   
@@ -365,7 +422,7 @@
 </script>
 
 <script>
-  var hasLine = 'true';
+  var hasLine = 'false';
   async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
     $('figure pre').each(function(i, block) {
       var figure = $(this).parents('figure');
@@ -386,22 +443,5 @@
 <!-- Baidu Tongji -->
 
 <script src="/js/script.js"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
-</body>
+  </body>
 </html>

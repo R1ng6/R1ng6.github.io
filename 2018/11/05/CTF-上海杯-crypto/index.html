@@ -15,7 +15,7 @@
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/Tomorrow.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/plugins/gitment.css">
   <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
@@ -137,35 +137,390 @@
   <article class="post-article">
     <section class="markdown-content"><h2 id="AESSSS"><a href="#AESSSS" class="headerlink" title="AESSSS"></a>AESSSS</h2><h3 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h3><p>官方的环境第二天已经崩掉了，还好留下了脚本，稍作修改就可以本地搭建</p>
 <a id="more"></a>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"><span class="keyword">import</span> SocketServer</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line">FLAG = <span class="string">'flag&#123;123456789012345678901234567&#125;'</span></span><br><span class="line">IV = <span class="string">'abcdefghabcdefgh'</span></span><br><span class="line">KEY = <span class="string">'abcdefghabcdefgh'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Task</span><span class="params">(SocketServer.BaseRequestHandler)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">proof_of_work</span><span class="params">(self)</span>:</span></span><br><span class="line">        proof = <span class="string">''</span>.join(</span><br><span class="line">            [random.choice(string.ascii_letters+string.digits) <span class="keyword">for</span> _ <span class="keyword">in</span> xrange(<span class="number">20</span>)])</span><br><span class="line">        <span class="string">'''</span></span><br><span class="line"><span class="string">        print proof</span></span><br><span class="line"><span class="string">        '''</span>     </span><br><span class="line">        digest = sha256(proof).hexdigest()</span><br><span class="line">        self.request.send(<span class="string">"sha256(XXXX+%s) == %s\n"</span> % (proof[<span class="number">4</span>:], digest))</span><br><span class="line">        self.request.send(<span class="string">'Give me XXXX:'</span>)</span><br><span class="line">        x = self.request.recv(<span class="number">10</span>)</span><br><span class="line">        x = x.strip()</span><br><span class="line">        <span class="keyword">if</span> len(x) != <span class="number">4</span> <span class="keyword">or</span> sha256(x+proof[<span class="number">4</span>:]).hexdigest() != digest:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pad</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        s += (<span class="number">256</span> - len(s)) * chr(<span class="number">256</span> - len(s))</span><br><span class="line">        ret = [<span class="string">'\x00'</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">256</span>)]</span><br><span class="line">        <span class="keyword">for</span> index, pos <span class="keyword">in</span> enumerate(self.s_box):</span><br><span class="line">            ret[pos] = s[index]</span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span>.join(ret)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">unpad</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        ret = [<span class="string">'\x00'</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">256</span>)]</span><br><span class="line">        <span class="keyword">for</span> index, pos <span class="keyword">in</span> enumerate(self.invs_box):</span><br><span class="line">            ret[pos] = s[index]</span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span>.join(ret[<span class="number">0</span>:-ord(ret[<span class="number">-1</span>])])</span><br><span class="line"></span><br><span class="line">    s_box = [</span><br><span class="line">        <span class="number">0x63</span>, <span class="number">0x7C</span>, <span class="number">0x77</span>, <span class="number">0x7B</span>, <span class="number">0xF2</span>, <span class="number">0x6B</span>, <span class="number">0x6F</span>, <span class="number">0xC5</span>, <span class="number">0x30</span>, <span class="number">0x01</span>, <span class="number">0x67</span>, <span class="number">0x2B</span>, <span class="number">0xFE</span>, <span class="number">0xD7</span>, <span class="number">0xAB</span>, <span class="number">0x76</span>,</span><br><span class="line">        <span class="number">0xCA</span>, <span class="number">0x82</span>, <span class="number">0xC9</span>, <span class="number">0x7D</span>, <span class="number">0xFA</span>, <span class="number">0x59</span>, <span class="number">0x47</span>, <span class="number">0xF0</span>, <span class="number">0xAD</span>, <span class="number">0xD4</span>, <span class="number">0xA2</span>, <span class="number">0xAF</span>, <span class="number">0x9C</span>, <span class="number">0xA4</span>, <span class="number">0x72</span>, <span class="number">0xC0</span>,</span><br><span class="line">        <span class="number">0xB7</span>, <span class="number">0xFD</span>, <span class="number">0x93</span>, <span class="number">0x26</span>, <span class="number">0x36</span>, <span class="number">0x3F</span>, <span class="number">0xF7</span>, <span class="number">0xCC</span>, <span class="number">0x34</span>, <span class="number">0xA5</span>, <span class="number">0xE5</span>, <span class="number">0xF1</span>, <span class="number">0x71</span>, <span class="number">0xD8</span>, <span class="number">0x31</span>, <span class="number">0x15</span>,</span><br><span class="line">        <span class="number">0x04</span>, <span class="number">0xC7</span>, <span class="number">0x23</span>, <span class="number">0xC3</span>, <span class="number">0x18</span>, <span class="number">0x96</span>, <span class="number">0x05</span>, <span class="number">0x9A</span>, <span class="number">0x07</span>, <span class="number">0x12</span>, <span class="number">0x80</span>, <span class="number">0xE2</span>, <span class="number">0xEB</span>, <span class="number">0x27</span>, <span class="number">0xB2</span>, <span class="number">0x75</span>,</span><br><span class="line">        <span class="number">0x09</span>, <span class="number">0x83</span>, <span class="number">0x2C</span>, <span class="number">0x1A</span>, <span class="number">0x1B</span>, <span class="number">0x6E</span>, <span class="number">0x5A</span>, <span class="number">0xA0</span>, <span class="number">0x52</span>, <span class="number">0x3B</span>, <span class="number">0xD6</span>, <span class="number">0xB3</span>, <span class="number">0x29</span>, <span class="number">0xE3</span>, <span class="number">0x2F</span>, <span class="number">0x84</span>,</span><br><span class="line">        <span class="number">0x53</span>, <span class="number">0xD1</span>, <span class="number">0x00</span>, <span class="number">0xED</span>, <span class="number">0x20</span>, <span class="number">0xFC</span>, <span class="number">0xB1</span>, <span class="number">0x5B</span>, <span class="number">0x6A</span>, <span class="number">0xCB</span>, <span class="number">0xBE</span>, <span class="number">0x39</span>, <span class="number">0x4A</span>, <span class="number">0x4C</span>, <span class="number">0x58</span>, <span class="number">0xCF</span>,</span><br><span class="line">        <span class="number">0xD0</span>, <span class="number">0xEF</span>, <span class="number">0xAA</span>, <span class="number">0xFB</span>, <span class="number">0x43</span>, <span class="number">0x4D</span>, <span class="number">0x33</span>, <span class="number">0x85</span>, <span class="number">0x45</span>, <span class="number">0xF9</span>, <span class="number">0x02</span>, <span class="number">0x7F</span>, <span class="number">0x50</span>, <span class="number">0x3C</span>, <span class="number">0x9F</span>, <span class="number">0xA8</span>,</span><br><span class="line">        <span class="number">0x51</span>, <span class="number">0xA3</span>, <span class="number">0x40</span>, <span class="number">0x8F</span>, <span class="number">0x92</span>, <span class="number">0x9D</span>, <span class="number">0x38</span>, <span class="number">0xF5</span>, <span class="number">0xBC</span>, <span class="number">0xB6</span>, <span class="number">0xDA</span>, <span class="number">0x21</span>, <span class="number">0x10</span>, <span class="number">0xFF</span>, <span class="number">0xF3</span>, <span class="number">0xD2</span>,</span><br><span class="line">        <span class="number">0xCD</span>, <span class="number">0x0C</span>, <span class="number">0x13</span>, <span class="number">0xEC</span>, <span class="number">0x5F</span>, <span class="number">0x97</span>, <span class="number">0x44</span>, <span class="number">0x17</span>, <span class="number">0xC4</span>, <span class="number">0xA7</span>, <span class="number">0x7E</span>, <span class="number">0x3D</span>, <span class="number">0x64</span>, <span class="number">0x5D</span>, <span class="number">0x19</span>, <span class="number">0x73</span>,</span><br><span class="line">        <span class="number">0x60</span>, <span class="number">0x81</span>, <span class="number">0x4F</span>, <span class="number">0xDC</span>, <span class="number">0x22</span>, <span class="number">0x2A</span>, <span class="number">0x90</span>, <span class="number">0x88</span>, <span class="number">0x46</span>, <span class="number">0xEE</span>, <span class="number">0xB8</span>, <span class="number">0x14</span>, <span class="number">0xDE</span>, <span class="number">0x5E</span>, <span class="number">0x0B</span>, <span class="number">0xDB</span>,</span><br><span class="line">        <span class="number">0xE0</span>, <span class="number">0x32</span>, <span class="number">0x3A</span>, <span class="number">0x0A</span>, <span class="number">0x49</span>, <span class="number">0x06</span>, <span class="number">0x24</span>, <span class="number">0x5C</span>, <span class="number">0xC2</span>, <span class="number">0xD3</span>, <span class="number">0xAC</span>, <span class="number">0x62</span>, <span class="number">0x91</span>, <span class="number">0x95</span>, <span class="number">0xE4</span>, <span class="number">0x79</span>,</span><br><span class="line">        <span class="number">0xE7</span>, <span class="number">0xC8</span>, <span class="number">0x37</span>, <span class="number">0x6D</span>, <span class="number">0x8D</span>, <span class="number">0xD5</span>, <span class="number">0x4E</span>, <span class="number">0xA9</span>, <span class="number">0x6C</span>, <span class="number">0x56</span>, <span class="number">0xF4</span>, <span class="number">0xEA</span>, <span class="number">0x65</span>, <span class="number">0x7A</span>, <span class="number">0xAE</span>, <span class="number">0x08</span>,</span><br><span class="line">        <span class="number">0xBA</span>, <span class="number">0x78</span>, <span class="number">0x25</span>, <span class="number">0x2E</span>, <span class="number">0x1C</span>, <span class="number">0xA6</span>, <span class="number">0xB4</span>, <span class="number">0xC6</span>, <span class="number">0xE8</span>, <span class="number">0xDD</span>, <span class="number">0x74</span>, <span class="number">0x1F</span>, <span class="number">0x4B</span>, <span class="number">0xBD</span>, <span class="number">0x8B</span>, <span class="number">0x8A</span>,</span><br><span class="line">        <span class="number">0x70</span>, <span class="number">0x3E</span>, <span class="number">0xB5</span>, <span class="number">0x66</span>, <span class="number">0x48</span>, <span class="number">0x03</span>, <span class="number">0xF6</span>, <span class="number">0x0E</span>, <span class="number">0x61</span>, <span class="number">0x35</span>, <span class="number">0x57</span>, <span class="number">0xB9</span>, <span class="number">0x86</span>, <span class="number">0xC1</span>, <span class="number">0x1D</span>, <span class="number">0x9E</span>,</span><br><span class="line">        <span class="number">0xE1</span>, <span class="number">0xF8</span>, <span class="number">0x98</span>, <span class="number">0x11</span>, <span class="number">0x69</span>, <span class="number">0xD9</span>, <span class="number">0x8E</span>, <span class="number">0x94</span>, <span class="number">0x9B</span>, <span class="number">0x1E</span>, <span class="number">0x87</span>, <span class="number">0xE9</span>, <span class="number">0xCE</span>, <span class="number">0x55</span>, <span class="number">0x28</span>, <span class="number">0xDF</span>,</span><br><span class="line">        <span class="number">0x8C</span>, <span class="number">0xA1</span>, <span class="number">0x89</span>, <span class="number">0x0D</span>, <span class="number">0xBF</span>, <span class="number">0xE6</span>, <span class="number">0x42</span>, <span class="number">0x68</span>, <span class="number">0x41</span>, <span class="number">0x99</span>, <span class="number">0x2D</span>, <span class="number">0x0F</span>, <span class="number">0xB0</span>, <span class="number">0x54</span>, <span class="number">0xBB</span>, <span class="number">0x16</span></span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    invs_box = [</span><br><span class="line">        <span class="number">0x52</span>, <span class="number">0x09</span>, <span class="number">0x6A</span>, <span class="number">0xD5</span>, <span class="number">0x30</span>, <span class="number">0x36</span>, <span class="number">0xA5</span>, <span class="number">0x38</span>, <span class="number">0xBF</span>, <span class="number">0x40</span>, <span class="number">0xA3</span>, <span class="number">0x9E</span>, <span class="number">0x81</span>, <span class="number">0xF3</span>, <span class="number">0xD7</span>, <span class="number">0xFB</span>,</span><br><span class="line">        <span class="number">0x7C</span>, <span class="number">0xE3</span>, <span class="number">0x39</span>, <span class="number">0x82</span>, <span class="number">0x9B</span>, <span class="number">0x2F</span>, <span class="number">0xFF</span>, <span class="number">0x87</span>, <span class="number">0x34</span>, <span class="number">0x8E</span>, <span class="number">0x43</span>, <span class="number">0x44</span>, <span class="number">0xC4</span>, <span class="number">0xDE</span>, <span class="number">0xE9</span>, <span class="number">0xCB</span>,</span><br><span class="line">        <span class="number">0x54</span>, <span class="number">0x7B</span>, <span class="number">0x94</span>, <span class="number">0x32</span>, <span class="number">0xA6</span>, <span class="number">0xC2</span>, <span class="number">0x23</span>, <span class="number">0x3D</span>, <span class="number">0xEE</span>, <span class="number">0x4C</span>, <span class="number">0x95</span>, <span class="number">0x0B</span>, <span class="number">0x42</span>, <span class="number">0xFA</span>, <span class="number">0xC3</span>, <span class="number">0x4E</span>,</span><br><span class="line">        <span class="number">0x08</span>, <span class="number">0x2E</span>, <span class="number">0xA1</span>, <span class="number">0x66</span>, <span class="number">0x28</span>, <span class="number">0xD9</span>, <span class="number">0x24</span>, <span class="number">0xB2</span>, <span class="number">0x76</span>, <span class="number">0x5B</span>, <span class="number">0xA2</span>, <span class="number">0x49</span>, <span class="number">0x6D</span>, <span class="number">0x8B</span>, <span class="number">0xD1</span>, <span class="number">0x25</span>,</span><br><span class="line">        <span class="number">0x72</span>, <span class="number">0xF8</span>, <span class="number">0xF6</span>, <span class="number">0x64</span>, <span class="number">0x86</span>, <span class="number">0x68</span>, <span class="number">0x98</span>, <span class="number">0x16</span>, <span class="number">0xD4</span>, <span class="number">0xA4</span>, <span class="number">0x5C</span>, <span class="number">0xCC</span>, <span class="number">0x5D</span>, <span class="number">0x65</span>, <span class="number">0xB6</span>, <span class="number">0x92</span>,</span><br><span class="line">        <span class="number">0x6C</span>, <span class="number">0x70</span>, <span class="number">0x48</span>, <span class="number">0x50</span>, <span class="number">0xFD</span>, <span class="number">0xED</span>, <span class="number">0xB9</span>, <span class="number">0xDA</span>, <span class="number">0x5E</span>, <span class="number">0x15</span>, <span class="number">0x46</span>, <span class="number">0x57</span>, <span class="number">0xA7</span>, <span class="number">0x8D</span>, <span class="number">0x9D</span>, <span class="number">0x84</span>,</span><br><span class="line">        <span class="number">0x90</span>, <span class="number">0xD8</span>, <span class="number">0xAB</span>, <span class="number">0x00</span>, <span class="number">0x8C</span>, <span class="number">0xBC</span>, <span class="number">0xD3</span>, <span class="number">0x0A</span>, <span class="number">0xF7</span>, <span class="number">0xE4</span>, <span class="number">0x58</span>, <span class="number">0x05</span>, <span class="number">0xB8</span>, <span class="number">0xB3</span>, <span class="number">0x45</span>, <span class="number">0x06</span>,</span><br><span class="line">        <span class="number">0xD0</span>, <span class="number">0x2C</span>, <span class="number">0x1E</span>, <span class="number">0x8F</span>, <span class="number">0xCA</span>, <span class="number">0x3F</span>, <span class="number">0x0F</span>, <span class="number">0x02</span>, <span class="number">0xC1</span>, <span class="number">0xAF</span>, <span class="number">0xBD</span>, <span class="number">0x03</span>, <span class="number">0x01</span>, <span class="number">0x13</span>, <span class="number">0x8A</span>, <span class="number">0x6B</span>,</span><br><span class="line">        <span class="number">0x3A</span>, <span class="number">0x91</span>, <span class="number">0x11</span>, <span class="number">0x41</span>, <span class="number">0x4F</span>, <span class="number">0x67</span>, <span class="number">0xDC</span>, <span class="number">0xEA</span>, <span class="number">0x97</span>, <span class="number">0xF2</span>, <span class="number">0xCF</span>, <span class="number">0xCE</span>, <span class="number">0xF0</span>, <span class="number">0xB4</span>, <span class="number">0xE6</span>, <span class="number">0x73</span>,</span><br><span class="line">        <span class="number">0x96</span>, <span class="number">0xAC</span>, <span class="number">0x74</span>, <span class="number">0x22</span>, <span class="number">0xE7</span>, <span class="number">0xAD</span>, <span class="number">0x35</span>, <span class="number">0x85</span>, <span class="number">0xE2</span>, <span class="number">0xF9</span>, <span class="number">0x37</span>, <span class="number">0xE8</span>, <span class="number">0x1C</span>, <span class="number">0x75</span>, <span class="number">0xDF</span>, <span class="number">0x6E</span>,</span><br><span class="line">        <span class="number">0x47</span>, <span class="number">0xF1</span>, <span class="number">0x1A</span>, <span class="number">0x71</span>, <span class="number">0x1D</span>, <span class="number">0x29</span>, <span class="number">0xC5</span>, <span class="number">0x89</span>, <span class="number">0x6F</span>, <span class="number">0xB7</span>, <span class="number">0x62</span>, <span class="number">0x0E</span>, <span class="number">0xAA</span>, <span class="number">0x18</span>, <span class="number">0xBE</span>, <span class="number">0x1B</span>,</span><br><span class="line">        <span class="number">0xFC</span>, <span class="number">0x56</span>, <span class="number">0x3E</span>, <span class="number">0x4B</span>, <span class="number">0xC6</span>, <span class="number">0xD2</span>, <span class="number">0x79</span>, <span class="number">0x20</span>, <span class="number">0x9A</span>, <span class="number">0xDB</span>, <span class="number">0xC0</span>, <span class="number">0xFE</span>, <span class="number">0x78</span>, <span class="number">0xCD</span>, <span class="number">0x5A</span>, <span class="number">0xF4</span>,</span><br><span class="line">        <span class="number">0x1F</span>, <span class="number">0xDD</span>, <span class="number">0xA8</span>, <span class="number">0x33</span>, <span class="number">0x88</span>, <span class="number">0x07</span>, <span class="number">0xC7</span>, <span class="number">0x31</span>, <span class="number">0xB1</span>, <span class="number">0x12</span>, <span class="number">0x10</span>, <span class="number">0x59</span>, <span class="number">0x27</span>, <span class="number">0x80</span>, <span class="number">0xEC</span>, <span class="number">0x5F</span>,</span><br><span class="line">        <span class="number">0x60</span>, <span class="number">0x51</span>, <span class="number">0x7F</span>, <span class="number">0xA9</span>, <span class="number">0x19</span>, <span class="number">0xB5</span>, <span class="number">0x4A</span>, <span class="number">0x0D</span>, <span class="number">0x2D</span>, <span class="number">0xE5</span>, <span class="number">0x7A</span>, <span class="number">0x9F</span>, <span class="number">0x93</span>, <span class="number">0xC9</span>, <span class="number">0x9C</span>, <span class="number">0xEF</span>,</span><br><span class="line">        <span class="number">0xA0</span>, <span class="number">0xE0</span>, <span class="number">0x3B</span>, <span class="number">0x4D</span>, <span class="number">0xAE</span>, <span class="number">0x2A</span>, <span class="number">0xF5</span>, <span class="number">0xB0</span>, <span class="number">0xC8</span>, <span class="number">0xEB</span>, <span class="number">0xBB</span>, <span class="number">0x3C</span>, <span class="number">0x83</span>, <span class="number">0x53</span>, <span class="number">0x99</span>, <span class="number">0x61</span>,</span><br><span class="line">        <span class="number">0x17</span>, <span class="number">0x2B</span>, <span class="number">0x04</span>, <span class="number">0x7E</span>, <span class="number">0xBA</span>, <span class="number">0x77</span>, <span class="number">0xD6</span>, <span class="number">0x26</span>, <span class="number">0xE1</span>, <span class="number">0x69</span>, <span class="number">0x14</span>, <span class="number">0x63</span>, <span class="number">0x55</span>, <span class="number">0x21</span>, <span class="number">0x0C</span>, <span class="number">0x7D</span></span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">encrypt</span><span class="params">(self, msg)</span>:</span></span><br><span class="line">        cipher = AES.new(KEY, AES.MODE_CBC, IV)</span><br><span class="line">        <span class="keyword">return</span> cipher.encrypt(msg).encode(<span class="string">'hex'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">handle</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.proof_of_work():</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        self.request.settimeout(<span class="number">15</span>)</span><br><span class="line">        req = self.request</span><br><span class="line">        flag_len = len(FLAG)</span><br><span class="line">        <span class="keyword">assert</span>(flag_len == <span class="number">33</span>)</span><br><span class="line">        self.flag = self.pad(FLAG)</span><br><span class="line">        <span class="keyword">assert</span>(len(self.flag) == <span class="number">256</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            req.sendall(</span><br><span class="line">                <span class="string">'Welcome to AES(WXH) encrypt system.\n1. get encrypted flag.\n2. pad flag.\n3.Do some encrypt.\nYour choice:'</span>)</span><br><span class="line">            cmd = req.recv(<span class="number">2</span>).strip()</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                cmd = int(cmd)</span><br><span class="line">            <span class="keyword">except</span> ValueError:</span><br><span class="line">                cmd = <span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> cmd == <span class="number">1</span>:</span><br><span class="line">                enc = self.encrypt(self.flag)</span><br><span class="line">                req.sendall(<span class="string">'Here is the encrypted flag: 0x%s\n'</span> % enc)</span><br><span class="line">            <span class="keyword">elif</span> cmd == <span class="number">2</span>:</span><br><span class="line">                req.sendall(<span class="string">'Pad me something:'</span>)</span><br><span class="line">                self.flag = self.unpad(self.flag)[</span><br><span class="line">                    :flag_len] + req.recv(<span class="number">1024</span>).strip()</span><br><span class="line">                <span class="keyword">assert</span>(len(self.flag) &lt;= <span class="number">256</span>)</span><br><span class="line">                self.flag = self.pad(self.flag)</span><br><span class="line">                req.sendall(<span class="string">'Done.\n'</span>)</span><br><span class="line">            <span class="keyword">elif</span> cmd == <span class="number">3</span>:</span><br><span class="line">                req.sendall(<span class="string">'What do you want to encrypt:'</span>)</span><br><span class="line">                msg = self.pad(req.recv(<span class="number">1024</span>).strip())</span><br><span class="line">                <span class="keyword">assert</span>(len(msg) &lt;= <span class="number">256</span>)</span><br><span class="line">                enc = self.encrypt(msg)</span><br><span class="line">                req.sendall(<span class="string">'Here is the encrypted message: 0x%s\n'</span> % enc)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                req.close()</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadedServer</span><span class="params">(SocketServer.ThreadingMixIn, SocketServer.TCPServer)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    HOST, PORT = <span class="string">'0.0.0.0'</span>, <span class="number">23333</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'Run in port:23333'</span></span><br><span class="line">    server = ThreadedServer((HOST, PORT), Task)</span><br><span class="line">    server.allow_reuse_address = <span class="keyword">True</span></span><br><span class="line">    server.serve_forever()</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-python">import random
+import sys
+import string
+from hashlib import sha256
+import SocketServer
+from Crypto.Cipher import AES
+
+FLAG = &#39;flag{123456789012345678901234567}&#39;
+IV = &#39;abcdefghabcdefgh&#39;
+KEY = &#39;abcdefghabcdefgh&#39;
+
+class Task(SocketServer.BaseRequestHandler):
+    def proof_of_work(self):
+        proof = &#39;&#39;.join(
+            [random.choice(string.ascii_letters+string.digits) for _ in xrange(20)])
+        &#39;&#39;&#39;
+        print proof
+        &#39;&#39;&#39;     
+        digest = sha256(proof).hexdigest()
+        self.request.send(&quot;sha256(XXXX+%s) == %s\n&quot; % (proof[4:], digest))
+        self.request.send(&#39;Give me XXXX:&#39;)
+        x = self.request.recv(10)
+        x = x.strip()
+        if len(x) != 4 or sha256(x+proof[4:]).hexdigest() != digest:
+            return False
+        return True
+
+    def pad(self, s):
+        s += (256 - len(s)) * chr(256 - len(s))
+        ret = [&#39;\x00&#39; for _ in range(256)]
+        for index, pos in enumerate(self.s_box):
+            ret[pos] = s[index]
+        return &#39;&#39;.join(ret)
+
+    def unpad(self, s):
+        ret = [&#39;\x00&#39; for _ in range(256)]
+        for index, pos in enumerate(self.invs_box):
+            ret[pos] = s[index]
+        return &#39;&#39;.join(ret[0:-ord(ret[-1])])
+
+    s_box = [
+        0x63, 0x7C, 0x77, 0x7B, 0xF2, 0x6B, 0x6F, 0xC5, 0x30, 0x01, 0x67, 0x2B, 0xFE, 0xD7, 0xAB, 0x76,
+        0xCA, 0x82, 0xC9, 0x7D, 0xFA, 0x59, 0x47, 0xF0, 0xAD, 0xD4, 0xA2, 0xAF, 0x9C, 0xA4, 0x72, 0xC0,
+        0xB7, 0xFD, 0x93, 0x26, 0x36, 0x3F, 0xF7, 0xCC, 0x34, 0xA5, 0xE5, 0xF1, 0x71, 0xD8, 0x31, 0x15,
+        0x04, 0xC7, 0x23, 0xC3, 0x18, 0x96, 0x05, 0x9A, 0x07, 0x12, 0x80, 0xE2, 0xEB, 0x27, 0xB2, 0x75,
+        0x09, 0x83, 0x2C, 0x1A, 0x1B, 0x6E, 0x5A, 0xA0, 0x52, 0x3B, 0xD6, 0xB3, 0x29, 0xE3, 0x2F, 0x84,
+        0x53, 0xD1, 0x00, 0xED, 0x20, 0xFC, 0xB1, 0x5B, 0x6A, 0xCB, 0xBE, 0x39, 0x4A, 0x4C, 0x58, 0xCF,
+        0xD0, 0xEF, 0xAA, 0xFB, 0x43, 0x4D, 0x33, 0x85, 0x45, 0xF9, 0x02, 0x7F, 0x50, 0x3C, 0x9F, 0xA8,
+        0x51, 0xA3, 0x40, 0x8F, 0x92, 0x9D, 0x38, 0xF5, 0xBC, 0xB6, 0xDA, 0x21, 0x10, 0xFF, 0xF3, 0xD2,
+        0xCD, 0x0C, 0x13, 0xEC, 0x5F, 0x97, 0x44, 0x17, 0xC4, 0xA7, 0x7E, 0x3D, 0x64, 0x5D, 0x19, 0x73,
+        0x60, 0x81, 0x4F, 0xDC, 0x22, 0x2A, 0x90, 0x88, 0x46, 0xEE, 0xB8, 0x14, 0xDE, 0x5E, 0x0B, 0xDB,
+        0xE0, 0x32, 0x3A, 0x0A, 0x49, 0x06, 0x24, 0x5C, 0xC2, 0xD3, 0xAC, 0x62, 0x91, 0x95, 0xE4, 0x79,
+        0xE7, 0xC8, 0x37, 0x6D, 0x8D, 0xD5, 0x4E, 0xA9, 0x6C, 0x56, 0xF4, 0xEA, 0x65, 0x7A, 0xAE, 0x08,
+        0xBA, 0x78, 0x25, 0x2E, 0x1C, 0xA6, 0xB4, 0xC6, 0xE8, 0xDD, 0x74, 0x1F, 0x4B, 0xBD, 0x8B, 0x8A,
+        0x70, 0x3E, 0xB5, 0x66, 0x48, 0x03, 0xF6, 0x0E, 0x61, 0x35, 0x57, 0xB9, 0x86, 0xC1, 0x1D, 0x9E,
+        0xE1, 0xF8, 0x98, 0x11, 0x69, 0xD9, 0x8E, 0x94, 0x9B, 0x1E, 0x87, 0xE9, 0xCE, 0x55, 0x28, 0xDF,
+        0x8C, 0xA1, 0x89, 0x0D, 0xBF, 0xE6, 0x42, 0x68, 0x41, 0x99, 0x2D, 0x0F, 0xB0, 0x54, 0xBB, 0x16
+    ]
+
+    invs_box = [
+        0x52, 0x09, 0x6A, 0xD5, 0x30, 0x36, 0xA5, 0x38, 0xBF, 0x40, 0xA3, 0x9E, 0x81, 0xF3, 0xD7, 0xFB,
+        0x7C, 0xE3, 0x39, 0x82, 0x9B, 0x2F, 0xFF, 0x87, 0x34, 0x8E, 0x43, 0x44, 0xC4, 0xDE, 0xE9, 0xCB,
+        0x54, 0x7B, 0x94, 0x32, 0xA6, 0xC2, 0x23, 0x3D, 0xEE, 0x4C, 0x95, 0x0B, 0x42, 0xFA, 0xC3, 0x4E,
+        0x08, 0x2E, 0xA1, 0x66, 0x28, 0xD9, 0x24, 0xB2, 0x76, 0x5B, 0xA2, 0x49, 0x6D, 0x8B, 0xD1, 0x25,
+        0x72, 0xF8, 0xF6, 0x64, 0x86, 0x68, 0x98, 0x16, 0xD4, 0xA4, 0x5C, 0xCC, 0x5D, 0x65, 0xB6, 0x92,
+        0x6C, 0x70, 0x48, 0x50, 0xFD, 0xED, 0xB9, 0xDA, 0x5E, 0x15, 0x46, 0x57, 0xA7, 0x8D, 0x9D, 0x84,
+        0x90, 0xD8, 0xAB, 0x00, 0x8C, 0xBC, 0xD3, 0x0A, 0xF7, 0xE4, 0x58, 0x05, 0xB8, 0xB3, 0x45, 0x06,
+        0xD0, 0x2C, 0x1E, 0x8F, 0xCA, 0x3F, 0x0F, 0x02, 0xC1, 0xAF, 0xBD, 0x03, 0x01, 0x13, 0x8A, 0x6B,
+        0x3A, 0x91, 0x11, 0x41, 0x4F, 0x67, 0xDC, 0xEA, 0x97, 0xF2, 0xCF, 0xCE, 0xF0, 0xB4, 0xE6, 0x73,
+        0x96, 0xAC, 0x74, 0x22, 0xE7, 0xAD, 0x35, 0x85, 0xE2, 0xF9, 0x37, 0xE8, 0x1C, 0x75, 0xDF, 0x6E,
+        0x47, 0xF1, 0x1A, 0x71, 0x1D, 0x29, 0xC5, 0x89, 0x6F, 0xB7, 0x62, 0x0E, 0xAA, 0x18, 0xBE, 0x1B,
+        0xFC, 0x56, 0x3E, 0x4B, 0xC6, 0xD2, 0x79, 0x20, 0x9A, 0xDB, 0xC0, 0xFE, 0x78, 0xCD, 0x5A, 0xF4,
+        0x1F, 0xDD, 0xA8, 0x33, 0x88, 0x07, 0xC7, 0x31, 0xB1, 0x12, 0x10, 0x59, 0x27, 0x80, 0xEC, 0x5F,
+        0x60, 0x51, 0x7F, 0xA9, 0x19, 0xB5, 0x4A, 0x0D, 0x2D, 0xE5, 0x7A, 0x9F, 0x93, 0xC9, 0x9C, 0xEF,
+        0xA0, 0xE0, 0x3B, 0x4D, 0xAE, 0x2A, 0xF5, 0xB0, 0xC8, 0xEB, 0xBB, 0x3C, 0x83, 0x53, 0x99, 0x61,
+        0x17, 0x2B, 0x04, 0x7E, 0xBA, 0x77, 0xD6, 0x26, 0xE1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0C, 0x7D
+    ]
+
+    def encrypt(self, msg):
+        cipher = AES.new(KEY, AES.MODE_CBC, IV)
+        return cipher.encrypt(msg).encode(&#39;hex&#39;)
+
+    def handle(self):
+        if not self.proof_of_work():
+            return
+        self.request.settimeout(15)
+        req = self.request
+        flag_len = len(FLAG)
+        assert(flag_len == 33)
+        self.flag = self.pad(FLAG)
+        assert(len(self.flag) == 256)
+
+        while True:
+            req.sendall(
+                &#39;Welcome to AES(WXH) encrypt system.\n1. get encrypted flag.\n2. pad flag.\n3.Do some encrypt.\nYour choice:&#39;)
+            cmd = req.recv(2).strip()
+            try:
+                cmd = int(cmd)
+            except ValueError:
+                cmd = 0
+            if cmd == 1:
+                enc = self.encrypt(self.flag)
+                req.sendall(&#39;Here is the encrypted flag: 0x%s\n&#39; % enc)
+            elif cmd == 2:
+                req.sendall(&#39;Pad me something:&#39;)
+                self.flag = self.unpad(self.flag)[
+                    :flag_len] + req.recv(1024).strip()
+                assert(len(self.flag) &lt;= 256)
+                self.flag = self.pad(self.flag)
+                req.sendall(&#39;Done.\n&#39;)
+            elif cmd == 3:
+                req.sendall(&#39;What do you want to encrypt:&#39;)
+                msg = self.pad(req.recv(1024).strip())
+                assert(len(msg) &lt;= 256)
+                enc = self.encrypt(msg)
+                req.sendall(&#39;Here is the encrypted message: 0x%s\n&#39; % enc)
+            else:
+                req.close()
+                return
+
+
+class ThreadedServer(SocketServer.ThreadingMixIn, SocketServer.TCPServer):
+    pass
+
+
+if __name__ == &quot;__main__&quot;:
+    HOST, PORT = &#39;0.0.0.0&#39;, 23333
+    print &#39;Run in port:23333&#39;
+    server = ThreadedServer((HOST, PORT), Task)
+    server.allow_reuse_address = True
+    server.serve_forever()
+</code></pre>
 <h3 id="0x01-非最优解"><a href="#0x01-非最优解" class="headerlink" title="0x01 非最优解"></a>0x01 非最优解</h3><p>自己在做题的时候没有找到漏洞，而是用了一种非最优解的做法，这种做法，讲道理，可以做，但是当时受限于网络问题，脚本跑的比较慢，自己当时又不知道怎么向nc端口监听发送数据，于是找了同队的pwn爷爷帮忙用pwntools写脚本，结果到比赛结束自己的脚本也跑不全（当时已经跑出了3位了），还浪费了pwn爷爷做pwn的时间。</p>
 <p>讲讲自己的做法，以下是我做题时对脚本的分析：</p>
-<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">首先将<span class="built_in">FLAG</span>由<span class="number">33</span>位填充到<span class="number">256</span>位 不足的位数用chr(<span class="number">256</span>-<span class="number">33</span>)填充</span><br><span class="line">然后经过s盒进行置换即得到<span class="built_in">flag</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>)</span><br><span class="line">使用aes的cbc模式 加密<span class="built_in">flag</span> 输出<span class="number">16</span>进制:</span><br><span class="line"><span class="number">0</span>x3478e3196c4a6a29b244380ef7cabe1030d103f3c3df019fb4ed207b849d0b6d5da5d3bf89f7ca65707c19591413de7dccddd498b8a8ab5fbae70e9ec17fdfc132a2fb63e0968d737b9839c0f7686de07251a1de0264d0ecad05749ad0d13a2c094da4a09837207c284e3ddfce2323c01ea0304e3362e06d191413fd3576657f072f823e07cf1c77ce453c4823c9d827545247254c8fedbe3c400567ca40eb047e1a7dba3962230b4cd0acc58d4b112690549f40c3553e34c38a1c2898a5eb5b33049d0032de35654639eb953b03464209809abecc70f0142f81fcf06298546ee58387795e9d59aa86a60e3a43a8d8f326f8a1e6ae9920291de72c638a9203fa</span><br><span class="line">key iv都不知道</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>)</span><br><span class="line">将<span class="built_in">flag</span>进行invs盒置换，然后返回<span class="built_in">flag</span>的前<span class="number">33</span>位(<span class="built_in">FLAG</span>)，然后加上一个自定义输入的字符组成meg</span><br><span class="line">将msg填充到<span class="number">256</span>位，不足的用chr(<span class="number">256</span>-msg长度)填充 然后返回经过s盒置换的东西赋值给<span class="built_in">flag</span></span><br><span class="line"></span><br><span class="line"><span class="number">3</span>)</span><br><span class="line">输入自定义的字符串  填充到<span class="number">256</span>位，不足的用chr(<span class="number">256</span>-长度)填充 然后经过s盒置换，再进行aes-cbc加密输出<span class="number">16</span>进制</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>)</span><br><span class="line">经过s盒置换再经过invs盒置换后就能还原字符串</span><br><span class="line">同样的经过invs盒置换后再经过s盒置换也能还原字符串</span><br><span class="line"></span><br><span class="line"><span class="number">5</span>)</span><br><span class="line">通过操作<span class="number">2</span>和<span class="number">1</span>，使得<span class="built_in">flag</span>变成<span class="built_in">FLAG</span> + <span class="number">223</span>个<span class="number">0</span>，那么通过操作<span class="number">1</span>，也就是经过S盒置换后加密的<span class="built_in">flag</span>如下：</span><br><span class="line"><span class="number">0</span>xdaf999ff0261053e70920760c99359c206a6162434a6c9d93c03c61a11fbd418b617d3b70c8be06c5c778031cad499af02393a15198d9c43a7ce57e7b47708dd6b1f39a243590539c6e0bac5d37aa38fa99617fd66a01afced5cb46de0bf4d1a75be8304dc43b973a22d937a432d3f96ad28b75e6b4b2e8bd4dd19863bd88e7a87d42a1f29d31566d1b474e8a61fc1891ffd8a60ff9710645b19ee56f2064b6df793885dcd7d579a5f169aba91e230ff0b48c503359bccd1e45b03e1988de76aabbcfd9d13a3dd37e76250d040e297fe30b89ce5297b1d506c5e1f6629abed9b87ef3897bded520ae8dc1289cf2d4c7a311587b30a14736af630b9edff53f48e</span><br></pre></td></tr></table></figure>
-<p>当时我的想法也就是：</p>
+<pre><code>首先将FLAG由33位填充到256位 不足的位数用chr(256-33)填充
+然后经过s盒进行置换即得到flag
+
+1)
+使用aes的cbc模式 加密flag 输出16进制:
+0x3478e3196c4a6a29b244380ef7cabe1030d103f3c3df019fb4ed207b849d0b6d5da5d3bf89f7ca65707c19591413de7dccddd498b8a8ab5fbae70e9ec17fdfc132a2fb63e0968d737b9839c0f7686de07251a1de0264d0ecad05749ad0d13a2c094da4a09837207c284e3ddfce2323c01ea0304e3362e06d191413fd3576657f072f823e07cf1c77ce453c4823c9d827545247254c8fedbe3c400567ca40eb047e1a7dba3962230b4cd0acc58d4b112690549f40c3553e34c38a1c2898a5eb5b33049d0032de35654639eb953b03464209809abecc70f0142f81fcf06298546ee58387795e9d59aa86a60e3a43a8d8f326f8a1e6ae9920291de72c638a9203fa
+key iv都不知道
+
+2)
+将flag进行invs盒置换，然后返回flag的前33位(FLAG)，然后加上一个自定义输入的字符组成meg
+将msg填充到256位，不足的用chr(256-msg长度)填充 然后返回经过s盒置换的东西赋值给flag
+
+3)
+输入自定义的字符串  填充到256位，不足的用chr(256-长度)填充 然后经过s盒置换，再进行aes-cbc加密输出16进制
+
+4)
+经过s盒置换再经过invs盒置换后就能还原字符串
+同样的经过invs盒置换后再经过s盒置换也能还原字符串
+
+5)
+通过操作2和1，使得flag变成FLAG + 223个0，那么通过操作1，也就是经过S盒置换后加密的flag如下：
+0xdaf999ff0261053e70920760c99359c206a6162434a6c9d93c03c61a11fbd418b617d3b70c8be06c5c778031cad499af02393a15198d9c43a7ce57e7b47708dd6b1f39a243590539c6e0bac5d37aa38fa99617fd66a01afced5cb46de0bf4d1a75be8304dc43b973a22d937a432d3f96ad28b75e6b4b2e8bd4dd19863bd88e7a87d42a1f29d31566d1b474e8a61fc1891ffd8a60ff9710645b19ee56f2064b6df793885dcd7d579a5f169aba91e230ff0b48c503359bccd1e45b03e1988de76aabbcfd9d13a3dd37e76250d040e297fe30b89ce5297b1d506c5e1f6629abed9b87ef3897bded520ae8dc1289cf2d4c7a311587b30a14736af630b9edff53f48e
+</code></pre><p>当时我的想法也就是：</p>
 <p>FLAG+223个0加密的结果你是知道的，那么我就通过操作3，输出256个0加密的结果，由于cbc模式采用分组加密，如果两个明文的第一块的明文完全相同，那么输出结果的第一块密文也是完全相同的，而FLAG+223个0通过s盒置换使得FLAG的各个位置散落在cbc加密的16组里面，所以，我们只要按位置改变操作3的输入，通过判断输出的结果和FLAG+223个0的前多少多少位是否相同来依次爆破就能得到flag</p>
 <p>那么这种方法的问题出在哪了呢？因为我们判断的依据是根据是每16个字节为一块的单位进行的爆破，而FLAG经过s盒置换后可能FLAG有几位在同一组里，这样就必须同时对这几位爆破，当时我爆出的几位都是一组里面只有这一位，也就是只有大概60种可能，所以很快，但后来FLAG有5位在同一组里面，这就意味着这一组的爆破有60的5次方种可能，想爆破出来就很困难了</p>
 <p>贴一下比赛时候的脚本吧：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">"debug"</span></span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">"106.75.13.64"</span>,<span class="number">54321</span>)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">"+"</span>)</span><br><span class="line">str1 = p.recvuntil(<span class="string">")"</span>,drop=<span class="keyword">True</span>)</span><br><span class="line">p.recvuntil(<span class="string">"== "</span>)</span><br><span class="line">str2 =p.recvuntil(<span class="string">"\n"</span>,drop = <span class="keyword">True</span>)</span><br><span class="line"><span class="keyword">print</span> str1</span><br><span class="line"><span class="keyword">print</span> str2</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">65</span>, <span class="number">123</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">65</span>, <span class="number">123</span>):</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">65</span>, <span class="number">123</span>):</span><br><span class="line">            <span class="keyword">for</span> l <span class="keyword">in</span> range(<span class="number">65</span>, <span class="number">123</span>):</span><br><span class="line">                x = chr(i)+chr(j)+chr(k)+chr(l)</span><br><span class="line">                <span class="keyword">if</span> sha256(x + str1).hexdigest() == str2:</span><br><span class="line">                    p.sendline(x)</span><br><span class="line"></span><br><span class="line">a = <span class="string">'000000000_0u0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'</span></span><br><span class="line"></span><br><span class="line">a = list(a)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">32</span>, <span class="number">127</span>):</span><br><span class="line">	p.recvuntil(<span class="string">"choice:"</span>)</span><br><span class="line">	p.sendline(str(<span class="number">3</span>))</span><br><span class="line">	a[<span class="number">8</span>] = chr(i)</span><br><span class="line">	p.recvuntil(<span class="string">"encrypt:"</span>)</span><br><span class="line">	p.sendline(<span class="string">''</span>.join(a))</span><br><span class="line">	p.recvuntil(<span class="string">"message: "</span>)</span><br><span class="line">	key = p.recvuntil(<span class="string">"\n"</span>)</span><br><span class="line">	<span class="comment">#success("key--&gt;"+key)</span></span><br><span class="line">	<span class="keyword">if</span> key[<span class="number">0</span>:<span class="number">130</span>] == <span class="string">'0xdaf999ff0261053e70920760c99359c206a6162434a6c9d93c03c61a11fbd418b617d3b70c8be06c5c778031cad499af02393a15198d9c43a7ce57e7b47708dd'</span>:</span><br><span class="line">		success(<span class="string">"flag--&gt;"</span>+<span class="string">''</span>.join(a))</span><br><span class="line">		exit()</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-python">from pwn import *
+context.log_level = &quot;debug&quot;
+
+p = remote(&quot;106.75.13.64&quot;,54321)
+
+p.recvuntil(&quot;+&quot;)
+str1 = p.recvuntil(&quot;)&quot;,drop=True)
+p.recvuntil(&quot;== &quot;)
+str2 =p.recvuntil(&quot;\n&quot;,drop = True)
+print str1
+print str2
+
+from hashlib import sha256
+
+for i in range(65, 123):
+    for j in range(65, 123):
+        for k in range(65, 123):
+            for l in range(65, 123):
+                x = chr(i)+chr(j)+chr(k)+chr(l)
+                if sha256(x + str1).hexdigest() == str2:
+                    p.sendline(x)
+
+a = &#39;000000000_0u0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000&#39;
+
+a = list(a)
+for i in range(32, 127):
+    p.recvuntil(&quot;choice:&quot;)
+    p.sendline(str(3))
+    a[8] = chr(i)
+    p.recvuntil(&quot;encrypt:&quot;)
+    p.sendline(&#39;&#39;.join(a))
+    p.recvuntil(&quot;message: &quot;)
+    key = p.recvuntil(&quot;\n&quot;)
+    #success(&quot;key--&gt;&quot;+key)
+    if key[0:130] == &#39;0xdaf999ff0261053e70920760c99359c206a6162434a6c9d93c03c61a11fbd418b617d3b70c8be06c5c778031cad499af02393a15198d9c43a7ce57e7b47708dd&#39;:
+        success(&quot;flag--&gt;&quot;+&#39;&#39;.join(a))
+        exit()
+</code></pre>
 <p>如你们所见，当时跑出了一个下划线和u= =</p>
-<h3 id="0x02-最优解"><a href="#0x02-最优解" class="headerlink" title="0x02 最优解"></a>0x02 最优解</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">unpad</span><span class="params">(self, s)</span>:</span></span><br><span class="line">    ret = [<span class="string">'\x00'</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">256</span>)]</span><br><span class="line">    <span class="keyword">for</span> index, pos <span class="keyword">in</span> enumerate(self.invs_box):</span><br><span class="line">        ret[pos] = s[index]</span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>.join(ret[<span class="number">0</span>:-ord(ret[<span class="number">-1</span>])])</span><br><span class="line"></span><br><span class="line"><span class="keyword">elif</span> cmd == <span class="number">2</span>:</span><br><span class="line">	req.sendall(<span class="string">'Pad me something:'</span>)</span><br><span class="line">	self.flag = self.unpad(self.flag)[:flag_len] + req.recv(<span class="number">1024</span>).strip()</span><br><span class="line">	<span class="keyword">assert</span>(len(self.flag) &lt;= <span class="number">256</span>)</span><br><span class="line">	self.flag = self.pad(self.flag)</span><br><span class="line">	req.sendall(<span class="string">'Done.\n'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="0x02-最优解"><a href="#0x02-最优解" class="headerlink" title="0x02 最优解"></a>0x02 最优解</h3><pre><code class="lang-python">def unpad(self, s):
+    ret = [&#39;\x00&#39; for _ in range(256)]
+    for index, pos in enumerate(self.invs_box):
+        ret[pos] = s[index]
+    return &#39;&#39;.join(ret[0:-ord(ret[-1])])
+
+elif cmd == 2:
+    req.sendall(&#39;Pad me something:&#39;)
+    self.flag = self.unpad(self.flag)[:flag_len] + req.recv(1024).strip()
+    assert(len(self.flag) &lt;= 256)
+    self.flag = self.pad(self.flag)
+    req.sendall(&#39;Done.\n&#39;)
+</code></pre>
 <p>问题的关键出在了这个unpad函数上</p>
 <p>我们第一次进行操作2，填充256-33=223个字符，然后经过s盒置换</p>
 <p>但我们如果再次进行操作2，那么就会得到FLAG+223个字符（也就是ret），然后返回ret[ 0 : -ord( ret [-1] ) ]，而这个ret[-1]就是我们第一次进行操作2输入的最后一个字符，如果我们输入chr(255)那么就只会返回flag的第一位，然后进行切片[:33]，这里就比较恶心了，python对于超过长度的切片居然不会报错，而是返回最长长度</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>][:<span class="number">1</span>]</span><br><span class="line">[<span class="number">1</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>][:<span class="number">33333</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-python">&gt;&gt;&gt; [1, 2, 3, 4][:1]
+[1]
+&gt;&gt;&gt; [1, 2, 3, 4][:33333]
+[1, 2, 3, 4]
+</code></pre>
 <p>然后我们再输入256-1=255个0， 然后经过S盒置换，再通过操作1就能得到加密的结果</p>
 <p>那么我们可以通过操作3输入 $c$+255个0就能得到经过S盒置换再加密的结果，对$c$进行爆破就能得到flag的第一位，其后的每一位也是如此， 给出最终脚本</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"><span class="keyword">from</span> re <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> string <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect</span><span class="params">(host, port)</span>:</span></span><br><span class="line">    s = socket()</span><br><span class="line">    s.connect((host, port))</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">proof</span><span class="params">(s)</span>:</span></span><br><span class="line">    mess = s.recv(<span class="number">1024</span>)</span><br><span class="line">    <span class="keyword">print</span> mess</span><br><span class="line">    <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line">    reg = <span class="string">'sha256\(XXXX\+(.+)\) == (.+)'</span></span><br><span class="line">    regexp = compile(reg)</span><br><span class="line">    str_12 = regexp.findall(mess)</span><br><span class="line">    str1 = str_12[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">    str2 = str_12[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    dict = letters + digits</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> dict:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> dict:</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> dict:</span><br><span class="line">                <span class="keyword">for</span> l <span class="keyword">in</span> dict:</span><br><span class="line">                    x = i + j + k + l</span><br><span class="line">                    <span class="keyword">if</span> sha256(x + str1).hexdigest() == str2:</span><br><span class="line">                        <span class="keyword">print</span> x</span><br><span class="line">                        s.send(x)</span><br><span class="line">                        <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line">                        <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_flag</span><span class="params">(host, port)</span>:</span></span><br><span class="line">    flag_len = <span class="number">33</span></span><br><span class="line">    flag = <span class="string">''</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(flag_len):</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        s = connect(host, port)</span><br><span class="line">        s = proof(s)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'2'</span></span><br><span class="line">        s.send(<span class="string">'2'</span>)</span><br><span class="line">        <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">print</span> <span class="number">222</span> * <span class="string">'0'</span> + chr(<span class="number">256</span> - i)</span><br><span class="line">        s.send(<span class="number">222</span> * <span class="string">'0'</span> + chr(<span class="number">256</span> - i))</span><br><span class="line">        <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'2'</span></span><br><span class="line">        s.send(<span class="string">'2'</span>)</span><br><span class="line">        <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">print</span> (<span class="number">256</span> - i) * <span class="string">'0'</span></span><br><span class="line">        s.send((<span class="number">256</span> - i) * <span class="string">'0'</span>)</span><br><span class="line">        <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'1'</span></span><br><span class="line">        s.send(<span class="string">'1'</span>)</span><br><span class="line">        mess = s.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">print</span> mess</span><br><span class="line"></span><br><span class="line">        reg = <span class="string">'Here is the encrypted flag: (.+)'</span></span><br><span class="line">        regexp = compile(reg)</span><br><span class="line">        str_1 = regexp.findall(mess)</span><br><span class="line">        str1 = str_1[<span class="number">0</span>]</span><br><span class="line">        flag = get_char(s, flag, str1, i)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'you made it and this is your flag! --&gt;'</span> + flag</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_char</span><span class="params">(s, flag, str1, i)</span>:</span></span><br><span class="line">    dict = letters + digits + <span class="string">'&#123;'</span> + <span class="string">'&#125;'</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> dict:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'3'</span></span><br><span class="line">        s.send(<span class="string">'3'</span>)</span><br><span class="line">        <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">print</span> flag + char + (<span class="number">256</span> - i) * <span class="string">'0'</span></span><br><span class="line">        s.send(flag + char + (<span class="number">256</span> - i) * <span class="string">'0'</span>)</span><br><span class="line">        mess = s.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">print</span>  mess</span><br><span class="line"></span><br><span class="line">        reg = <span class="string">'Here is the encrypted message: (.+)'</span></span><br><span class="line">        regexp = compile(reg)</span><br><span class="line">        str_2 = regexp.findall(mess)</span><br><span class="line">        str2 = str_2[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> str1 == str2:</span><br><span class="line">            flag += char</span><br><span class="line">            s.close()</span><br><span class="line">            <span class="keyword">return</span> flag</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">AES</span><span class="params">()</span>:</span></span><br><span class="line">    host = <span class="string">'192.168.134.135'</span></span><br><span class="line">    port = <span class="number">23333</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> get_flag(host, port)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    AES()</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-python">#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from socket import *
+from hashlib import sha256
+from re import *
+from string import *
+
+def connect(host, port):
+    s = socket()
+    s.connect((host, port))
+    return s
+
+def proof(s):
+    mess = s.recv(1024)
+    print mess
+    print s.recv(1024)
+
+    reg = &#39;sha256\(XXXX\+(.+)\) == (.+)&#39;
+    regexp = compile(reg)
+    str_12 = regexp.findall(mess)
+    str1 = str_12[0][0]
+    str2 = str_12[0][1]
+
+    dict = letters + digits
+    for i in dict:
+        for j in dict:
+            for k in dict:
+                for l in dict:
+                    x = i + j + k + l
+                    if sha256(x + str1).hexdigest() == str2:
+                        print x
+                        s.send(x)
+                        print s.recv(1024)
+                        return s
+
+def get_flag(host, port):
+    flag_len = 33
+    flag = &#39;&#39;
+
+    for i in range(flag_len):
+        i += 1
+
+        s = connect(host, port)
+        s = proof(s)
+
+        print &#39;2&#39;
+        s.send(&#39;2&#39;)
+        print s.recv(1024)
+        print 222 * &#39;0&#39; + chr(256 - i)
+        s.send(222 * &#39;0&#39; + chr(256 - i))
+        print s.recv(1024)
+        print s.recv(1024)
+
+        print &#39;2&#39;
+        s.send(&#39;2&#39;)
+        print s.recv(1024)
+        print (256 - i) * &#39;0&#39;
+        s.send((256 - i) * &#39;0&#39;)
+        print s.recv(1024)
+        print s.recv(1024)
+
+        print &#39;1&#39;
+        s.send(&#39;1&#39;)
+        mess = s.recv(1024)
+        print mess
+
+        reg = &#39;Here is the encrypted flag: (.+)&#39;
+        regexp = compile(reg)
+        str_1 = regexp.findall(mess)
+        str1 = str_1[0]
+        flag = get_char(s, flag, str1, i)
+
+    return &#39;you made it and this is your flag! --&gt;&#39; + flag
+
+
+def get_char(s, flag, str1, i):
+    dict = letters + digits + &#39;{&#39; + &#39;}&#39;
+
+    for char in dict:
+
+        print s.recv(1024)
+        print &#39;3&#39;
+        s.send(&#39;3&#39;)
+        print s.recv(1024)
+
+        print flag + char + (256 - i) * &#39;0&#39;
+        s.send(flag + char + (256 - i) * &#39;0&#39;)
+        mess = s.recv(1024)
+        print  mess
+
+        reg = &#39;Here is the encrypted message: (.+)&#39;
+        regexp = compile(reg)
+        str_2 = regexp.findall(mess)
+        str2 = str_2[0]
+
+        if str1 == str2:
+            flag += char
+            s.close()
+            return flag
+
+def AES():
+    host = &#39;192.168.134.135&#39;
+    port = 23333
+
+    print get_flag(host, port)
+
+if __name__ == &#39;__main__&#39;:
+    AES()
+</code></pre>
 <p>有人说socket没有pwntools好用，但是我觉得pwntools也好不到哪里去= =</p>
 <h2 id="RSAAAA"><a href="#RSAAAA" class="headerlink" title="RSAAAA"></a>RSAAAA</h2><h3 id="0x00-前言-1"><a href="#0x00-前言-1" class="headerlink" title="0x00 前言"></a>0x00 前言</h3><p>太菜了，这个题在比赛的时候也没做出来，还是十分羞耻的卡在了第一关。。。</p>
 <p>题目没有给在端口搭建的脚本我又懒得改写= =</p>
 <h3 id="0x01-第一关"><a href="#0x01-第一关" class="headerlink" title="0x01 第一关"></a>0x01 第一关</h3><p>题目第一关给的是这个：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rsa_gen</span><span class="params">(bit_n=<span class="number">2048</span>, bit_e=<span class="number">64</span>)</span>:</span></span><br><span class="line">    p = getPrime(bit_n / <span class="number">2</span>)</span><br><span class="line">    q = getPrime(bit_n / <span class="number">2</span>)</span><br><span class="line">    n = p * q</span><br><span class="line">    e = getPrime(bit_e)</span><br><span class="line">    d = mod_inv(e, (p - <span class="number">1</span>) * (q - <span class="number">1</span>))</span><br><span class="line">    msg = int(<span class="string">''</span>.join([random.choice(string.ascii_letters + string.digits)</span><br><span class="line">                       <span class="keyword">for</span> _ <span class="keyword">in</span> xrange(<span class="number">16</span>)]).encode(<span class="string">'hex'</span>), <span class="number">16</span>)</span><br><span class="line">    cipher = pow(msg, e, n)</span><br><span class="line">    <span class="keyword">return</span> e, d, n, msg, cipher</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tell_n_d</span><span class="params">()</span>:</span></span><br><span class="line">    e, d, n, m, c = rsa_gen()</span><br><span class="line">    print_output(<span class="string">"Give you a message:0x%x\nand its ciphertext:0x%x"</span> % (m, c))</span><br><span class="line">    print_output(<span class="string">"Please give me the private key to decrypt cipher"</span>)</span><br><span class="line">    print_output(<span class="string">"n:"</span>)</span><br><span class="line">    N = int(raw_input().strip())</span><br><span class="line">    print_output(<span class="string">"d:"</span>)</span><br><span class="line">    D = int(raw_input().strip())</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> pow(c, D, N) == m:</span><br><span class="line">        exit(<span class="number">1</span>)</span><br><span class="line">    print_output(<span class="string">"Oh, how you know the private key!"</span>)</span><br><span class="line">    <span class="keyword">return</span> m</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-python">def rsa_gen(bit_n=2048, bit_e=64):
+    p = getPrime(bit_n / 2)
+    q = getPrime(bit_n / 2)
+    n = p * q
+    e = getPrime(bit_e)
+    d = mod_inv(e, (p - 1) * (q - 1))
+    msg = int(&#39;&#39;.join([random.choice(string.ascii_letters + string.digits)
+                       for _ in xrange(16)]).encode(&#39;hex&#39;), 16)
+    cipher = pow(msg, e, n)
+    return e, d, n, msg, cipher
+
+
+def tell_n_d():
+    e, d, n, m, c = rsa_gen()
+    print_output(&quot;Give you a message:0x%x\nand its ciphertext:0x%x&quot; % (m, c))
+    print_output(&quot;Please give me the private key to decrypt cipher&quot;)
+    print_output(&quot;n:&quot;)
+    N = int(raw_input().strip())
+    print_output(&quot;d:&quot;)
+    D = int(raw_input().strip())
+    if not pow(c, D, N) == m:
+        exit(1)
+    print_output(&quot;Oh, how you know the private key!&quot;)
+    return m
+</code></pre>
 <p>给出了m和c，只要找到一组N和D就让你过，当时脑子真的是抽了，我想的是随后找到一个比c大的N，然后爆破D，使得pow(c, D, N) == m，由于涉及到求离散对数的问题，使这个做法很难达成， 于是当时就放弃了。。。</p>
 <p>当我看到别人随便找了一个D，然后求得n = pow(c, D) - m的时候我直接愣住了。。。</p>
 <p>那么为了简单，D取1就行了= =</p>
 <p>第一关就没有什么可以说的了</p>
 <h3 id="0x02-第二关"><a href="#0x02-第二关" class="headerlink" title="0x02 第二关"></a>0x02 第二关</h3><p>还是有一点意思的，看了别人的wp，听说在今年的SUCTF里面考过</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">number_theory</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        e, d, n, m, c = rsa_gen()</span><br><span class="line">        print_output(<span class="string">"n=0x%x\ne=0x%x\nc=0x%x\n"</span> % (n, e, c))</span><br><span class="line">        print_output(<span class="string">"Now, you have a chance to decrypt something(but no c):"</span>)</span><br><span class="line">        C = int(raw_input().strip())</span><br><span class="line">        <span class="keyword">if</span> C == c:</span><br><span class="line">            print_output(<span class="string">"Nonono~"</span>)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        M = pow(C, d, n)</span><br><span class="line">        print_output(<span class="string">"message:0x%x"</span> % M)</span><br><span class="line">        print_output(<span class="string">"Give me right message:"</span>)</span><br><span class="line">        MM = int(raw_input().strip())</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> MM == m:</span><br><span class="line">            exit(<span class="number">1</span>)</span><br><span class="line">        print_output(<span class="string">"Master in math!"</span>)</span><br><span class="line">        <span class="keyword">return</span> m</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-python">def number_theory():
+    while True:
+        e, d, n, m, c = rsa_gen()
+        print_output(&quot;n=0x%x\ne=0x%x\nc=0x%x\n&quot; % (n, e, c))
+        print_output(&quot;Now, you have a chance to decrypt something(but no c):&quot;)
+        C = int(raw_input().strip())
+        if C == c:
+            print_output(&quot;Nonono~&quot;)
+            continue
+        M = pow(C, d, n)
+        print_output(&quot;message:0x%x&quot; % M)
+        print_output(&quot;Give me right message:&quot;)
+        MM = int(raw_input().strip())
+        if not MM == m:
+            exit(1)
+        print_output(&quot;Master in math!&quot;)
+        return m
+</code></pre>
 <p>在我们已知n, e, c的情况下去求另外一个$c_1$，使得$pow(c_1, d, n)  = M$ 然后你通过这个输出的M就能得到m</p>
 <p>如果给$c_1​$赋以下面的值，我们来看看会得到什么东西</p>
 <script type="math/tex; mode=display">
@@ -180,7 +535,17 @@ c_1 &= (c \times pow(2,\ e,\ n)) mod\ n\\
 \end{equation}</script><p>所以可得到$pow(c1, d, n) = 2 \times m = M$</p>
 <p>那么通过回显的M除以2就能得到m了</p>
 <p>最后，IV有了，key有了，cipher有了，再通过这一步计算就能拿到flag了</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">from</span> libnum <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">msg1 = <span class="number">0x414e744b3649345a43444679634c3341</span></span><br><span class="line">msg2 = <span class="number">131947649330183564622513572431866783299</span></span><br><span class="line">flag = <span class="number">0xf34e8c903c3b3803c6f69f64d88612b1bd7b7bbcdaddc962fe0514bf1295a260a7cabd3f261869b6e49ce1088be9bdd8</span></span><br><span class="line">cipher = AES.new(n2s(msg2), AES.MODE_CBC, n2s(msg1))</span><br><span class="line">dec = cipher.decrypt(n2s(flag))</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> dec</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-python">from Crypto.Cipher import AES
+from libnum import *
+
+msg1 = 0x414e744b3649345a43444679634c3341
+msg2 = 131947649330183564622513572431866783299
+flag = 0xf34e8c903c3b3803c6f69f64d88612b1bd7b7bbcdaddc962fe0514bf1295a260a7cabd3f261869b6e49ce1088be9bdd8
+cipher = AES.new(n2s(msg2), AES.MODE_CBC, n2s(msg1))
+dec = cipher.decrypt(n2s(flag))
+
+print dec
+</code></pre>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>长记性了，把这个socket的轮子留着，下次直接改</p>
 <p>对于第一道AESSSS，我的关注点放在了CBC加密本身的缺陷上，而没有想到去找算法本身的漏洞，以后还是应该关注一下细节</p>
 <p>在跑脚本之前应该先评估一下时间复杂度，不要去白白浪费时间，当发现自己的思路出了明显问题的时候，还是应该先冷静思考，找找自己忽略了的地方</p>
@@ -244,7 +609,7 @@ c_1 &= (c \times pow(2,\ e,\ n)) mod\ n\\
 <script>
   (function () {
     var url = 'http://yoursite.com/2018/11/05/CTF-上海杯-crypto/';
-    var banner = 'undefined'
+    var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'
@@ -325,7 +690,7 @@ c_1 &= (c \times pow(2,\ e,\ n)) mod\ n\\
 </script>
 
 <script>
-  var disqus_shortname = 'null';
+  var disqus_shortname = '';
   
   var disqus_url = 'http://yoursite.com/2018/11/05/CTF-上海杯-crypto/';
   
@@ -366,7 +731,7 @@ c_1 &= (c \times pow(2,\ e,\ n)) mod\ n\\
 </script>
 
 <script>
-  var hasLine = 'true';
+  var hasLine = 'false';
   async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
     $('figure pre').each(function(i, block) {
       var figure = $(this).parents('figure');
@@ -387,22 +752,5 @@ c_1 &= (c \times pow(2,\ e,\ n)) mod\ n\\
 <!-- Baidu Tongji -->
 
 <script src="/js/script.js"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
-</body>
+  </body>
 </html>
