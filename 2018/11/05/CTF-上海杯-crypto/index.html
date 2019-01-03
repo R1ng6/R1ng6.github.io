@@ -125,7 +125,9 @@
   </div>
 </header>
 
-    <div id="article-banner">
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<div id="article-banner">
   <h2>上海杯-2018-crypto</h2>
   <p class="post-date">2018-11-05</p>
   <div class="arrow-down">
@@ -220,8 +222,16 @@ c_1 &= (c \times pow(2,\ e,\ n)) mod\ n\\
     <!-- 二维码 START -->
     
     <!-- 二维码 END -->
+	</br>
+	<span id="https://r1ngs.top" class="leancloud-visitors" data-flag-title="Your Article Title">
+    	<em class="post-meta-item-text">这篇水文章的阅读量 </em>
+    	<i class="leancloud-visitors-count">1000000</i>
+	</span>
     
-      <!-- No Comment -->
+        <!-- Disqus START -->
+        <div id="vcomments"></div>
+        <!-- Disqus END -->
+    
     
   </article>
   <!-- Article END -->
@@ -294,15 +304,15 @@ c_1 &= (c \times pow(2,\ e,\ n)) mod\ n\\
     });
 
     // gitment
-    var gitmentConfig = "R1ng6";
+    var gitmentConfig = "undefined";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
         id: "上海杯-2018-crypto",
-        owner: "R1ng6",
-        repo: "R1ng6.github.io",
+        owner: "undefined",
+        repo: "undefined",
         oauth: {
-          client_id: "adbd0ebe7176ad319aed",
-          client_secret: "e18990d6808181ce7080a1775db8140e2da1b55c"
+          client_id: "undefined",
+          client_secret: "undefined"
         },
         theme: {
           render(state, instance) {
@@ -335,7 +345,19 @@ c_1 &= (c \times pow(2,\ e,\ n)) mod\ n\\
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
-
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'U6Mi8KdqsN4W4eE3mdtxkGOb-gzGzoHsz',
+        appKey: 'pEaiuVgetU4E2j06NHtY0dn5',
+        notify: false, 
+        verify: false, 
+        avatar: 'mp', 
+        placeholder: '输入你的邮箱，我会在看到后尽快回复的哦。ヾﾉ≧∀≦)o',
+        pageSize: 12,
+        visitor: true,
+    })
+</script>
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
