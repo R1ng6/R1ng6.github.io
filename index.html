@@ -129,6 +129,27 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2019/01/04/Essay-Valine配置/">Essay-Valine配置</a>
+      </h2>
+      <p class="article-date">January 4, 2019</p>
+      
+        
+  <a href="/tags#随笔" >
+    <span class="tag-code">随笔</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>最近差不多把试考完了，终于有时间来配一下自己的博客了，由于最近比较喜欢绿色，所以选了这套主题，就是这个主题的作者貌似2017年就跑路不维护了有点难受= =</p>
+<p>看着别人的blog都有评论和阅读量，于是我也决定弄一个，最终我选择了用Valine来实现评论和统计阅读量，弄了一天也踩了很多坑，决定发出来分享给大家</p>
+        
+      </div>
+      <a class="more" href="/2019/01/04/Essay-Valine配置/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2018/11/12/CTF-HCTF-2018-crypto/">HCTF-2018-crypto和一些思考</a>
       </h2>
       <p class="article-date">November 12, 2018</p>
@@ -222,5 +243,22 @@
 <!-- Baidu Tongji -->
 
 <script src="/js/script.js"></script>
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+</body>
 </html>

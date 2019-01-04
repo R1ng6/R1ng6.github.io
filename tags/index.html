@@ -132,7 +132,9 @@
 <main class="app-body">
   <div id="tag-cloud">
     
-      <a class="tag1" data-name="tag-Crypto">Crypto</a>
+      <a class="tag0" data-name="tag-Crypto">Crypto</a>
+    
+      <a class="tag1" data-name="tag-随笔">随笔</a>
     
   </div>
   
@@ -148,6 +150,17 @@
         <ul class="tag-preview">
           <li>
             <a href="/2018/11/05/CTF-上海杯-crypto/">上海杯-2018-crypto</a>
+          </li>
+        </ul>
+        
+    </div>
+    
+    <div class="tag-list">
+      <h3 class="tag-name" id="tag-随笔">随笔</h3>
+      
+        <ul class="tag-preview">
+          <li>
+            <a href="/2019/01/04/Essay-Valine配置/">Essay-Valine配置</a>
           </li>
         </ul>
         
@@ -219,5 +232,22 @@
 <!-- Baidu Tongji -->
 
 <script src="/js/script.js"></script>
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+</body>
 </html>
