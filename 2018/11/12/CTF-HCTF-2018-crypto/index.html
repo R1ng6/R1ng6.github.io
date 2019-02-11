@@ -196,8 +196,8 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">CoppersmithShortPadAttack</span><span class="params">(e,n,C1,C2,eps=<span class="number">1</span>/<span class="number">30</span>)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> binascii</span><br><span class="line">    P.&lt;x,y&gt; = PolynomialRing(ZZ)</span><br><span class="line">    ZmodN = Zmod(n)</span><br><span class="line">    g1 = x^e - C1</span><br><span class="line">    g2 = (x+y)^e - C2</span><br><span class="line">    res = g1.resultant(g2)</span><br><span class="line">    P.&lt;y&gt; = PolynomialRing(ZmodN)</span><br><span class="line">    rres = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(res.coefficients())):</span><br><span class="line">        rres += res.coefficients()[i]*(y^(res.exponents()[i][<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line">    diff = rres.small_roots(epsilon=eps)</span><br><span class="line">    recoveredM1 = franklinReiter(n,e,diff[<span class="number">0</span>],C1,C2)</span><br><span class="line">    print(diff)</span><br><span class="line">    print(recoveredM1)</span><br><span class="line">    print(recoveredM1 + diff[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>首先第一题，我觉得当时如果仔细看了明文，能够注意到已经还原了部分单词的话，就能坚持做下去的，虽然同队的师傅后来也做出了这道题，影响不是很大，但是对于自己来说，还是欠了一点坚持</p>
 <p>对于第二题，这种不能用简单的数论解决的题目应该都是一种单独的攻击面，后续的学习可能要参照ctf-wiki了= =</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>[1]<a href="https://xz.aliyun.com/t/3242#toc-18" target="_blank" rel="noopener">HCTF 2018 Writeup — Whitzard</a></p>
-<p>[2]<a href="https://xz.aliyun.com/t/3253#toc-24" target="_blank" rel="noopener">HCTF2018 Writeup — Eur3kA</a></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>[1] <a href="https://xz.aliyun.com/t/3242#toc-18" target="_blank" rel="noopener">HCTF 2018 Writeup — Whitzard</a></p>
+<p>[2] <a href="https://xz.aliyun.com/t/3253#toc-24" target="_blank" rel="noopener">HCTF2018 Writeup — Eur3kA</a></p>
 </section>
     <!-- Tags START -->
     
@@ -270,7 +270,7 @@
 <script>
   (function () {
     var url = 'https://r1ngs.top/2018/11/12/CTF-HCTF-2018-crypto/';
-    var banner = 'undefined'
+    var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'
@@ -322,15 +322,15 @@
     });
 
     // gitment
-    var gitmentConfig = "undefined";
+    var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
         id: "HCTF-2018-crypto和一些思考",
-        owner: "undefined",
-        repo: "undefined",
+        owner: "",
+        repo: "",
         oauth: {
-          client_id: "undefined",
-          client_secret: "undefined"
+          client_id: "",
+          client_secret: ""
         },
         theme: {
           render(state, instance) {
@@ -351,7 +351,7 @@
 </script>
 
 <script>
-  var disqus_shortname = 'null';
+  var disqus_shortname = '';
   
   var disqus_url = 'https://r1ngs.top/2018/11/12/CTF-HCTF-2018-crypto/';
   
@@ -425,22 +425,5 @@
 <!-- Baidu Tongji -->
 
 <script src="/js/script.js"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
-</body>
+  </body>
 </html>
