@@ -249,7 +249,7 @@
 <script>
   (function () {
     var url = 'https://r1ngs.top/2019/01/04/Essay-Valine配置/';
-    var banner = ''
+    var banner = 'undefined'
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'
@@ -301,15 +301,15 @@
     });
 
     // gitment
-    var gitmentConfig = "";
+    var gitmentConfig = "undefined";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
         id: "Valine的评论和阅读量统计功能配置",
-        owner: "",
-        repo: "",
+        owner: "undefined",
+        repo: "undefined",
         oauth: {
-          client_id: "",
-          client_secret: ""
+          client_id: "undefined",
+          client_secret: "undefined"
         },
         theme: {
           render(state, instance) {
@@ -330,7 +330,7 @@
 </script>
 
 <script>
-  var disqus_shortname = '';
+  var disqus_shortname = 'null';
   
   var disqus_url = 'https://r1ngs.top/2019/01/04/Essay-Valine配置/';
   
@@ -404,5 +404,22 @@
 <!-- Baidu Tongji -->
 
 <script src="/js/script.js"></script>
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+</body>
 </html>
