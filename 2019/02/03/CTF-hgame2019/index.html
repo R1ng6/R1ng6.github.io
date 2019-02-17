@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="r1ngs&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      hgame2019几道有意思的Crypto | r1ngs&#39;s blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/foundation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>r1ngs's blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<div id="article-banner">
+  <h2>hgame2019几道有意思的Crypto</h2>
+  <p class="post-date">2019-02-03</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h2 id="week-1"><a href="#week-1" class="headerlink" title="week 1"></a>week 1</h2><h3 id="perfect-secrecy"><a href="#perfect-secrecy" class="headerlink" title="perfect_secrecy"></a>perfect_secrecy</h3><p>描述：</p>
+<blockquote>
+<p>Mom told me OTP is perfect secrecy!（结果加上hgame{}）</p>
+</blockquote>
+<a id="more"></a>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">strxor</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">""</span>.join(hex(x ^ y)[<span class="number">2</span>:].zfill(<span class="number">2</span>) <span class="keyword">for</span> (x, y) <span class="keyword">in</span> zip(a, b))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fp = open(<span class="string">'poem.txt'</span>, <span class="string">'rb'</span>)</span><br><span class="line">flag = <span class="string">"*********************************"</span></span><br><span class="line">strings = fp.readlines()</span><br><span class="line">key = hex(random.randint(<span class="number">2</span>**<span class="number">511</span>, <span class="number">2</span>**<span class="number">512</span>))[<span class="number">2</span>:]</span><br><span class="line">strs = [strxor(i[:<span class="number">-3</span>], binascii.unhexlify(key)) <span class="keyword">for</span> i <span class="keyword">in</span> strings]</span><br><span class="line">result = strxor(flag.encode(<span class="string">'utf-8'</span>), binascii.unhexlify(key))</span><br><span class="line">print(strs)</span><br><span class="line">print(result)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">output:</span></span><br><span class="line"><span class="string">['daaa4b4e8c996dc786889cd63bc4df4d1e7dc6f3f0b7a0b61ad48811f6f7c9bfabd7083c53ba54',</span></span><br><span class="line"><span class="string">'c5a342468c8c7a88999a9dd623c0cc4b0f7c829acaf8f3ac13c78300b3b1c7a3ef8e193840bb',</span></span><br><span class="line"><span class="string">'dda342458c897a8285df879e3285ce511e7c8d9afff9b7ff15de8a16b394c7bdab920e7946a05e9941d8308e',</span></span><br><span class="line"><span class="string">'d9b05b4cd5ce7c8f938bd39e24d0df191d7694dfeaf8bfbb56e28900e1b8dff1bb985c2d5aa154',</span></span><br><span class="line"><span class="string">'d9aa4b00c88b7fc79d99d38223c08d54146b88d3f0f0f38c03df8d52f0bfc1bda3d7133712a55e9948c32c8a',</span></span><br><span class="line"><span class="string">'c4b60e46c9827cc79e9698936bd1c55c5b6e87c8f0febdb856fe8052e4bfc9a5efbe5c3f57ad4b9944de34',</span></span><br><span class="line"><span class="string">'d9aa5700da817f94d29e81936bc4c1555b7b94d5f5f2bdff37df8252ffbecfb9bbd7152a12bc4fc00ad7229090',</span></span><br><span class="line"><span class="string">'c4e24645cd9c28939a86d3982ac8c819086989d1fbf9f39e18d5c601fbb6dab4ef9e12795bbc549959d9229090',</span></span><br><span class="line"><span class="string">'d9aa4b598c80698a97df879e2ec08d5b1e7f89c8fbb7beba56f0c619fdb2c4bdef8313795fa149dc0ad4228f',</span></span><br><span class="line"><span class="string">'cce25d48d98a6c8280df909926c0de19143983c8befab6ff21d99f52e4b2daa5ef83143647e854d60ad5269c87',</span></span><br><span class="line"><span class="string">'d9aa4b598c85668885df9d993f85e419107783cdbee3bbba1391b11afcf7c3bfaa805c2d5aad42995ede2cdd82977244',</span></span><br><span class="line"><span class="string">'e1ad40478c82678995df809e2ac9c119323994cffbb7a7b713d4c626fcb888b5aa920c354be853d60ac5269199',</span></span><br><span class="line"><span class="string">'c4ac0e53c98d7a8286df84936bc8c84d5b50889aedfebfba18d28352daf7cfa3a6920a3c',</span></span><br><span class="line"><span class="string">'d9aa4f548c9a609ed297969739d18d5a146c8adebef1bcad11d49252c7bfd1f1bc87152b5bbc07dd4fd226948397',</span></span><br><span class="line"><span class="string">'c4a40e698c9d6088879397d626c0c84d5b6d8edffbb792b902d49452ffbec6b6ef8e193840',</span></span><br><span class="line"><span class="string">'c5ad5900df8667929e9bd3bf6bc2df5c1e6dc6cef6f2b6ff21d8921ab3a4c1bdaa991f3c12a949dd0ac5269c']</span></span><br><span class="line"><span class="string">'c2967e7fc59d57899d8bac852ac3c866127fb9d7f1e5b68002d9871cccb8c6b2aa'</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+<h4 id="非预期解"><a href="#非预期解" class="headerlink" title="非预期解"></a>非预期解</h4><p>自己非预期了，直接通过暴破$key$的每一个字节判断每条$cipher$的对应位置的字节是不是都是大小写字母或者空格，把$key$恢复了出来，当时的解题脚本已经删了，有个截图凑合看吧2333</p>
+<p><img src="/2019/02/03/CTF-hgame2019/1.png" alt=""></p>
+<p>比较巧合的是刚好除了第一个字节有多种可能以外，其他的字节都只有一种可能</p>
+<h4 id="预期解"><a href="#预期解" class="headerlink" title="预期解"></a>预期解</h4><p>这个攻击手法也是出题人告诉我的，首先，如果我们运行下面的代码，程序输出结果是空，这说明任意两个字母异或的结果都不是字母</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> string <span class="keyword">import</span> letters</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.strxor <span class="keyword">import</span> strxor</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> letters:</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> letters:</span><br><span class="line">        tmp = strxor(i, j)</span><br><span class="line">        <span class="keyword">if</span> tmp <span class="keyword">in</span> letters:</span><br><span class="line">            <span class="keyword">print</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>而对于空格来说，空格和任意字母（大写/小写）异或的结果都是这个字母的（小写/大写），而$C_1\;xor\;C_2 = m_1\;xor\;m_2$</p>
+<p>所以，如果两个密文异或的结果里面有字母的话，就很有可能一个是字母一个是空格，那么我们再将其中一个密文和另外几个密文异或也是字母或者chr(0)的话就可以确定这个明文是空格，而我们再将它和目标密文异或就能得到目标明文了</p>
+<p>自己写了个轮子，代码如下，<a href="https://github.com/0xr1ngs/XOR-Encryption-Using-Duplicate-Key" target="_blank" rel="noopener">github地址</a>，以后遇到类似的问题就可以直接跑了23333：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> string <span class="keyword">import</span> letters</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.strxor <span class="keyword">import</span> strxor</span><br><span class="line"><span class="keyword">from</span> libnum <span class="keyword">import</span> n2s</span><br><span class="line"></span><br><span class="line">cipher = [</span><br><span class="line"><span class="string">'daaa4b4e8c996dc786889cd63bc4df4d1e7dc6f3f0b7a0b61ad48811f6f7c9bfabd7083c53ba54'</span>,</span><br><span class="line"><span class="string">'c5a342468c8c7a88999a9dd623c0cc4b0f7c829acaf8f3ac13c78300b3b1c7a3ef8e193840bb'</span>,</span><br><span class="line"><span class="string">'dda342458c897a8285df879e3285ce511e7c8d9afff9b7ff15de8a16b394c7bdab920e7946a05e9941d8308e'</span>,</span><br><span class="line"><span class="string">'d9b05b4cd5ce7c8f938bd39e24d0df191d7694dfeaf8bfbb56e28900e1b8dff1bb985c2d5aa154'</span>,</span><br><span class="line"><span class="string">'d9aa4b00c88b7fc79d99d38223c08d54146b88d3f0f0f38c03df8d52f0bfc1bda3d7133712a55e9948c32c8a'</span>,</span><br><span class="line"><span class="string">'c4b60e46c9827cc79e9698936bd1c55c5b6e87c8f0febdb856fe8052e4bfc9a5efbe5c3f57ad4b9944de34'</span>,</span><br><span class="line"><span class="string">'d9aa5700da817f94d29e81936bc4c1555b7b94d5f5f2bdff37df8252ffbecfb9bbd7152a12bc4fc00ad7229090'</span>,</span><br><span class="line"><span class="string">'c4e24645cd9c28939a86d3982ac8c819086989d1fbf9f39e18d5c601fbb6dab4ef9e12795bbc549959d9229090'</span>,</span><br><span class="line"><span class="string">'d9aa4b598c80698a97df879e2ec08d5b1e7f89c8fbb7beba56f0c619fdb2c4bdef8313795fa149dc0ad4228f'</span>,</span><br><span class="line"><span class="string">'cce25d48d98a6c8280df909926c0de19143983c8befab6ff21d99f52e4b2daa5ef83143647e854d60ad5269c87'</span>,</span><br><span class="line"><span class="string">'d9aa4b598c85668885df9d993f85e419107783cdbee3bbba1391b11afcf7c3bfaa805c2d5aad42995ede2cdd82977244'</span>,</span><br><span class="line"><span class="string">'e1ad40478c82678995df809e2ac9c119323994cffbb7a7b713d4c626fcb888b5aa920c354be853d60ac5269199'</span>,</span><br><span class="line"><span class="string">'c4ac0e53c98d7a8286df84936bc8c84d5b50889aedfebfba18d28352daf7cfa3a6920a3c'</span>,</span><br><span class="line"><span class="string">'d9aa4f548c9a609ed297969739d18d5a146c8adebef1bcad11d49252c7bfd1f1bc87152b5bbc07dd4fd226948397'</span>,</span><br><span class="line"><span class="string">'c4a40e698c9d6088879397d626c0c84d5b6d8edffbb792b902d49452ffbec6b6ef8e193840'</span>,</span><br><span class="line"><span class="string">'c5ad5900df8667929e9bd3bf6bc2df5c1e6dc6cef6f2b6ff21d8921ab3a4c1bdaa991f3c12a949dd0ac5269c'</span>]</span><br><span class="line"></span><br><span class="line">target = <span class="string">'c2967e7fc59d57899d8bac852ac3c866127fb9d7f1e5b68002d9871cccb8c6b2aa'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(cipher)):</span><br><span class="line">    cipher[i] = cipher[i][<span class="number">0</span>:len(target)]</span><br><span class="line">    cipher[i] = n2s(int(cipher[i], <span class="number">16</span>))</span><br><span class="line">target = n2s(int(target, <span class="number">16</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check</span><span class="params">(j, i)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> pos <span class="keyword">in</span> range(len(cipher)):</span><br><span class="line">        <span class="keyword">if</span> strxor(cipher[j][i], cipher[pos][i]) <span class="keyword">not</span> <span class="keyword">in</span> letters + chr(<span class="number">0</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find</span><span class="params">(i)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(cipher)):</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(len(cipher) - j - <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> strxor(cipher[j][i], cipher[k+j+<span class="number">1</span>][i]) <span class="keyword">in</span> letters:</span><br><span class="line">                <span class="keyword">if</span> check(j, i):</span><br><span class="line">                    <span class="keyword">return</span> strxor(strxor(cipher[j][i], target[i]), <span class="string">' '</span>)</span><br><span class="line">                <span class="keyword">elif</span> check(k+j+<span class="number">1</span>, i):</span><br><span class="line">                    <span class="keyword">return</span> strxor(strxor(cipher[k+j+<span class="number">1</span>][i], target[i]), <span class="string">' '</span>)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'?'</span></span><br><span class="line"></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(target)):</span><br><span class="line">    flag += find(i)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> flag</span><br></pre></td></tr></table></figure>
+<p>最终输出结果为：</p>
+<p>?TP_is_not_safe_if_more_than_once</p>
+<p>其中?代表这个位置是不确定的，那么很显然应该是题目描述里的OTP的O了</p>
+<h2 id="week-2"><a href="#week-2" class="headerlink" title="week 2"></a>week 2</h2><h3 id="HILL"><a href="#HILL" class="headerlink" title="HILL"></a>HILL</h3><p>描述：</p>
+<blockquote>
+<p>hill密码，秘钥是3x3矩阵，flag的密文是TCSHXZTCXAPBDKJVJDOHJEAE，flag中含有BABYSHILL，flag是有意义的英文，最终提交格式: hgame{有意义的英文}</p>
+</blockquote>
+<h4 id="预期解-1"><a href="#预期解-1" class="headerlink" title="预期解"></a>预期解</h4><p>$KP=C$</p>
+<p>$P=K^{-1}C$</p>
+<p>$PC^{-1}=K^{-1}$</p>
+<p>BABYSHILL和C中连续的3X3矩阵的逆相乘就是K的逆</p>
+<p>这里要注意的是Hill密码的逆矩阵和线性代数里的不一样，这个坑踩了一天，出题人不提醒完全就发现不了啊= =</p>
+<p><img src="https://wkretype.bdimg.com/retype/zoom/ce825c4c1eb91a37f1115ce5?pn=16&amp;o=jpg_6&amp;md5sum=2c1e2946b3387553eeae8be2326266ae&amp;sign=a52cc86e95&amp;png=51748-56046&amp;jpg=2137789-2262262" alt=""></p>
+<p>完整解题脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> invert</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cipher = [</span><br><span class="line">    [<span class="string">'T'</span>, <span class="string">'H'</span>, <span class="string">'T'</span>, <span class="string">'A'</span>, <span class="string">'D'</span>, <span class="string">'V'</span>, <span class="string">'O'</span>, <span class="string">'E'</span>],</span><br><span class="line">    [<span class="string">'C'</span>, <span class="string">'X'</span>, <span class="string">'C'</span>, <span class="string">'P'</span>, <span class="string">'K'</span>, <span class="string">'J'</span>, <span class="string">'H'</span>, <span class="string">'A'</span>],</span><br><span class="line">    [<span class="string">'S'</span>, <span class="string">'Z'</span>, <span class="string">'X'</span>, <span class="string">'B'</span>, <span class="string">'J'</span>, <span class="string">'D'</span>, <span class="string">'J'</span>, <span class="string">'E'</span>]</span><br><span class="line">]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">        cipher[i][j] = ord(cipher[i][j])<span class="number">-65</span></span><br><span class="line"></span><br><span class="line">plain = [</span><br><span class="line">    [<span class="string">'B'</span>, <span class="string">'Y'</span>, <span class="string">'I'</span>],</span><br><span class="line">    [<span class="string">'A'</span>, <span class="string">'S'</span>, <span class="string">'L'</span>],</span><br><span class="line">    [<span class="string">'B'</span>, <span class="string">'H'</span>, <span class="string">'L'</span>]</span><br><span class="line">]</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">plain = [</span></span><br><span class="line"><span class="string">    ['0', 'B', 'H'],</span></span><br><span class="line"><span class="string">    ['B', 'Y', 'I'],</span></span><br><span class="line"><span class="string">    ['A', 'S', 'L']</span></span><br><span class="line"><span class="string">]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">plain = [</span></span><br><span class="line"><span class="string">    ['A', 'S', 'L'],  </span></span><br><span class="line"><span class="string">    ['B', 'H', 'L'],</span></span><br><span class="line"><span class="string">    ['Y', 'I', '0']</span></span><br><span class="line"><span class="string">]</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">        plain[i][j] = ord(plain[i][j])<span class="number">-65</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">to_int</span><span class="params">(m)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">            m[i][j] = int(round(m[i][j]))</span><br><span class="line">    <span class="keyword">return</span> matrix(m)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_inv_matrix</span><span class="params">(m)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="string">'''print int(round(linalg.det(m)))</span></span><br><span class="line"><span class="string">    print invert(int(round(linalg.det(m))), 26)'''</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        kk = invert(int(round(linalg.det(m))), <span class="number">26</span>)</span><br><span class="line">        inv_m = linalg.inv(m)</span><br><span class="line">        tmp = inv_m * linalg.det(m)</span><br><span class="line"></span><br><span class="line">        test_real_inv = array(kk * tmp)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">                test_real_inv[i][j] = int(round(test_real_inv[i][j])) % <span class="number">26</span></span><br><span class="line">        <span class="keyword">return</span> matrix(test_real_inv)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">print</span> int(round(linalg.det(m)))</span><br><span class="line">        <span class="keyword">return</span> m</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flag</span><span class="params">(m)</span>:</span></span><br><span class="line">    str = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">            str+=chr(int(round(m[j][i])%<span class="number">26</span>)+<span class="number">97</span>)</span><br><span class="line">    <span class="keyword">print</span> str</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">for i in range(26):</span></span><br><span class="line"><span class="string">    plain[0][0] = i</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">new_cipher = matrix(cipher)</span><br><span class="line">new_plain = matrix(plain)</span><br><span class="line"></span><br><span class="line">cipher_matrix = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">6</span>):</span><br><span class="line">    tmp = []</span><br><span class="line">    tmp.append(cipher[<span class="number">0</span>][i:i+<span class="number">3</span>])</span><br><span class="line">    tmp.append(cipher[<span class="number">1</span>][i:i+<span class="number">3</span>])</span><br><span class="line">    tmp.append(cipher[<span class="number">2</span>][i:i+<span class="number">3</span>])</span><br><span class="line">    cipher_matrix.append(tmp)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">C_1 = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">6</span>):</span><br><span class="line">    C_1.append(get_inv_matrix(to_int(array(cipher_matrix[i]))))</span><br><span class="line"></span><br><span class="line">K_1 = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">6</span>):</span><br><span class="line">    K_1.append(dot(new_plain, C_1[i]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">6</span>):</span><br><span class="line">    <span class="string">'''print array(dot(K_1[j], new_cipher))'''</span></span><br><span class="line">    flag(array(dot(K_1[j],matrix(cipher))))</span><br><span class="line"><span class="keyword">print</span> <span class="string">'-'</span>*<span class="number">65</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">test = [</span></span><br><span class="line"><span class="string">    [6, 24, 1],</span></span><br><span class="line"><span class="string">    [13, 16, 10],</span></span><br><span class="line"><span class="string">    [20, 17, 15]</span></span><br><span class="line"><span class="string">]</span></span><br><span class="line"><span class="string">print get_inv_matrix(test)</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+<h4 id="流氓解"><a href="#流氓解" class="headerlink" title="流氓解"></a>流氓解</h4><p>当然，这个题还可以爆破，但是如果直接对$K$进行爆破的话，一共有$26^9=5429503678976$种可能，这是不太现实的</p>
+<p>然而我们可以对$K^{-1}$的每一行进行爆破，这样就很快了，而且，由于直接爆破$K^{-1}$，跳过了求逆矩阵，使得这种方法简单得多，具体代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">cipher = [</span><br><span class="line">    [<span class="string">'T'</span>, <span class="string">'H'</span>, <span class="string">'T'</span>, <span class="string">'A'</span>, <span class="string">'D'</span>, <span class="string">'V'</span>, <span class="string">'O'</span>, <span class="string">'E'</span>],</span><br><span class="line">    [<span class="string">'C'</span>, <span class="string">'X'</span>, <span class="string">'C'</span>, <span class="string">'P'</span>, <span class="string">'K'</span>, <span class="string">'J'</span>, <span class="string">'H'</span>, <span class="string">'A'</span>],</span><br><span class="line">    [<span class="string">'S'</span>, <span class="string">'Z'</span>, <span class="string">'X'</span>, <span class="string">'B'</span>, <span class="string">'J'</span>, <span class="string">'D'</span>, <span class="string">'J'</span>, <span class="string">'E'</span>]</span><br><span class="line">]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">        cipher[i][j] = ord(cipher[i][j])<span class="number">-65</span></span><br><span class="line"></span><br><span class="line">plain = [</span><br><span class="line">    [<span class="string">'B'</span>, <span class="string">'Y'</span>, <span class="string">'I'</span>],</span><br><span class="line">    [<span class="string">'A'</span>, <span class="string">'S'</span>, <span class="string">'L'</span>],</span><br><span class="line">    [<span class="string">'B'</span>, <span class="string">'H'</span>, <span class="string">'L'</span>]</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">        plain[i][j] = ord(plain[i][j])<span class="number">-65</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">K = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">26</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">26</span>):</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">26</span>):</span><br><span class="line">            tmp = []</span><br><span class="line">            tmp.append(i)</span><br><span class="line">            tmp.append(j)</span><br><span class="line">            tmp.append(k)</span><br><span class="line">            K.append(tmp)</span><br><span class="line"></span><br><span class="line">cipher_matrix = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">    tmp = []</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">        tmp.append(cipher[j][i])</span><br><span class="line">    cipher_matrix.append(tmp)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">multi</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">assert</span> len(a) == len(b) == <span class="number">3</span></span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i, j <span class="keyword">in</span> zip(a, b):</span><br><span class="line">        num += i*j</span><br><span class="line">    <span class="keyword">return</span> chr((num%<span class="number">26</span>)+<span class="number">65</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">for key in K:</span></span><br><span class="line"><span class="string">    str = ''</span></span><br><span class="line"><span class="string">    for i in range(len(cipher_matrix)):</span></span><br><span class="line"><span class="string">        str += multi(key, cipher_matrix[i])</span></span><br><span class="line"><span class="string">    if 'BHL' in str:</span></span><br><span class="line"><span class="string">        print key, str</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">K1 = [[<span class="number">5</span>, <span class="number">1</span>, <span class="number">23</span>], [<span class="number">5</span>, <span class="number">14</span>, <span class="number">10</span>], [<span class="number">9</span>, <span class="number">8</span>, <span class="number">11</span>], [<span class="number">15</span>, <span class="number">4</span>, <span class="number">17</span>], [<span class="number">24</span>, <span class="number">25</span>, <span class="number">25</span>], [<span class="number">25</span>, <span class="number">23</span>, <span class="number">1</span>]]</span><br><span class="line">K2 = [[<span class="number">6</span>, <span class="number">9</span>, <span class="number">23</span>], [<span class="number">21</span>, <span class="number">4</span>, <span class="number">3</span>], [<span class="number">21</span>, <span class="number">17</span>, <span class="number">5</span>], [<span class="number">23</span>, <span class="number">20</span>, <span class="number">23</span>]]</span><br><span class="line">K3 = [[<span class="number">1</span>, <span class="number">15</span>, <span class="number">16</span>], [<span class="number">4</span>, <span class="number">18</span>, <span class="number">17</span>], [<span class="number">5</span>, <span class="number">0</span>, <span class="number">2</span>], [<span class="number">14</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">16</span>, <span class="number">12</span>, <span class="number">19</span>], [<span class="number">24</span>, <span class="number">0</span>, <span class="number">11</span>]]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flag</span><span class="params">(m)</span>:</span></span><br><span class="line">    str = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">            str+=chr(int(round(m[j][i])%<span class="number">26</span>)+<span class="number">97</span>)</span><br><span class="line">    <span class="keyword">print</span> str</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> k1 <span class="keyword">in</span> K1:</span><br><span class="line">    <span class="keyword">for</span> k2 <span class="keyword">in</span> K2:</span><br><span class="line">        <span class="keyword">for</span> k3 <span class="keyword">in</span> K3:</span><br><span class="line">            K = []</span><br><span class="line">            K.append(k1)</span><br><span class="line">            K.append(k2)</span><br><span class="line">            K.append(k3)</span><br><span class="line">            flag(array(dot(matrix(K),matrix(cipher))))</span><br></pre></td></tr></table></figure>
+<p>在输出的结果里查找$BABYSHILL$就可以找到正确的flag了</p>
+<h2 id="week-3"><a href="#week-3" class="headerlink" title="week 3"></a>week 3</h2><h3 id="P4ndd-n"><a href="#P4ndd-n" class="headerlink" title="P4ndd!n@!"></a>P4ndd!n@!</h3><p>描述：</p>
+<blockquote>
+<p>Aris跑了过来 嘴里大喊”CBC!” 并递给了我一张纸条<br>lpFsOPZm9UztVP30SHertuXoWkOEP4Ij7UcjGM1xvFIw78Ti15UwL9YY0xn4syBxW/2BgzRtsZHGksUmWgfr5Q==(参数要用base64编码一发)</p>
+<p>URL: <a href="http://47.95.212.185:23450/padding?text" target="_blank" rel="noopener">http://47.95.212.185:23450/padding?text</a></p>
+</blockquote>
+<p>其实这道题就是一个非常单纯的padding oracle，主要的坑就是没有给源代码，有点搞不懂逻辑，通过<del>py出题人</del>仔细分析，可以得到：</p>
+<p>题目给的base64编码的字符串是IV+cipher，我们首先要做的就是解密cipher，给的接口的回显的Error的意思是padding正确，也就是填充的个数和填充的值都正确，但是解密的值不正确，回显的Something error!的意思就是padding不正确</p>
+<p>我们可以通过对plain对应的前一段的cipher的值做更改，利用cbc翻转字节攻击逐位枚举plain，依据Error​的回显来判断枚举是否成功，也就可以恢复所有的明文了</p>
+<p>最后一个地方稍微脑洞一点，解密的值是<code>If you R Aris, I will give you flag.</code> 意思是得构造cipher使得解密的明文是Aris，然后才给你flag</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.strxor <span class="keyword">import</span> strxor</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xor</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> chr(ord(a)^ord(b))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_source_code</span><span class="params">(url)</span>:</span></span><br><span class="line">    web = requests.get(url)</span><br><span class="line">    <span class="keyword">return</span> web.text</span><br><span class="line"></span><br><span class="line">url = <span class="string">'http://47.95.212.185:23450/padding?text='</span></span><br><span class="line"></span><br><span class="line">str = <span class="string">'lpFsOPZm9UztVP30SHertuXoWkOEP4Ij7UcjGM1xvFIw78Ti15UwL9YY0xn4syBxW/2BgzRtsZHGksUmWgfr5Q=='</span></span><br><span class="line">cipher = b64decode(str)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cipher_list = list(cipher)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">for i in range(1, 17):</span></span><br><span class="line"><span class="string">    cipher_list[63-16] = xor(xor(cipher[63-16], chr(i)), chr(1))</span></span><br><span class="line"><span class="string">    state = get_source_code(url+b64encode(''.join(cipher_list)))</span></span><br><span class="line"><span class="string">    if state == 'Error':</span></span><br><span class="line"><span class="string">        print i</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">flag1=<span class="string">'lag.'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">cipher_list[63-16-12] = xor(xor(cipher[63-16-12], '.'), chr(17))</span></span><br><span class="line"><span class="string">cipher_list[63-16-13] = xor(xor(cipher[63-16-13], 'g'), chr(17))</span></span><br><span class="line"><span class="string">cipher_list[63-16-14] = xor(xor(cipher[63-16-14], 'a'), chr(17))</span></span><br><span class="line"><span class="string">cipher_list[63-16-15] = xor(xor(cipher[63-16-15], 'l'), chr(17))</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">cipher_list = cipher_list[:<span class="number">48</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">flag2 = <span class="string">' will give you f'</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">for i in range(16):</span></span><br><span class="line"><span class="string">    for k in range(i):</span></span><br><span class="line"><span class="string">        cipher_list[47 - k - 16] = xor(xor(cipher[47 - k - 16], flag2[-k-1]), chr(i + 1))</span></span><br><span class="line"><span class="string">    for j in range(256):</span></span><br><span class="line"><span class="string">        cipher_list[47 - i - 16] = xor(xor(cipher[47 - i - 16], chr(j)), chr(i+1))</span></span><br><span class="line"><span class="string">        state = get_source_code(url + b64encode(''.join(cipher_list)))</span></span><br><span class="line"><span class="string">        if state == 'Error':</span></span><br><span class="line"><span class="string">            flag2=chr(j)+flag2</span></span><br><span class="line"><span class="string">            print flag2</span></span><br><span class="line"><span class="string">            break</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">flag3 = <span class="string">'If you R Aris, I'</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">cipher_list = cipher_list[:32]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">for i in range(16):</span></span><br><span class="line"><span class="string">    for k in range(i):</span></span><br><span class="line"><span class="string">        cipher_list[31 - k - 16] = xor(xor(cipher[31 - k - 16], flag3[-k-1]), chr(i + 1))</span></span><br><span class="line"><span class="string">    for j in range(32, 256):</span></span><br><span class="line"><span class="string">        cipher_list[31 - i - 16] = xor(xor(cipher[31 - i - 16], chr(j)), chr(i+1))</span></span><br><span class="line"><span class="string">        sleep(0.5)</span></span><br><span class="line"><span class="string">        state = get_source_code(url + b64encode(''.join(cipher_list)))</span></span><br><span class="line"><span class="string">        if state == 'Error':</span></span><br><span class="line"><span class="string">            flag3=chr(j)+flag3</span></span><br><span class="line"><span class="string">            print flag3</span></span><br><span class="line"><span class="string">            break</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">fake_flag = flag3+flag2+flag1</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> fake_flag</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">IV = cipher[:<span class="number">16</span>]</span><br><span class="line">tmp1 = strxor(strxor(IV[<span class="number">0</span>:<span class="number">4</span>], <span class="string">'If y'</span>), <span class="string">'Aris'</span>)</span><br><span class="line">tmp2 = strxor(strxor(IV[<span class="number">4</span>:<span class="number">16</span>], <span class="string">'ou R Aris, I'</span>), chr(<span class="number">12</span>)*<span class="number">12</span>)</span><br><span class="line"><span class="keyword">print</span> get_source_code(url+b64encode(tmp1+tmp2+cipher[<span class="number">16</span>:<span class="number">32</span>]))</span><br></pre></td></tr></table></figure>
+<h3 id="babyRSA"><a href="#babyRSA" class="headerlink" title="babyRSA"></a>babyRSA</h3><p>描述：</p>
+<blockquote>
+<p>e = 12<br>p = 58380004430307803367806996460773123603790305789098384488952056206615768274527<br>q = 81859526975720060649380098193671612801200505029127076539457680155487669622867<br>ciphertext = 206087215323690202467878926681944491769659156726458690815919286163630886447291570510196171585626143608988384615185921752409380788006476576337410136447460</p>
+</blockquote>
+<p>这道题已经告诉了$p、q$但是由于$e$是$12$不是素数，和$\varphi(n)$不互素，所以不能用普通的RSA求逆元的算法解这道题，这个时候就需要我们<del>打出题人</del>冷静分析了</p>
+<p>由于$m^{12}\equiv c\;(mod\;n)​$则$(m^4)^3\equiv c\;(mod\;n)​$，而$3​$是一个奇素数，所以$3​$的逆元$d​$存在，那么我们有$m^4\equiv c^d\;(mod\;n)​$，当时我觉得4是一个小公钥指数，那么直接用小公钥指数暴破攻击就可以了，于是我就用多进程直接开冲，暴破了1亿多次都没有出结果，而已经有人做出来的时候我就觉得自己的思路应该错了</p>
+<p>此时已经临近深夜，正打算挂机暴破一整晚的我突然就想到怎么做了（这周的crypto题给我最深的感触的就是如果思路正确很快就能出答案，如果不正确或者有偏差就会既费时又费力），$m^4\equiv (m^2)^2\equiv c^d\;(mod\;n)​$，而$(m^2)^2​$可以看做是两个Rabin加密，且$p、q​$都是模$4​$余$3​$的素数，直接可以秒解了（话说是不是真的有人暴破小公钥指数做出来的？）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> libnum <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p = <span class="number">58380004430307803367806996460773123603790305789098384488952056206615768274527</span></span><br><span class="line">q = <span class="number">81859526975720060649380098193671612801200505029127076539457680155487669622867</span></span><br><span class="line">n = p*q</span><br><span class="line">fn = (p<span class="number">-1</span>)*(q<span class="number">-1</span>)</span><br><span class="line">d1 = gmpy2.invert(<span class="number">3</span>, fn)</span><br><span class="line">c = <span class="number">206087215323690202467878926681944491769659156726458690815919286163630886447291570510196171585626143608988384615185921752409380788006476576337410136447460</span></span><br><span class="line"></span><br><span class="line">c1 = pow(c, d1, n)</span><br><span class="line"></span><br><span class="line">c1 = <span class="number">0x2a9428e86d9010e3f77d5d50c03c62f041db75a63fc74ed65de56d09</span></span><br><span class="line"></span><br><span class="line">inv_p = gmpy2.invert(p, q)</span><br><span class="line">inv_q = gmpy2.invert(q, p)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mp = pow(c1, (p + <span class="number">1</span>) / <span class="number">4</span>, p)</span><br><span class="line">mq = pow(c1, (q + <span class="number">1</span>) / <span class="number">4</span>, q)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = (inv_p * p * mq + inv_q * q * mp) % n</span><br><span class="line">b = n - int(a)</span><br><span class="line">c = (inv_p * p * mq - inv_q * q * mp) % n</span><br><span class="line">d = n - int(c)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> (a, b, c, d):</span><br><span class="line">    s = <span class="string">'%x'</span> % i</span><br><span class="line">    <span class="keyword">if</span> len(s) % <span class="number">2</span> != <span class="number">0</span>:</span><br><span class="line">        s = <span class="string">'0'</span> + s</span><br><span class="line">    <span class="keyword">print</span> n2s(int(s, <span class="number">16</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="basicmath"><a href="#basicmath" class="headerlink" title="basicmath"></a>basicmath</h3><p>描述：</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">&gt; </span><br><span class="line">&gt; flag = <span class="string">'*******************'</span></span><br><span class="line">&gt; </span><br><span class="line">&gt; m = int(flag.encode(<span class="string">'hex'</span>), <span class="number">16</span>)</span><br><span class="line">&gt; p = getPrime(<span class="number">256</span>)</span><br><span class="line">&gt; <span class="keyword">while</span>(p % <span class="number">4</span> != <span class="number">3</span>):</span><br><span class="line">&gt;     p = getPrime(<span class="number">256</span>)</span><br><span class="line">&gt; a = pow(m, <span class="number">2</span>, p)</span><br><span class="line">&gt; print(p)</span><br><span class="line">&gt; print(a)</span><br><span class="line">&gt; </span><br><span class="line">&gt; <span class="string">'''</span></span><br><span class="line"><span class="string">&gt; p = 96844604612122594734846587450751002272823339993969599631517516290673675281347</span></span><br><span class="line"><span class="string">&gt; a = 5491280935375344696344639339035431520073311126446116169370534450549651945232</span></span><br><span class="line"><span class="string">&gt; '''</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>题目的要求就是解一个二次同余方程$m^2\equiv a\;(mod\;p)$，模数$p$是一个模$4$余$3$的奇素数</p>
+<p>由欧拉判别定理，$a$是模$p$的平方剩余的充要条件是$a^{(p-1)/2} \equiv 1(mod\;p)$那么$a^{(p-1)/2}a \equiv a(mod\;p)$即$a^{(p+1)/2} \equiv a(mod\;p)$</p>
+<p>又有$(a^{(p+1)/4})^2\equiv a\;(mod\;p)$，则令$k=\frac{p+1}{4}$，由于$p$模$4$余$3$，故$k$是一个整数，$(a^k)^2\equiv a \;(mod\;p)$，即$m^2\equiv (a^k)^2\;(mod\;p) $</p>
+<p>所以$m\equiv ± a^k\;(mod\;p)​$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> libnum <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p = <span class="number">96844604612122594734846587450751002272823339993969599631517516290673675281347</span></span><br><span class="line">a = <span class="number">5491280935375344696344639339035431520073311126446116169370534450549651945232</span></span><br><span class="line">k = (p+<span class="number">1</span>)/<span class="number">4</span></span><br><span class="line"><span class="keyword">print</span> n2s(pow(a, k, p))</span><br><span class="line"><span class="keyword">print</span> n2s(p-pow(a, k, p))</span><br></pre></td></tr></table></figure>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>[1] <a href="https://wenku.baidu.com/view/83d5497a854769eae009581b6bd97f192279bf2c.html" target="_blank" rel="noopener">B 为A 的模m 逆矩阵</a></p>
+<p>[2] <a href="https://blog.csdn.net/liuweiran900217/article/details/19933549" target="_blank" rel="noopener">Stanford - Cryptography I</a></p>
+<p>[3] <a href="https://wenku.baidu.com/view/b971871ad15abe23492f4db6.html" target="_blank" rel="noopener">初等数论</a></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#CTF" >
+    <span class="tag-code">CTF</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/01/04/Essay-Valine配置/">
+        <span class="nav-arrow">← </span>
+        
+          Valine的评论和阅读量统计功能配置
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+  </br>
+  <span id='/2019/02/03/CTF-hgame2019/' class="leancloud-visitors" data-flag-title="hgame2019几道有意思的Crypto">
+      <em class="post-meta-item-text">这篇水文的阅读量 </em>
+      <i class="leancloud-visitors-count">1000000</i>
+  </span>
+    
+        <!-- valine START -->
+        <div id="vcomments"></div>
+        <!-- valine END -->
+    
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#week-1"><span class="toc-nav-text">week 1</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#perfect-secrecy"><span class="toc-nav-text">perfect_secrecy</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#非预期解"><span class="toc-nav-text">非预期解</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#预期解"><span class="toc-nav-text">预期解</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#week-2"><span class="toc-nav-text">week 2</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#HILL"><span class="toc-nav-text">HILL</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#预期解-1"><span class="toc-nav-text">预期解</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#流氓解"><span class="toc-nav-text">流氓解</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#week-3"><span class="toc-nav-text">week 3</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#P4ndd-n"><span class="toc-nav-text">P4ndd!n@!</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#babyRSA"><span class="toc-nav-text">babyRSA</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#basicmath"><span class="toc-nav-text">basicmath</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#参考文章"><span class="toc-nav-text">参考文章</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://r1ngs.top/2019/02/03/CTF-hgame2019/';
+    var banner = 'undefined'
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "undefined";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "hgame2019几道有意思的Crypto",
+        owner: "undefined",
+        repo: "undefined",
+        oauth: {
+          client_id: "undefined",
+          client_secret: "undefined"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+<script>
+  var disqus_shortname = 'null';
+  
+  var disqus_url = 'https://r1ngs.top/2019/02/03/CTF-hgame2019/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'U6Mi8KdqsN4W4eE3mdtxkGOb-gzGzoHsz',
+        appKey: 'pEaiuVgetU4E2j06NHtY0dn5',
+        notify: false, 
+        verify: false, 
+        avatar: 'mp', 
+        placeholder: '输入你的邮箱，我会在看到后尽快发邮件回复的哦。ヾﾉ≧∀≦)o',
+        pageSize: 12,
+        visitor: true // 阅读量统计,
+    })
+</script>
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+</body>
+</html>
