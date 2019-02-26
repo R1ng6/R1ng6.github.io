@@ -191,8 +191,8 @@ c_1 &= (c \times pow(2,\ e,\ n)) mod\ n\\
 &= ((m ^ e) \times (2 ^ e)) mod\ n\\
 &= (2 \times m) ^ e mod\ n\\
 \end{aligned}
-\end{equation}</script><p>所以可得到$pow(c1, d, n) = 2 \times m = M$</p>
-<p>那么通过回显的M除以2就能得到m了</p>
+\end{equation}</script><p>所以可得到$pow(c_1, d, n) = 2 \times m = M$</p>
+<p>那么通过回显的M乘以2的逆元就能得到m了</p>
 <p>最后，IV有了，key有了，cipher有了，再通过这一步计算就能拿到flag了</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">from</span> libnum <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">msg1 = <span class="number">0x414e744b3649345a43444679634c3341</span></span><br><span class="line">msg2 = <span class="number">131947649330183564622513572431866783299</span></span><br><span class="line">flag = <span class="number">0xf34e8c903c3b3803c6f69f64d88612b1bd7b7bbcdaddc962fe0514bf1295a260a7cabd3f261869b6e49ce1088be9bdd8</span></span><br><span class="line">cipher = AES.new(n2s(msg2), AES.MODE_CBC, n2s(msg1))</span><br><span class="line">dec = cipher.decrypt(n2s(flag))</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> dec</span><br></pre></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>长记性了，把这个socket的轮子留着，下次直接改</p>
