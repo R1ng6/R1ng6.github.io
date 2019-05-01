@@ -150,6 +150,7 @@
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><a href="https://xz.aliyun.com/t/4552" target="_blank" rel="noopener">先知已投， 戳我跳转</a></p>
+<a id="more"></a>
 <p>现在无论你是google还是百度，”字节反转攻击”的搜索结果整整几页都是”CBC字节反转攻击”，看来字节反转攻击和CBC模式结合的想法已经可以说是深入人心，毕竟它的名字就叫”CBC反转字节攻击”，但是不是这种攻击只有CBC分组模式才有呢？如果不用CBC分组模式，是不是就不存在这种重放攻击呢？笔者就这个问题进行了研究。</p>
 <h2 id="CBC"><a href="#CBC" class="headerlink" title="CBC"></a>CBC</h2><p>CBC模式下的字节反转攻击想必大家都不陌生了，这种攻击方式和分组加密的加密算法无关，是在处理明文加密后的密文块时出现了漏洞：前一块的密文可以影响后一块的明文。</p>
 <p><img src="https://mk0resourcesinfm536w.kinstacdn.com/wp-content/uploads/082113_1459_CBCByteFlip3.jpg" alt=""></p>
