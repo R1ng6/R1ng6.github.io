@@ -205,7 +205,7 @@
 <h3 id="官方的解法"><a href="#官方的解法" class="headerlink" title="官方的解法"></a>官方的解法</h3><p>先来看exp（稍微有改动，因为我觉得有一步貌似没必要= =）：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msg = <span class="string">'\x02\x02\x05\01\x35\x02'</span>+<span class="string">'\x00'</span>*<span class="number">10</span>+<span class="string">'\x40'</span></span><br></pre></td></tr></table></figure>
 <p>上个自己画的图：</p>
-<p><img src="/2019/05/02/CTF-starCTF/fullsizerender.jpg" alt=""></p>
+<p><img src="/2019/05/02/CTF-starCTF/0.jpg" alt=""></p>
 <p>可以看到流程就是利用跳转来实现循环语句，直到异或以后最后一位为1，然后删掉1，取倒数第二位10次，然后再删除这一位，继续异或，重复操作。</p>
 <p>通过异或使得最后一位为1只有两种可能10和01，且这两种情况等概率出现（均为16%），所以倒数第二位为0或者1的概率各为50%，也即算法等价于在每个周期等概率的取0或者1，这样的话成功的概率就很大了</p>
 <h2 id="babyprng2"><a href="#babyprng2" class="headerlink" title="babyprng2"></a>babyprng2</h2><p>核心代码：</p>
@@ -214,11 +214,11 @@
 <p>delta更小、out append的时候每次还会把栈删除、多了对seq的操作，循环的次数更多，而要求out的元素更少</p>
 <h3 id="自己的解法-1"><a href="#自己的解法-1" class="headerlink" title="自己的解法"></a>自己的解法</h3><p>由于可以做判断是否为一，那么我可以在一个周期里第一步取0，如果不是0就丢弃然后重复判断（送入seq），如果是0就判断下一个是否为1，如果是1就进入下一个周期，如果不是的话就丢弃然后再重复判断，这样相当于每个周期都在重复的取01</p>
 <p>画成图就是这个样子：</p>
-<p><img src="/2019/05/02/CTF-starCTF/fullsizerender(1" alt="">.jpg)</p>
+<p><img src="/2019/05/02/CTF-starCTF/1.jpg" alt=""></p>
 <p>或者这个样子</p>
-<p><img src="/2019/05/02/CTF-starCTF/fullsizerender(2" alt="">.jpg)</p>
+<p><img src="/2019/05/02/CTF-starCTF/2.jpg" alt=""></p>
 <p>但是这样并不能实现，因为误删除元素（送入seq）的有很多，循环还没结束就会因为stack的元素全部没有了而报错，导致out的元素个数就不够了，本地测试最多也就在2万左右，达不到3万，但是我们有一个判断stack元素还剩多少的方法，当stack要空了的时候只要用第8个方法把seq的元素重新放回stack重复利用就行了，虽然构造有点麻烦，但总归是可以实现的：</p>
-<p><img src="/2019/05/02/CTF-starCTF/fullsizerender(3" alt="">.jpg)</p>
+<p><img src="/2019/05/02/CTF-starCTF/3.jpg" alt=""></p>
 <p>对应poc：01140708053607080001140708003a0708053a</p>
 <h2 id="notcurves"><a href="#notcurves" class="headerlink" title="notcurves"></a>notcurves</h2><p>题目有一个非常严重的Bug，导致了非常严重的非预期</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">self.dosend(<span class="string">"please give me a point(pi,qi): \n"</span>)</span><br><span class="line">R = self.recvpoint(<span class="number">30</span>)</span><br><span class="line">(u,v) = R</span><br><span class="line"><span class="keyword">print</span> R</span><br><span class="line"><span class="keyword">if</span> (u*v)%p == <span class="number">0</span>:</span><br><span class="line">    self.dosend(<span class="string">"%s\n"</span> % FLAG)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    self.dosend(<span class="string">"&gt;.&lt;\n"</span>)</span><br><span class="line">self.request.close()</span><br></pre></td></tr></table></figure>
@@ -296,7 +296,7 @@
 <script>
   (function () {
     var url = 'https://r1ngs.top/2019/05/02/CTF-starCTF/';
-    var banner = ''
+    var banner = 'undefined'
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'
@@ -348,15 +348,15 @@
     });
 
     // gitment
-    var gitmentConfig = "";
+    var gitmentConfig = "undefined";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
         id: "starCTF-crypto部分",
-        owner: "",
-        repo: "",
+        owner: "undefined",
+        repo: "undefined",
         oauth: {
-          client_id: "",
-          client_secret: ""
+          client_id: "undefined",
+          client_secret: "undefined"
         },
         theme: {
           render(state, instance) {
@@ -377,7 +377,7 @@
 </script>
 
 <script>
-  var disqus_shortname = '';
+  var disqus_shortname = 'null';
   
   var disqus_url = 'https://r1ngs.top/2019/05/02/CTF-starCTF/';
   
@@ -451,5 +451,22 @@
 <!-- Baidu Tongji -->
 
 <script src="/js/script.js"></script>
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+</body>
 </html>
