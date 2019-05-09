@@ -149,7 +149,8 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>临近五一事情比较多，基本用的是零碎的时间玩的*ctf，有些题目还是很有趣的</p>
+    <section class="markdown-content"><p><a href="https://www.anquanke.com/post/id/177582" target="_blank" rel="noopener">安全客已投，戳我跳转</a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>临近五一事情比较多，基本用的是零碎的时间玩的*ctf，有些题目还是很有趣的</p>
 <a id="more"></a>
 <h2 id="babyprng"><a href="#babyprng" class="headerlink" title="babyprng"></a>babyprng</h2><p>首先看一下主要代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self, code)</span>:</span></span><br><span class="line">    stack = []</span><br><span class="line">    out = []</span><br><span class="line">    cnt = <span class="number">0</span></span><br><span class="line">    random.seed(os.urandom(<span class="number">8</span>))</span><br><span class="line">    self.TH = <span class="number">0.7</span> + random.random()*<span class="number">0.25</span></span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> xrange(self.SIZE):</span><br><span class="line">        stack.append(self.randbit())</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        pos = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> xrange(self.SIZE*<span class="number">10</span>):</span><br><span class="line">            c = code[pos]</span><br><span class="line">            pos += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> c==<span class="string">'\x00'</span>:</span><br><span class="line">                out.append(stack[<span class="number">-1</span>])</span><br><span class="line">            <span class="keyword">elif</span> c==<span class="string">'\x01'</span>:</span><br><span class="line">                <span class="keyword">if</span> stack[<span class="number">-1</span>]==<span class="number">1</span>:</span><br><span class="line">                    pos += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> c==<span class="string">'\x02'</span>:</span><br><span class="line">                <span class="keyword">del</span> stack[<span class="number">-1</span>]</span><br><span class="line">            <span class="keyword">elif</span> c==<span class="string">'\x03'</span>:</span><br><span class="line">                stack[<span class="number">-1</span>] = stack[<span class="number">-1</span>]&amp;stack[<span class="number">-2</span>]</span><br><span class="line">            <span class="keyword">elif</span> c==<span class="string">'\x04'</span>:</span><br><span class="line">                stack[<span class="number">-1</span>] = stack[<span class="number">-1</span>]|stack[<span class="number">-2</span>]</span><br><span class="line">            <span class="keyword">elif</span> c==<span class="string">'\x05'</span>:</span><br><span class="line">                stack[<span class="number">-1</span>] = stack[<span class="number">-1</span>]^stack[<span class="number">-2</span>]</span><br><span class="line">            <span class="comment">#elif c=='\x06':</span></span><br><span class="line">            <span class="comment">#    stack[-1] = 1-stack[-1]</span></span><br><span class="line">            <span class="comment">#elif c=='\x06':</span></span><br><span class="line">            <span class="comment">#    stack.append(stack[-1])</span></span><br><span class="line">            <span class="keyword">elif</span> ord(c)&gt;=<span class="number">0x10</span> <span class="keyword">and</span> ord(c)&lt;=<span class="number">0x30</span>:</span><br><span class="line">                pos += ord(c)<span class="number">-0x10</span></span><br><span class="line">            <span class="keyword">elif</span> ord(c)&gt;=<span class="number">0x30</span> <span class="keyword">and</span> ord(c)&lt;=<span class="number">0x50</span>:</span><br><span class="line">                pos -= ord(c)<span class="number">-0x30</span></span><br></pre></td></tr></table></figure>
@@ -296,7 +297,7 @@
 <script>
   (function () {
     var url = 'https://r1ngs.top/2019/05/02/CTF-starCTF/';
-    var banner = 'undefined'
+    var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'
@@ -348,15 +349,15 @@
     });
 
     // gitment
-    var gitmentConfig = "undefined";
+    var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
         id: "starCTF-crypto部分",
-        owner: "undefined",
-        repo: "undefined",
+        owner: "",
+        repo: "",
         oauth: {
-          client_id: "undefined",
-          client_secret: "undefined"
+          client_id: "",
+          client_secret: ""
         },
         theme: {
           render(state, instance) {
@@ -377,7 +378,7 @@
 </script>
 
 <script>
-  var disqus_shortname = 'null';
+  var disqus_shortname = '';
   
   var disqus_url = 'https://r1ngs.top/2019/05/02/CTF-starCTF/';
   
@@ -451,22 +452,5 @@
 <!-- Baidu Tongji -->
 
 <script src="/js/script.js"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
-</body>
+  </body>
 </html>

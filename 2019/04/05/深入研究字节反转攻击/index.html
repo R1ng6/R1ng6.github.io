@@ -265,7 +265,7 @@
 <script>
   (function () {
     var url = 'https://r1ngs.top/2019/04/05/深入研究字节反转攻击/';
-    var banner = 'undefined'
+    var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'
@@ -317,15 +317,15 @@
     });
 
     // gitment
-    var gitmentConfig = "undefined";
+    var gitmentConfig = "";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
         id: "深入研究字节反转攻击",
-        owner: "undefined",
-        repo: "undefined",
+        owner: "",
+        repo: "",
         oauth: {
-          client_id: "undefined",
-          client_secret: "undefined"
+          client_id: "",
+          client_secret: ""
         },
         theme: {
           render(state, instance) {
@@ -346,7 +346,7 @@
 </script>
 
 <script>
-  var disqus_shortname = 'null';
+  var disqus_shortname = '';
   
   var disqus_url = 'https://r1ngs.top/2019/04/05/深入研究字节反转攻击/';
   
@@ -420,22 +420,5 @@
 <!-- Baidu Tongji -->
 
 <script src="/js/script.js"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
-</body>
+  </body>
 </html>
