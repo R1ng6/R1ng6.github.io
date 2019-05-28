@@ -141,6 +141,30 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2019/05/28/Rabin加密算法/">Rabin加密算法</a>
+      </h2>
+      <p class="article-date">May 28, 2019</p>
+      
+        
+  <a href="/tags#分析" >
+    <span class="tag-code">分析</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          先知已投，戳我跳转
+Rabin加密算法Rabin算法是一种基于计算模合数平方根困难性问题的非对称加密算法。他和RSA加密的形式类似，本文主要探讨Rabin算法的特殊情况和n次同余方程的解法。
+加密选择两个大素数$p$和$q$做为私钥
+计算$n = p \times q$做为公钥
+密文为$c  ...
+        
+      </div>
+      <a class="more" href="/2019/05/28/Rabin加密算法/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2019/05/02/CTF-starCTF/">starCTF-crypto部分</a>
       </h2>
       <p class="article-date">May 2, 2019</p>
@@ -359,5 +383,22 @@
 <!-- Baidu Tongji -->
 
 <script src="/js/script.js"></script>
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+</body>
 </html>
