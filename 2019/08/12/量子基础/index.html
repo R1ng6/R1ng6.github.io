@@ -149,7 +149,7 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>最近打算入坑量子密码学，摸了大半个暑假的🐟，什么也没干。记了点笔记，主要是量子相关的基础知识，持续更新。</p>
+    <section class="markdown-content"><p>最近打算入坑量子密码学，摸了大半个暑假的🐟，什么也没干。记点笔记，主要是量子相关的基础知识，持续更新。</p>
 <a id="more"></a>
 <h2 id="量子基础"><a href="#量子基础" class="headerlink" title="量子基础"></a>量子基础</h2><h3 id="量子"><a href="#量子" class="headerlink" title="量子"></a>量子</h3><p>最开始，量子即能量子，是能量的基本单位，即$\varepsilon =h\nu$，能量只能是$h\nu$的整数倍</p>
 <p>现代物理将微观世界中将所有的微观粒子（如光子、电子、原子等）统称为量子。</p>
@@ -164,11 +164,13 @@
 <p>一个量子比特的状态是一个二维复数空间的向量，用它的两个极化状态|0&gt;和|1&gt;来对应经典状态的0和1。</p>
 <p>用狄拉克标记&lt;|和|&gt;表示量子态，bra和ket分别用来称呼括号的左半和右半，中文译作左矢和右矢。</p>
 <p>一个量子比特能够处在既不是|0&gt;也不是|1&gt;的状态上，而是处于|0&gt;和|1&gt;的叠加态上。</p>
-<p>$|\psi&gt;=\alpha|0&gt;+\beta|1&gt;$（这里的$\alpha$和$\beta$为任意复数。并且满足归一化要求$\alpha\alpha^<em>+\beta\beta^</em>=1$）</p>
+<p>$|\psi&gt;=\alpha|0\rangle+\beta|1\rangle$（这里的$\alpha$和$\beta$为任意复数。并且满足归一化要求：</p>
+<script type="math/tex; mode=display">
+\alpha\alpha^*+\beta\beta^*=1</script><p>）</p>
 <p>由于$\alpha$和$\beta$都满足归一化要求，所以可以设$\alpha=cos\;\theta\;e^{i\delta}$，$\beta=sin\;\theta\;e^{i(\delta+\phi)}$</p>
-<p>得到$|\psi&gt;=cos\;\theta\;e^{i\delta}\;|0&gt;+sin\;\theta\;e^{i(\delta+\phi)}\;|1&gt;=e^{i\delta}(cos\;\theta\;|0&gt;+sin\;\theta\;e^{i\phi}\;|1&gt;)$</p>
+<p>得到$|\psi\rangle=cos\;\theta\;e^{i\delta}\;|0\rangle+sin\;\theta\;e^{i(\delta+\phi)}\;|1\rangle=e^{i\delta}(cos\;\theta\;|0\rangle+sin\;\theta\;e^{i\phi}\;|1\rangle)$</p>
 <p>将$e^{i\delta}$称作共同相位，因为对|0&gt;和对|1&gt;都一样影响，在实验上测不出来，所以可以舍弃不看，而$e^{i\phi}$则是相对相位，有影响，得到：</p>
-<p>$|\psi&gt;=cos\;\theta\;|0&gt;+sin\;\theta\;e^{i\phi}\;|1&gt;$</p>
+<p>$|\psi\rangle=cos\;\theta\;|0\rangle+sin\;\theta\;e^{i\phi}\;|1\rangle$</p>
 <p>由于$cos\;\theta$和$sin\;\theta$表示的是复数$\alpha$和$\beta$的长度（<strong>不懂</strong>）所以二者都应该是非负的实数，故$0\leqslant \theta\leqslant \frac{\pi}{2}$，$0\leqslant \phi\leqslant 2\pi$</p>
 <p>将<strong>2</strong>$\theta$和$\phi$的所有分布在三维空间$\mathbb{R}^3$中画出来，就能得到一个球面，即布洛赫球面</p>
 <script type="math/tex; mode=display">
@@ -181,7 +183,7 @@ z=cos\;2\theta\\</script><p>则|0&gt;是$z_+=(0, 0, 1)$，|1&gt;是$z_-=(0, 0, -
 x=sin\;\theta\times cos\;\phi\\
 y=sin\;\theta\times sin\phi\\
 z=cos\;\theta\\</script><p>所以$0\leqslant \theta\leqslant \pi$，$0\leqslant \phi\leqslant 2\pi$</p>
-<p>故定义为$|\psi&gt;=cos\;\frac{\theta}{2}\;|0&gt;+sin\;\frac{\theta}{2}e^{i\phi}\;|1&gt;$</p>
+<p>故定义为$|\psi&gt;=cos\;\frac{\theta}{2}\;|0\rangle+sin\;\frac{\theta}{2}e^{i\phi}\;|1\rangle$</p>
 <p>这样方便用球坐标$(r_0, \theta, \phi)$来表示</p>
 <h4 id="复数"><a href="#复数" class="headerlink" title="复数"></a>复数</h4><p>把形如z=a+bi的数称为复数</p>
 <p>定义有序对z=(a, b)，并规定有序对之间有运算+、$\times$，则对于$z_1=(a, b),\;z_2=(c, d)$来说</p>
@@ -194,15 +196,84 @@ z=cos\;\theta\\</script><p>所以$0\leqslant \theta\leqslant \pi$，$0\leqslant 
 <h4 id="复数的辐角"><a href="#复数的辐角" class="headerlink" title="复数的辐角"></a>复数的辐角</h4><p>复数可以表示为$z=r\times(cos\;\theta+i\;sin\;\theta)$，r是z的模的形式</p>
 <p>指数形式为$z=r(cos\;\theta+i\;sin\;\theta)=re^{i\theta}$</p>
 <p>其中$e^{i\theta}=cos\;\theta+i\;sin\;\theta$是欧拉公式，可以用泰勒级数证明</p>
-<h3 id="线性代数相关"><a href="#线性代数相关" class="headerlink" title="线性代数相关"></a>线性代数相关</h3><p>一个向量空间的生成集合是一个向量集合$\{|v_1&gt;, \Lambda , |v_n&gt;\}$</p>
+<h3 id="线性代数相关"><a href="#线性代数相关" class="headerlink" title="线性代数相关"></a>线性代数相关</h3><p>一个向量空间的生成集合是一个向量集合$\{|v_1\rangle, \Lambda , |v_n\rangle\}$</p>
 <p>该向量空间中的任意向量|v&gt;都能写成这个生成集合的线性组合</p>
-<p>$|v&gt;=\Sigma a_i|v_i&gt; $</p>
+<p>$|v\rangle=\Sigma a_i|v_i\rangle $</p>
+<p>比如：</p>
+<p>向量空间$C^2$的生成集合是：</p>
+<script type="math/tex; mode=display">
+|v_1\rangle\equiv\left[
+ \begin{matrix}
+   1 \\
+   0 
+  \end{matrix}
+  \right]\;\;\;\;\;
+  |v_2\rangle\equiv\left[
+ \begin{matrix}
+   0 \\
+   1 
+  \end{matrix}
+  \right]</script><p>则$C^2$中的任意向量</p>
+<script type="math/tex; mode=display">
+|v\rangle\equiv\left[
+ \begin{matrix}
+   a_1 \\
+   a_2
+  \end{matrix}
+  \right]</script><p>能够写成$|v_1\rangle$和$|v_2\rangle$的线性组合$|v\rangle=a_1|v_1\rangle+a_2|v_2\rangle$，故称$|v_1\rangle$和$|v_2\rangle$生成了向量空间$C^2$</p>
 <p>一些表示：</p>
 <ul>
-<li>$&lt;\psi|$表示$|\psi&gt;$的对偶矢量</li>
-<li>$&lt;\varphi|\psi&gt;$表示矢量$|\varphi&gt;$和$|\psi&gt;$的内积</li>
-<li>$|\varphi&gt;|\psi&gt;$表示两个矢量张量积的简写</li>
+<li>$\langle\psi|$表示$|\psi\rangle$的对偶矢量</li>
+<li>$\langle\varphi|\psi\rangle$表示矢量$|\varphi\rangle$和$|\psi\rangle$的内积</li>
+<li>$|\varphi\rangle|\psi\rangle$表示两个矢量张量积的简写</li>
 </ul>
+<p><strong>向量张量乘积的矩阵表示：</strong></p>
+<p>量子比特的运算和线性代数里的不一样，是新定义的运算：</p>
+<script type="math/tex; mode=display">
+\left[
+ \begin{matrix}
+   a_1 \\
+   a_2 \\
+   \vdots \\
+   a_n 
+  \end{matrix}
+  \right] \otimes  \left[
+ \begin{matrix}
+   b_1 \\
+   b_2 \\
+   \vdots \\
+   b_n 
+  \end{matrix}
+  \right] =\left[
+ \begin{matrix}
+   a_1b_1 \\
+   \vdots \\
+   a_1b_n \\
+   a_2b_1 \\
+   \vdots \\
+   a_2b_n \\
+   \vdots \\
+   a_mb_n 
+  \end{matrix}
+  \right]</script><p>显然，这种乘法运算<strong>不满足交换律，满足结合律，满足对加法的分配律</strong></p>
+<h2 id="量子叠加态与纠缠态"><a href="#量子叠加态与纠缠态" class="headerlink" title="量子叠加态与纠缠态"></a>量子叠加态与纠缠态</h2><p>量子的叠加性源于微观粒子波粒二象性（微观粒子有时会显示出波动性（这时粒子性较不显著），有时又会显示出粒子性（这时波动性较不显著），在不同条件下分别表现出波动或粒子的性质。）的波动相干叠加性。</p>
+<p>量子的纠缠态是指两个或多个量子系统之间的非定域、非经典的关联，是量子系统内各子系统或各自由度之间关联的力学属性。</p>
+<p>量子态的纠缠反映在<strong>概率幅</strong>不相乘上。概率幅的叠加表现出量子力学特有的干涉现象，概率幅的纠缠将对量子干涉产生重要的影响。</p>
+<p>量子纠缠态：无法将一个量子叠加状态写成两个量子比特的乘积，这种叠加状态就叫量子纠缠状态</p>
+<p>比如：</p>
+<script type="math/tex; mode=display">
+\frac{1}{\sqrt 2}|00\rangle+\frac{1}{\sqrt 2}|10\rangle=\frac{1}{\sqrt 2}|0\rangle|0\rangle+\frac{1}{\sqrt 2}|1\rangle|0\rangle</script><p>可以写成：</p>
+<script type="math/tex; mode=display">
+(\frac{1}{\sqrt 2}|0\rangle+\frac{1}{\sqrt 2}|1\rangle)|0\rangle</script><p>但比如：</p>
+<script type="math/tex; mode=display">
+\frac{1}{\sqrt 2}|01\rangle+\frac{1}{\sqrt 2}|10\rangle</script><p>就无法写成两个量子比特的乘积，这种叠加态就叫量子的纠缠状态。</p>
+<p>不同的量子位会因为纠缠而彼此影响，使得一个量子的状态将同与之发生纠缠的另一个量子的状态相关。</p>
+<p>比如对于十进制的5和10：</p>
+<script type="math/tex; mode=display">
+|10\rangle\rangle_{10}\equiv|1010\rangle=|1\rangle\otimes|0\rangle\otimes|1\rangle\otimes|0\rangle\\
+|5\rangle\rangle_{10}\equiv|0101\rangle=|0\rangle\otimes|1\rangle\otimes|0\rangle\otimes|1\rangle\\</script><p>取二者的叠加态：</p>
+<script type="math/tex; mode=display">
+|10\rangle\rangle_{10}+|5\rangle\rangle_{10}=|1010\rangle+|0101\rangle=|1\rangle\otimes|0\rangle\otimes|1\rangle\otimes|0\rangle\\+|0\rangle\otimes|1\rangle\otimes|0\rangle\otimes|1\rangle\\</script><p>对于这样的叠加态就能利用量子算法同时处理十进制整数的10和5，结果即如同同时对10和5进行计算，最后通过测量分别获得10和5的计算结果。实现物理上的并行计算。</p>
 </section>
     <!-- Tags START -->
     
@@ -257,7 +328,7 @@ z=cos\;\theta\\</script><p>所以$0\leqslant \theta\leqslant \pi$，$0\leqslant 
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#量子基础"><span class="toc-nav-text">量子基础</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#量子"><span class="toc-nav-text">量子</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#量子信息"><span class="toc-nav-text">量子信息</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#量子比特"><span class="toc-nav-text">量子比特</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#复数"><span class="toc-nav-text">复数</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#复数的模"><span class="toc-nav-text">复数的模</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#共轭复数"><span class="toc-nav-text">共轭复数</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#复数的辐角"><span class="toc-nav-text">复数的辐角</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#线性代数相关"><span class="toc-nav-text">线性代数相关</span></a></li></ol></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#量子基础"><span class="toc-nav-text">量子基础</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#量子"><span class="toc-nav-text">量子</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#量子信息"><span class="toc-nav-text">量子信息</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#量子比特"><span class="toc-nav-text">量子比特</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#复数"><span class="toc-nav-text">复数</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#复数的模"><span class="toc-nav-text">复数的模</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#共轭复数"><span class="toc-nav-text">共轭复数</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#复数的辐角"><span class="toc-nav-text">复数的辐角</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#线性代数相关"><span class="toc-nav-text">线性代数相关</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#量子叠加态与纠缠态"><span class="toc-nav-text">量子叠加态与纠缠态</span></a></li></ol>
     
   </div>
 </aside>
