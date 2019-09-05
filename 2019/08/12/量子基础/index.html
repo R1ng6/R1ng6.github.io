@@ -161,12 +161,13 @@
 <li>量子不可克隆定理：量子力学的线性特性确保对任意量子态无法实现精确的复制。量子不可克隆定理和测不准原理构成量子密码技术的物理基础。</li>
 </ul>
 <h3 id="量子比特"><a href="#量子比特" class="headerlink" title="量子比特"></a>量子比特</h3><p>处于两种极化状态的叠加态粒子系统就是量子比特。</p>
-<p>一个量子比特的状态是一个二维复数空间的向量，用它的两个极化状态|0&gt;和|1&gt;来对应经典状态的0和1。</p>
+<p>一个量子比特的状态是一个二维复数空间的向量，用它的两个极化状态（本征态）|0&gt;和|1&gt;来对应经典状态的0和1。</p>
 <p>用狄拉克标记&lt;|和|&gt;表示量子态，bra和ket分别用来称呼括号的左半和右半，中文译作左矢和右矢。</p>
 <p>一个量子比特能够处在既不是|0&gt;也不是|1&gt;的状态上，而是处于|0&gt;和|1&gt;的叠加态上。</p>
-<p>$|\psi&gt;=\alpha|0\rangle+\beta|1\rangle$（这里的$\alpha$和$\beta$为任意复数。并且满足归一化要求：</p>
+<p>$|\psi \rangle=\alpha|0\rangle+\beta|1\rangle$（这里的$\alpha$和$\beta$为任意复数。并且满足归一化要求：</p>
 <script type="math/tex; mode=display">
 \alpha\alpha^*+\beta\beta^*=1</script><p>）</p>
+<p>具体意义为：如果我们对$|\psi \rangle$做测量，那么得到$|0\rangle$和$|1\rangle$的概率分别为$|\alpha|^2$和$|\beta|^2$</p>
 <p>由于$\alpha$和$\beta$都满足归一化要求，所以可以设$\alpha=cos\;\theta\;e^{i\delta}$，$\beta=sin\;\theta\;e^{i(\delta+\phi)}$</p>
 <p>得到$|\psi\rangle=cos\;\theta\;e^{i\delta}\;|0\rangle+sin\;\theta\;e^{i(\delta+\phi)}\;|1\rangle=e^{i\delta}(cos\;\theta\;|0\rangle+sin\;\theta\;e^{i\phi}\;|1\rangle)$</p>
 <p>将$e^{i\delta}$称作共同相位，因为对|0&gt;和对|1&gt;都一样影响，在实验上测不出来，所以可以舍弃不看，而$e^{i\phi}$则是相对相位，有影响，得到：</p>
@@ -274,6 +275,24 @@ z=cos\;\theta\\</script><p>所以$0\leqslant \theta\leqslant \pi$，$0\leqslant 
 |5\rangle\rangle_{10}\equiv|0101\rangle=|0\rangle\otimes|1\rangle\otimes|0\rangle\otimes|1\rangle\\</script><p>取二者的叠加态：</p>
 <script type="math/tex; mode=display">
 |10\rangle\rangle_{10}+|5\rangle\rangle_{10}=|1010\rangle+|0101\rangle=|1\rangle\otimes|0\rangle\otimes|1\rangle\otimes|0\rangle\\+|0\rangle\otimes|1\rangle\otimes|0\rangle\otimes|1\rangle\\</script><p>对于这样的叠加态就能利用量子算法同时处理十进制整数的10和5，结果即如同同时对10和5进行计算，最后通过测量分别获得10和5的计算结果。实现物理上的并行计算。</p>
+<h2 id="量子门"><a href="#量子门" class="headerlink" title="量子门"></a>量子门</h2><p>一些常用的量子门的矩阵表示：</p>
+<p>Hadamard Gate作用于单比特量子</p>
+<script type="math/tex; mode=display">
+\frac{1}{\sqrt2}\left[
+ \begin{matrix}
+   1& 1 \\
+   1& -1 \\
+  \end{matrix}
+  \right]</script><p>Hadamard Gate配合Controlled-NOT Gate可以将输入的双量子比特转换为贝尔态，任何一组二粒子状态都可以表示为这四组新的基态的线性叠加， 即：</p>
+<script type="math/tex; mode=display">
+|\Phi^+\rangle=\frac{|00\rangle+|11\rangle}{\sqrt2}\\
+|\Phi^-\rangle=\frac{|00\rangle-|11\rangle}{\sqrt2}\\
+|\Psi^+\rangle=\frac{|01\rangle+|10\rangle}{\sqrt2}\\
+|\Psi^-\rangle=\frac{|01\rangle-|10\rangle}{\sqrt2}</script><p>实现过程参考<a href="https://blog.csdn.net/m0_37622530/article/details/82991134" target="_blank" rel="noopener">Bell State 贝尔态基本原理</a></p>
+<p><img src="https://img-blog.csdn.net/20181010043158196?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3NjIyNTMw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" style="zoom: 50%;"></p>
+<p><img src="https://img-blog.csdn.net/20181010042939195?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzM3NjIyNTMw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70"></p>
+<p>常用的单比特逻辑门的输入与输出：</p>
+<p><img src="/2019/08/12/量子基础/1.jpg" style="zoom:80%;"></p>
 </section>
     <!-- Tags START -->
     
@@ -328,7 +347,7 @@ z=cos\;\theta\\</script><p>所以$0\leqslant \theta\leqslant \pi$，$0\leqslant 
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#量子基础"><span class="toc-nav-text">量子基础</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#量子"><span class="toc-nav-text">量子</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#量子信息"><span class="toc-nav-text">量子信息</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#量子比特"><span class="toc-nav-text">量子比特</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#复数"><span class="toc-nav-text">复数</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#复数的模"><span class="toc-nav-text">复数的模</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#共轭复数"><span class="toc-nav-text">共轭复数</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#复数的辐角"><span class="toc-nav-text">复数的辐角</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#线性代数相关"><span class="toc-nav-text">线性代数相关</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#量子叠加态与纠缠态"><span class="toc-nav-text">量子叠加态与纠缠态</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#量子基础"><span class="toc-nav-text">量子基础</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#量子"><span class="toc-nav-text">量子</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#量子信息"><span class="toc-nav-text">量子信息</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#量子比特"><span class="toc-nav-text">量子比特</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#复数"><span class="toc-nav-text">复数</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#复数的模"><span class="toc-nav-text">复数的模</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#共轭复数"><span class="toc-nav-text">共轭复数</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#复数的辐角"><span class="toc-nav-text">复数的辐角</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#线性代数相关"><span class="toc-nav-text">线性代数相关</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#量子叠加态与纠缠态"><span class="toc-nav-text">量子叠加态与纠缠态</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#量子门"><span class="toc-nav-text">量子门</span></a></li></ol>
     
   </div>
 </aside>
