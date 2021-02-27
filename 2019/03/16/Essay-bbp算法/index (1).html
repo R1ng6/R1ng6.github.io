@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="r1ngs&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      bbp算法求PI的小数点后第n位 | r1ngs&#39;s blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/foundation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>r1ngs's blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<div id="article-banner">
+  <h2>bbp算法求PI的小数点后第n位</h2>
+  <p class="post-date">2019-03-16</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>上周学长给我出了一道ACM题，以前没有打过ACM，但是通过这道题也是学到了东西的，干脆就记录一下</p>
+<a id="more"></a>
+<h2 id="基本定理"><a href="#基本定理" class="headerlink" title="基本定理"></a>基本定理</h2><p>$\left \lfloor \frac{p}{q} \right \rfloor mod\;m=\left \lfloor \frac{p\;mod\;mq}{q} \right \rfloor​$，这里的p和q都是整数。</p>
+<p>啥？这个定理叫什么名字，怎么没有听说过？</p>
+<p><img src="/2019/03/16/Essay-bbp算法/1.jpg" alt=""></p>
+<p>这大概就是我和大佬的差距吧，自己去推了一下，不难，但是要想到这种做法，运用到后面的快速幂算法里，我觉得还是很不容易的：</p>
+<p>令$p=kmq+r$，$0\leqslant r&lt;mq$</p>
+<p>$\left \lfloor \frac{p\;mod\;mq}{q} \right \rfloor=\left \lfloor \frac{r}{q}\right \rfloor=\left \lfloor \frac{p-kmq}{q} \right \rfloor=\left \lfloor \frac{p}{q}\right \rfloor-km$</p>
+<p>由于$0\leqslant r&lt;mq$，则$0\leqslant \frac{r}{ q}&lt;m$所以$0\leqslant\left \lfloor \frac{p}{q}\right \rfloor-km&lt;m$</p>
+<p> 故$\left \lfloor \frac{p}{q}\right \rfloor-km=\left \lfloor \frac{p}{q}\right \rfloor\;mod\;m​$</p>
+<h2 id="求小数点后第n位"><a href="#求小数点后第n位" class="headerlink" title="求小数点后第n位"></a>求小数点后第n位</h2><p>如果要求$\frac{1}{a}​$小数点后n位可以这样求：$\left \lfloor \frac{10^{n}}{a}\right \rfloor\;mod\;10=\left \lfloor \frac{10^n\;mod\;10a}{a} \right \rfloor​$，而分子运用快速模幂算法，就能很快算出来</p>
+<p>所以$\frac{1}{a}+\frac{1}{b}+\frac{1}{c}$小数点后第n位只需要将三者小数点后第n位相加然后求和，然后考虑第n位后面的低位是否存在进位的问题就可以了，我实现了用函数递归调用的求法，一直向低位探索直到不存在进位</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_pow</span><span class="params">(a, b, c)</span>:</span></span><br><span class="line">    a = a % c</span><br><span class="line">    res = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> b != <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> b &amp; <span class="number">1</span>:</span><br><span class="line">            res = res * a</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span></span><br><span class="line">        a = (a ** <span class="number">2</span>) % c</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res % c</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(a, b, c)</span>:</span></span><br><span class="line"></span><br><span class="line">    i = <span class="number">10000</span></span><br><span class="line">    a_0 = my_pow(<span class="number">10</span>, i, <span class="number">10</span> * a) / a</span><br><span class="line">    b_0 = my_pow(<span class="number">10</span>, i, <span class="number">10</span> * b) / b</span><br><span class="line">    c_0 = my_pow(<span class="number">10</span>, i, <span class="number">10</span> * c) / c</span><br><span class="line">    s_0 = (a_0 + b_0 + c_0)%<span class="number">10</span></span><br><span class="line"></span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">    a_t = my_pow(<span class="number">10</span>, i, <span class="number">10</span>*a)/a</span><br><span class="line">    b_t = my_pow(<span class="number">10</span>, i, <span class="number">10</span>*b)/b</span><br><span class="line">    c_t = my_pow(<span class="number">10</span>, i, <span class="number">10</span>*c)/c</span><br><span class="line">    s_t = a_t+b_t+c_t</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> s_t &gt;= <span class="number">20</span>:</span><br><span class="line">        <span class="keyword">return</span> (s_0 + <span class="number">2</span>) % <span class="number">10</span></span><br><span class="line">    <span class="keyword">elif</span> s_t == <span class="number">18</span>:</span><br><span class="line">        <span class="keyword">return</span> (s_0 + if_18(a, b, c, i))%<span class="number">10</span></span><br><span class="line">    <span class="keyword">elif</span> s_t == <span class="number">19</span>:</span><br><span class="line">        <span class="keyword">return</span> (s_0 + if_19(a, b, c, i))%<span class="number">10</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="number">10</span> &lt;= s_t &lt; <span class="number">18</span>:</span><br><span class="line">        <span class="keyword">return</span> (s_0 + <span class="number">1</span>) % <span class="number">10</span></span><br><span class="line">    <span class="keyword">elif</span> s_t == <span class="number">8</span>:</span><br><span class="line">        <span class="keyword">return</span> (s_0+if_8(a, b, c, i))%<span class="number">10</span></span><br><span class="line">    <span class="keyword">elif</span> s_t == <span class="number">9</span>:</span><br><span class="line">        <span class="keyword">return</span> (s_0+if_9(a, b, c, i))%<span class="number">10</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> s_0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">if_8</span><span class="params">(a, b, c, i)</span>:</span></span><br><span class="line">    a_0 = my_pow(<span class="number">10</span>, i, <span class="number">10</span> * a) / a</span><br><span class="line">    b_0 = my_pow(<span class="number">10</span>, i, <span class="number">10</span> * b) / b</span><br><span class="line">    c_0 = my_pow(<span class="number">10</span>, i, <span class="number">10</span> * c) / c</span><br><span class="line">    s_0 = a_0 + b_0 + c_0</span><br><span class="line"></span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">    a_t = my_pow(<span class="number">10</span>, i, <span class="number">10</span>*a)/a</span><br><span class="line">    b_t = my_pow(<span class="number">10</span>, i, <span class="number">10</span>*b)/b</span><br><span class="line">    c_t = my_pow(<span class="number">10</span>, i, <span class="number">10</span>*c)/c</span><br><span class="line">    s_t = a_t+b_t+c_t</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> s_t&gt;=<span class="number">20</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> s_t == <span class="number">18</span>:</span><br><span class="line">        <span class="keyword">return</span> (s_0+if_18(a, b, c, i))/<span class="number">10</span></span><br><span class="line">    <span class="keyword">elif</span> s_t == <span class="number">19</span>:</span><br><span class="line">        <span class="keyword">return</span> (s_0+if_19(a, b, c, i))/<span class="number">10</span></span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">if_9</span><span class="params">(a, b, c, i)</span>:</span></span><br><span class="line">    a_0 = my_pow(<span class="number">10</span>, i, <span class="number">10</span> * a) / a</span><br><span class="line">    b_0 = my_pow(<span class="number">10</span>, i, <span class="number">10</span> * b) / b</span><br><span class="line">    c_0 = my_pow(<span class="number">10</span>, i, <span class="number">10</span> * c) / c</span><br><span class="line">    s_0 = a_0 + b_0 + c_0</span><br><span class="line"></span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">    a_t = my_pow(<span class="number">10</span>, i, <span class="number">10</span>*a)/a</span><br><span class="line">    b_t = my_pow(<span class="number">10</span>, i, <span class="number">10</span>*b)/b</span><br><span class="line">    c_t = my_pow(<span class="number">10</span>, i, <span class="number">10</span>*c)/c</span><br><span class="line">    s_t = a_t+b_t+c_t</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> s_t&gt;=<span class="number">10</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> s_t == <span class="number">8</span>:</span><br><span class="line">        <span class="keyword">return</span> (s_0+if_8(a, b, c, i))/<span class="number">10</span></span><br><span class="line">    <span class="keyword">elif</span> s_t == <span class="number">9</span>:</span><br><span class="line">        <span class="keyword">return</span> (s_0+if_9(a, b, c, i))/<span class="number">10</span></span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">if_19</span><span class="params">(a, b, c, i)</span>:</span></span><br><span class="line">    a_0 = my_pow(<span class="number">10</span>, i, <span class="number">10</span> * a) / a</span><br><span class="line">    b_0 = my_pow(<span class="number">10</span>, i, <span class="number">10</span> * b) / b</span><br><span class="line">    c_0 = my_pow(<span class="number">10</span>, i, <span class="number">10</span> * c) / c</span><br><span class="line">    s_0 = a_0 + b_0 + c_0</span><br><span class="line"></span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">    a_t = my_pow(<span class="number">10</span>, i, <span class="number">10</span>*a)/a</span><br><span class="line">    b_t = my_pow(<span class="number">10</span>, i, <span class="number">10</span>*b)/b</span><br><span class="line">    c_t = my_pow(<span class="number">10</span>, i, <span class="number">10</span>*c)/c</span><br><span class="line">    s_t = a_t+b_t+c_t</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> s_t&gt;=<span class="number">10</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">    <span class="keyword">elif</span> s_t == <span class="number">8</span>:</span><br><span class="line">        <span class="keyword">return</span> (s_0+if_8(a, b, c, i))/<span class="number">10</span></span><br><span class="line">    <span class="keyword">elif</span> s_t == <span class="number">9</span>:</span><br><span class="line">        <span class="keyword">return</span> (s_0+if_9(a, b, c, i))/<span class="number">10</span></span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">if_18</span><span class="params">(a, b, c, i)</span>:</span></span><br><span class="line">    a_0 = my_pow(<span class="number">10</span>, i, <span class="number">10</span> * a) / a</span><br><span class="line">    b_0 = my_pow(<span class="number">10</span>, i, <span class="number">10</span> * b) / b</span><br><span class="line">    c_0 = my_pow(<span class="number">10</span>, i, <span class="number">10</span> * c) / c</span><br><span class="line">    s_0 = a_0 + b_0 + c_0</span><br><span class="line"></span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">    a_t = my_pow(<span class="number">10</span>, i, <span class="number">10</span>*a)/a</span><br><span class="line">    b_t = my_pow(<span class="number">10</span>, i, <span class="number">10</span>*b)/b</span><br><span class="line">    c_t = my_pow(<span class="number">10</span>, i, <span class="number">10</span>*c)/c</span><br><span class="line">    s_t = a_t+b_t+c_t</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> s_t&gt;=<span class="number">20</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">    <span class="keyword">elif</span> s_t == <span class="number">18</span>:</span><br><span class="line">        <span class="keyword">return</span> (s_0+if_18(a, b, c, i))/<span class="number">10</span></span><br><span class="line">    <span class="keyword">elif</span> s_t == <span class="number">19</span>:</span><br><span class="line">        <span class="keyword">return</span> (s_0+if_19(a, b, c, i))/<span class="number">10</span></span><br><span class="line">    <span class="keyword">elif</span> s_t == <span class="number">8</span>:</span><br><span class="line">        <span class="keyword">return</span> (s_0+if_8(a, b, c, i))/<span class="number">10</span></span><br><span class="line">    <span class="keyword">elif</span> s_t == <span class="number">9</span>:</span><br><span class="line">        <span class="keyword">return</span> (s_0+if_9(a, b, c, i))/<span class="number">10</span></span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    a = <span class="number">123</span></span><br><span class="line">    b = <span class="number">234</span></span><br><span class="line">    c = <span class="number">456</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'1/a的10000位小数点为'</span>+str(my_pow(<span class="number">10</span>, <span class="number">10000</span>, <span class="number">10</span>*a)/a)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'1/b的10000位小数点为'</span>+str(my_pow(<span class="number">10</span>, <span class="number">10000</span>, <span class="number">10</span>*b)/b)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'1/c的10000位小数点为'</span>+str(my_pow(<span class="number">10</span>, <span class="number">10000</span>, <span class="number">10</span>*c)/c)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'\n'</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'1/a的10001位小数点为'</span>+str(my_pow(<span class="number">10</span>, <span class="number">10001</span>, <span class="number">10</span>*a)/a)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'1/b的10001位小数点为'</span>+str(my_pow(<span class="number">10</span>, <span class="number">10001</span>, <span class="number">10</span>*b)/b)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'1/c的10001位小数点为'</span>+str(my_pow(<span class="number">10</span>, <span class="number">10001</span>, <span class="number">10</span>*c)/c)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'\n'</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'1/a的10002位小数点为'</span>+str(my_pow(<span class="number">10</span>, <span class="number">10002</span>, <span class="number">10</span>*a)/a)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'1/b的10002位小数点为'</span>+str(my_pow(<span class="number">10</span>, <span class="number">10002</span>, <span class="number">10</span>*b)/b)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'1/c的10002位小数点为'</span>+str(my_pow(<span class="number">10</span>, <span class="number">10002</span>, <span class="number">10</span>*c)/c)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'\n'</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'1/a+1/b+1/c的10000位小数点为'</span>+str(add(a, b, c))</span><br></pre></td></tr></table></figure>
+<h2 id="bbp算法"><a href="#bbp算法" class="headerlink" title="bbp算法"></a>bbp算法</h2><p>ACM题目链接：<a href="http://acm.hdu.edu.cn/showproblem.php?pid=6217" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6217</a></p>
+<p>BBP公式提出了求$\pi$小数点后任意位的算法，只是求的是16进制表示的$\pi$</p>
+<p><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/af6bc360851499dd2ab2a90bee03fbe2040089d5" alt=""></p>
+<p>那么依照上面的我们求$\left \lfloor16^n\pi\right\rfloor\;mod\;16$就可以了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_pow</span><span class="params">(a, b, c)</span>:</span></span><br><span class="line">    a = a % c</span><br><span class="line">    res = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> b != <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> b &amp; <span class="number">1</span>:</span><br><span class="line">            res = res * a</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span></span><br><span class="line">        a = (a ** <span class="number">2</span>) % c</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res % c</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">S</span><span class="params">(d, j)</span>:</span></span><br><span class="line">    sum = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(d):</span><br><span class="line">        sum+=my_pow(<span class="number">16</span>, d-k, <span class="number">16</span>*(<span class="number">8</span>*k+j))/(<span class="number">8</span>*k+j)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">accuracy</span><span class="params">(d, j, a)</span>:</span></span><br><span class="line">    sum = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(d+a):</span><br><span class="line">        sum += my_pow(<span class="number">16</span>, d - k+a , (<span class="number">16</span>**a) * (<span class="number">8</span> * k + j)) / (<span class="number">8</span> * k + j)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cal</span><span class="params">(d, a)</span>:</span></span><br><span class="line">    sum = (<span class="number">4</span>*S(d, <span class="number">1</span>) - <span class="number">2</span>*S(d, <span class="number">4</span>)-S(d, <span class="number">5</span>)-S(d, <span class="number">6</span>))</span><br><span class="line">    aa = (<span class="number">4</span>*accuracy(d, <span class="number">1</span>, a) - <span class="number">2</span>*accuracy(d, <span class="number">4</span>, a)-accuracy(d, <span class="number">5</span>, a)-accuracy(d, <span class="number">6</span>, a))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> aa&lt;<span class="number">0</span>:</span><br><span class="line">        sum -= (-aa)/(<span class="number">16</span>**a)+<span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        sum += aa/(<span class="number">16</span>**a)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> sum % <span class="number">16</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    a = <span class="number">5</span></span><br><span class="line">    i = <span class="number">1</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'第%d位为：'</span> % (i)+hex(cal(i, a))[<span class="number">2</span>:].strip(<span class="string">'L'</span>)</span><br><span class="line">    i = <span class="number">11</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'第%d位为：'</span> % (i) + hex(cal(i, a))[<span class="number">2</span>:].strip(<span class="string">'L'</span>)</span><br><span class="line">    i = <span class="number">111</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'第%d位为：'</span> % (i) + hex(cal(i, a))[<span class="number">2</span>:].strip(<span class="string">'L'</span>)</span><br><span class="line">    i = <span class="number">1111</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'第%d位为：'</span> % (i) + hex(cal(i, a))[<span class="number">2</span>:].strip(<span class="string">'L'</span>)</span><br><span class="line">    i = <span class="number">11111</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'第%d位为：'</span> % (i) + hex(cal(i, a))[<span class="number">2</span>:].strip(<span class="string">'L'</span>)</span><br></pre></td></tr></table></figure>
+<p>虽然可以使用上面的递归计算来实现精确进位，但通常只考虑后面几位就能有较高的准确率了，代码中的a即表示精确的位数</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#随笔" >
+    <span class="tag-code">随笔</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/02/03/CTF-hgame-2019/">
+        <span class="nav-arrow">← </span>
+        
+          hgame2019几道有意思的Crypto
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/04/05/深入研究字节反转攻击/">
+        
+          深入研究字节反转攻击
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+  </br>
+  <span id='/2019/03/16/Essay-bbp算法/' class="leancloud-visitors" data-flag-title="bbp算法求PI的小数点后第n位">
+      <em class="post-meta-item-text">这篇水文的阅读量 </em>
+      <i class="leancloud-visitors-count">1000000</i>
+  </span>
+    
+        <!-- valine START -->
+        <div id="vcomments"></div>
+        <!-- valine END -->
+    
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#基本定理"><span class="toc-nav-text">基本定理</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#求小数点后第n位"><span class="toc-nav-text">求小数点后第n位</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#bbp算法"><span class="toc-nav-text">bbp算法</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://r1ngs.top/2019/03/16/Essay-bbp算法/';
+    var banner = 'undefined'
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "undefined";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "bbp算法求PI的小数点后第n位",
+        owner: "undefined",
+        repo: "undefined",
+        oauth: {
+          client_id: "undefined",
+          client_secret: "undefined"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+<script>
+  var disqus_shortname = 'null';
+  
+  var disqus_url = 'https://r1ngs.top/2019/03/16/Essay-bbp算法/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'U6Mi8KdqsN4W4eE3mdtxkGOb-gzGzoHsz',
+        appKey: 'pEaiuVgetU4E2j06NHtY0dn5',
+        notify: false, 
+        verify: false, 
+        avatar: 'mp', 
+        placeholder: '输入你的邮箱，我会在看到后尽快发邮件回复的哦。ヾﾉ≧∀≦)o',
+        pageSize: 12,
+        visitor: true // 阅读量统计,
+    })
+</script>
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+</body>
+</html>

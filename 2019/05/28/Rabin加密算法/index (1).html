@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="r1ngs&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Rabin加密算法 | r1ngs&#39;s blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/foundation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>r1ngs's blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<div id="article-banner">
+  <h2>Rabin加密算法</h2>
+  <p class="post-date">2019-05-28</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><a href="https://xz.aliyun.com/t/5113" target="_blank" rel="noopener">先知已投，戳我跳转</a></p>
+<p>Rabin算法是一种基于计算模合数平方根困难性问题的非对称加密算法。他和RSA加密的形式类似，本文主要探讨Rabin算法的特殊情况和n次同余方程的解法。</p>
+<a id="more"></a>
+<h3 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h3><p>选择两个大素数$p$和$q$做为私钥</p>
+<p>计算$n = p \times q$做为公钥</p>
+<p>密文为$c \equiv m^2\;mod\;n$</p>
+<h3 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h3><ul>
+<li>计算出$r$和$s$，目的是满足：</li>
+</ul>
+<script type="math/tex; mode=display">
+\begin{align*}
+r &\equiv \sqrt{c}\ (mod\ p)\\
+s &\equiv \sqrt{c}\ (mod\ q)
+\end{align*}</script><p>这里的根号只是一种表示形式，表示$r^2\equiv c\;(mod\;p)$而已，一般来说$p \equiv q \equiv 3 \pmod 4$，那么结合欧拉判别定理，易知</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+r &\equiv c^{\frac{1}{4}(p + 1)}\ (mod\ p)\\
+s &\equiv c^{\frac{1}{4}(q + 1)}\ (mod\ q)
+\end{align*}</script><p>+-都可以，只要取一个满足的就行了</p>
+<ul>
+<li>用扩展欧几里得计算出a和b：</li>
+</ul>
+<p>$a \cdot p + b \cdot q \equiv 1\;(mod\;n)$</p>
+<ul>
+<li>解出四个明文：</li>
+</ul>
+<script type="math/tex; mode=display">
+\begin{align*}
+x_1 &= (a \cdot p \cdot s + b \cdot q \cdot r) \bmod n\\
+x_2 &= n - x_1\\
+x_3 &= (a \cdot p \cdot s - b \cdot q \cdot r) \bmod n\\
+x_4 &= n - x_3
+\end{align*}</script><p>验证：</p>
+<p>$x_1^2 \equiv (a \cdot p \cdot s + b \cdot q \cdot r)^2\equiv (a \cdot p \cdot s)^2+(b \cdot q \cdot r)^2\;(mod\;n)$</p>
+<p>由$s^2=k_1q+c$和$r^2=k_2p+c$</p>
+<p>则：$x_1^2 \equiv a^2 \cdot p^2 \cdot s^2+b^2 \cdot q^2 \cdot r^2\equiv c (a^2\cdot p^2+b^2\cdot q^2)\;(mod\;n)$</p>
+<p>则：$x_1^2\equiv c((a\cdot p+b\cdot q)^2-2a\cdot p\cdot b\cdot q)\equiv c\;(mod\;n)$</p>
+<p>其余的也是同理可证</p>
+<p>这里求$a$和$b$可以不用之前的先求一个正数再由这个数算出另一个负数的方法（实际上两种方法是等效的），而直接求二者相互的逆元</p>
+<p>由于</p>
+<p>$p^{-1}p \equiv1\;(mod\;q)$      $q^{-1}q \equiv1\;(mod\;p)$ </p>
+<p>那么</p>
+<p>$p^{-1}p+q^{-1}q\equiv c\;(mod\;pq)$</p>
+<p>等价于</p>
+<script type="math/tex; mode=display">
+\left\{\begin{matrix}
+p^{-1}p \equiv c\ (mod\ q)\\
+q^{-1}q \equiv c\ (mod\ p)\\
+\end{matrix}\right.</script><p>所以显然$c\equiv1\;(mod\;pq)$</p>
+<h3 id="代码验证"><a href="#代码验证" class="headerlink" title="代码验证"></a>代码验证</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> getPrime</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line">p = getPrime(<span class="number">512</span>)</span><br><span class="line"><span class="keyword">while</span> p % <span class="number">4</span> != <span class="number">3</span>:</span><br><span class="line">    p = getPrime(<span class="number">512</span>)</span><br><span class="line"></span><br><span class="line">q = getPrime(<span class="number">512</span>)</span><br><span class="line"><span class="keyword">while</span> q % <span class="number">4</span> != <span class="number">3</span>:</span><br><span class="line">    q = getPrime(<span class="number">512</span>)</span><br><span class="line"></span><br><span class="line">n = p*q</span><br><span class="line">plain = <span class="number">123456789</span></span><br><span class="line">cipher = pow(plain, <span class="number">2</span>, n)</span><br><span class="line"></span><br><span class="line">inv_p = gmpy2.invert(p, q)</span><br><span class="line">inv_q = gmpy2.invert(q, p)</span><br><span class="line"><span class="keyword">assert</span> (inv_p*p+inv_q*q)%(p*q) == <span class="number">1</span></span><br><span class="line"></span><br><span class="line">mp = pow(cipher, (p+<span class="number">1</span>)/<span class="number">4</span>, p)</span><br><span class="line">mq = pow(cipher, (q+<span class="number">1</span>)/<span class="number">4</span>, q)</span><br><span class="line"></span><br><span class="line">a = (inv_p * p *mq + inv_q * q * mp)%n</span><br><span class="line">b = n - a</span><br><span class="line">c = (inv_p * p *mq - inv_q * q * mp)%n</span><br><span class="line">d = n - c</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> pow(a, <span class="number">2</span>, n) == cipher</span><br><span class="line"><span class="keyword">assert</span> pow(b, <span class="number">2</span>, n) == cipher</span><br><span class="line"><span class="keyword">assert</span> pow(c, <span class="number">2</span>, n) == cipher</span><br><span class="line"><span class="keyword">assert</span> pow(d, <span class="number">2</span>, n) == cipher</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> a</span><br><span class="line"><span class="keyword">print</span> b</span><br><span class="line"><span class="keyword">print</span> c</span><br><span class="line"><span class="keyword">print</span> d</span><br></pre></td></tr></table></figure>
+<p>可以看到一共有四个解，而真正的解应该结合实际来筛选</p>
+<h2 id="如果p和q不是模4余3呢？"><a href="#如果p和q不是模4余3呢？" class="headerlink" title="如果p和q不是模4余3呢？"></a>如果p和q不是模4余3呢？</h2><p>也不难，首先由$m^2\equiv c\;(mod\;n)$</p>
+<p>得到$m^2\equiv c\;(mod\;p)$和$m^2\equiv c\;(mod\;q)$</p>
+<p>对两个式子可以用二次同余方程的通用解法得到$m\equiv C_1\;(mod\;p)$和$m\equiv C_2\;(mod\;q)$</p>
+<p>其中$C_1$和$C_2$均有两个不同的解，然后再用CRT就能得到$m\equiv M\;(mod\;pq)$了</p>
+<h3 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> getPrime</span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint</span><br><span class="line"><span class="keyword">from</span> libnum <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> invert</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">power</span><span class="params">(s1, s2, k1, k2, w, p)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> ((s1*k1+s2*k2*w)%p, (s1*k2+s2*k1)%p)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Cipolla_algorithm</span><span class="params">(p, n)</span>:</span></span><br><span class="line">    a = randint(<span class="number">1</span>, p)</span><br><span class="line">    w = a ** <span class="number">2</span> - n</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> pow(w, (p<span class="number">-1</span>)/<span class="number">2</span>, p) !=p<span class="number">-1</span> :</span><br><span class="line">        a = randint(<span class="number">1</span>, p)</span><br><span class="line">        w = a ** <span class="number">2</span> - n</span><br><span class="line"></span><br><span class="line">    times = (p+<span class="number">1</span>)/<span class="number">2</span></span><br><span class="line"></span><br><span class="line">    k1 = <span class="number">1</span></span><br><span class="line">    k2 = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    first = <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line">    sum1 = <span class="number">1</span></span><br><span class="line">    sum2 = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> times != <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> first:</span><br><span class="line">            k1, k2=power(k1, k2, a, <span class="number">1</span>, w, p)</span><br><span class="line">            first = <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            k1, k2=power(k1, k2, k1, k2, w, p)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> times &amp; <span class="number">1</span>:</span><br><span class="line">            sum1, sum2 = power(sum1, sum2, k1, k2, w, p)</span><br><span class="line">        times &gt;&gt;= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> sum1</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">CRT</span><span class="params">(c, n)</span>:</span></span><br><span class="line">    N = reduce(<span class="keyword">lambda</span> a, b: a*b, n)</span><br><span class="line">    x = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i, j <span class="keyword">in</span> zip(c, n):</span><br><span class="line">        N_i = N/j</span><br><span class="line">        N_i_1 = invert(N_i, j)</span><br><span class="line">        x+=i*N_i*N_i_1</span><br><span class="line">    <span class="keyword">return</span> x % N</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    p = getPrime(<span class="number">512</span>)</span><br><span class="line">    <span class="keyword">while</span> p % <span class="number">4</span> != <span class="number">1</span>:</span><br><span class="line">        p = getPrime(<span class="number">512</span>)</span><br><span class="line"></span><br><span class="line">    q = getPrime(<span class="number">512</span>)</span><br><span class="line">    <span class="keyword">while</span> q % <span class="number">4</span> != <span class="number">1</span>:</span><br><span class="line">        q = getPrime(<span class="number">512</span>)</span><br><span class="line"></span><br><span class="line">    n = p * q</span><br><span class="line">    m = s2n(<span class="string">'this is plaintext'</span>)</span><br><span class="line">    c = pow(m, <span class="number">2</span>, n)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'m is '</span>+str(m)</span><br><span class="line"></span><br><span class="line">    get_x1 = Cipolla_algorithm(p, c)</span><br><span class="line">    get_x2 = Cipolla_algorithm(q, c)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">assert</span>  pow(get_x1, <span class="number">2</span>, p) == c % p</span><br><span class="line">    <span class="keyword">assert</span>  pow(get_x2, <span class="number">2</span>, q) == c % q</span><br><span class="line"></span><br><span class="line">    c11 = get_x1</span><br><span class="line">    c12 = p-get_x1</span><br><span class="line">    c21 = get_x2</span><br><span class="line">    c22 = q-get_x2</span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> CRT([c11, c21], [p, q])</span><br><span class="line">    <span class="keyword">print</span> CRT([c11, c22], [p, q])</span><br><span class="line">    <span class="keyword">print</span> CRT([c12, c21], [p, q])</span><br><span class="line">    <span class="keyword">print</span> CRT([c12, c22], [p, q])</span><br></pre></td></tr></table></figure>
+<h2 id="n次同余方程"><a href="#n次同余方程" class="headerlink" title="n次同余方程"></a>n次同余方程</h2><p>这样的话也就衍生了一个通用的解法，就是如果题目给的是$m^e ≡ c (mod\;n)$，其中$p$、$q$已知但是$e$和$\varphi(n)$不互素的话，就可以利用上面的算法先解出$m ≡ C_1 (mod\;p)$和$m ≡ C_2(mod\;q)$再用CRT联合</p>
+<p>但也许你会问$m^3 ≡ c (mod\;p)$或者$m^n ≡ c (mod\;p)$，这类方程如何求解，事实上这类方程的计算是困难的，针对这个问题，python有sympy库可以进行处理，算法应该是利用的原根进行计算，所以当p比较大的时候计算也是很难的，而且也不是一定有原根的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> getPrime</span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint</span><br><span class="line"><span class="keyword">from</span> sympy.ntheory.residue_ntheory <span class="keyword">import</span> nthroot_mod</span><br><span class="line"></span><br><span class="line">p = getPrime(<span class="number">150</span>)</span><br><span class="line">x = randint(<span class="number">1</span>, p)</span><br><span class="line">n = pow(x, <span class="number">4</span>, p)</span><br><span class="line"></span><br><span class="line">x1 = nthroot_mod(n,<span class="number">4</span>,p,all_roots=<span class="keyword">False</span>)</span><br><span class="line"><span class="keyword">assert</span> pow(x1, <span class="number">4</span>, p) == n</span><br><span class="line"><span class="keyword">print</span> x1</span><br></pre></td></tr></table></figure></section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#分析" >
+    <span class="tag-code">分析</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/05/02/CTF-starCTF/">
+        <span class="nav-arrow">← </span>
+        
+          starCTF-crypto部分
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/06/03/random方法的安全问题/">
+        
+          Java random方法的安全问题
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+  </br>
+  <span id='/2019/05/28/Rabin加密算法/' class="leancloud-visitors" data-flag-title="Rabin加密算法">
+      <em class="post-meta-item-text">这篇水文的阅读量 </em>
+      <i class="leancloud-visitors-count">1000000</i>
+  </span>
+    
+        <!-- valine START -->
+        <div id="vcomments"></div>
+        <!-- valine END -->
+    
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#加密"><span class="toc-nav-text">加密</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#解密"><span class="toc-nav-text">解密</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#代码验证"><span class="toc-nav-text">代码验证</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#如果p和q不是模4余3呢？"><span class="toc-nav-text">如果p和q不是模4余3呢？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#demo"><span class="toc-nav-text">demo</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#n次同余方程"><span class="toc-nav-text">n次同余方程</span></a>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://r1ngs.top/2019/05/28/Rabin加密算法/';
+    var banner = 'undefined'
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "undefined";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "Rabin加密算法",
+        owner: "undefined",
+        repo: "undefined",
+        oauth: {
+          client_id: "undefined",
+          client_secret: "undefined"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+<script>
+  var disqus_shortname = 'null';
+  
+  var disqus_url = 'https://r1ngs.top/2019/05/28/Rabin加密算法/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'U6Mi8KdqsN4W4eE3mdtxkGOb-gzGzoHsz',
+        appKey: 'pEaiuVgetU4E2j06NHtY0dn5',
+        notify: false, 
+        verify: false, 
+        avatar: 'mp', 
+        placeholder: '输入你的邮箱，我会在看到后尽快发邮件回复的哦。ヾﾉ≧∀≦)o',
+        pageSize: 12,
+        visitor: true // 阅读量统计,
+    })
+</script>
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+</body>
+</html>

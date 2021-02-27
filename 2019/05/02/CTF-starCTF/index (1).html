@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="r1ngs&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      starCTF-crypto部分 | r1ngs&#39;s blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/foundation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>r1ngs's blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<div id="article-banner">
+  <h2>starCTF-crypto部分</h2>
+  <p class="post-date">2019-05-02</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><a href="https://www.anquanke.com/post/id/177582" target="_blank" rel="noopener">安全客已投，戳我跳转</a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>临近五一事情比较多，基本用的是零碎的时间玩的*ctf，有些题目还是很有趣的</p>
+<a id="more"></a>
+<h2 id="babyprng"><a href="#babyprng" class="headerlink" title="babyprng"></a>babyprng</h2><p>首先看一下主要代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self, code)</span>:</span></span><br><span class="line">    stack = []</span><br><span class="line">    out = []</span><br><span class="line">    cnt = <span class="number">0</span></span><br><span class="line">    random.seed(os.urandom(<span class="number">8</span>))</span><br><span class="line">    self.TH = <span class="number">0.7</span> + random.random()*<span class="number">0.25</span></span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> xrange(self.SIZE):</span><br><span class="line">        stack.append(self.randbit())</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        pos = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> xrange(self.SIZE*<span class="number">10</span>):</span><br><span class="line">            c = code[pos]</span><br><span class="line">            pos += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> c==<span class="string">'\x00'</span>:</span><br><span class="line">                out.append(stack[<span class="number">-1</span>])</span><br><span class="line">            <span class="keyword">elif</span> c==<span class="string">'\x01'</span>:</span><br><span class="line">                <span class="keyword">if</span> stack[<span class="number">-1</span>]==<span class="number">1</span>:</span><br><span class="line">                    pos += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> c==<span class="string">'\x02'</span>:</span><br><span class="line">                <span class="keyword">del</span> stack[<span class="number">-1</span>]</span><br><span class="line">            <span class="keyword">elif</span> c==<span class="string">'\x03'</span>:</span><br><span class="line">                stack[<span class="number">-1</span>] = stack[<span class="number">-1</span>]&amp;stack[<span class="number">-2</span>]</span><br><span class="line">            <span class="keyword">elif</span> c==<span class="string">'\x04'</span>:</span><br><span class="line">                stack[<span class="number">-1</span>] = stack[<span class="number">-1</span>]|stack[<span class="number">-2</span>]</span><br><span class="line">            <span class="keyword">elif</span> c==<span class="string">'\x05'</span>:</span><br><span class="line">                stack[<span class="number">-1</span>] = stack[<span class="number">-1</span>]^stack[<span class="number">-2</span>]</span><br><span class="line">            <span class="comment">#elif c=='\x06':</span></span><br><span class="line">            <span class="comment">#    stack[-1] = 1-stack[-1]</span></span><br><span class="line">            <span class="comment">#elif c=='\x06':</span></span><br><span class="line">            <span class="comment">#    stack.append(stack[-1])</span></span><br><span class="line">            <span class="keyword">elif</span> ord(c)&gt;=<span class="number">0x10</span> <span class="keyword">and</span> ord(c)&lt;=<span class="number">0x30</span>:</span><br><span class="line">                pos += ord(c)<span class="number">-0x10</span></span><br><span class="line">            <span class="keyword">elif</span> ord(c)&gt;=<span class="number">0x30</span> <span class="keyword">and</span> ord(c)&lt;=<span class="number">0x50</span>:</span><br><span class="line">                pos -= ord(c)<span class="number">-0x30</span></span><br></pre></td></tr></table></figure>
+<p>首先TH随机生成的值大概会在0.8左右，后面就以TH=0.8来讨论，那么按照算法，stack中大概有80%为0，20%为1</p>
+<p>我们要做的是使得最终的out有大约一半的0和一半的1，而且元素的个数不能太少，我做这种题目喜欢在本地搭建，因为proof_of_work等待的时间实在有点长</p>
+<p>我们关注第三个，第四个，第五个操作，列举出stack最后两个元素的可能情况和经过这些操作后的值：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>出现的概率</th>
+<th>最后两个元素可能的值</th>
+<th>与操作</th>
+<th>或操作</th>
+<th>异或操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>64%</td>
+<td>00</td>
+<td>00</td>
+<td>00</td>
+<td>00</td>
+</tr>
+<tr>
+<td>16%</td>
+<td>01</td>
+<td>00(改变)</td>
+<td>01</td>
+<td>01</td>
+</tr>
+<tr>
+<td>16%</td>
+<td>10</td>
+<td>10</td>
+<td>11（改变）</td>
+<td>11（改变）</td>
+</tr>
+<tr>
+<td>4%</td>
+<td>11</td>
+<td>11</td>
+<td>11</td>
+<td>10（改变）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="自己的解法"><a href="#自己的解法" class="headerlink" title="自己的解法"></a>自己的解法</h3><p>观察到对于10来说^操作可以将其变为11而11又可以变成10，这样最后一位就可以在我们的控制下做周期性的交替了，而且最后两步操作是可以重新将pos指针重新指向code的任意位置的，如此一来就能实现周期性的循环操作，所以解法是在一个周期的前半周期里重复执行0的操作，然后中间执行一次异或操作，改变最后一元素的值，后半周期再重复执行0操作，这样就能再一个周期里取一半的0再取一半的1了</p>
+<p>上面能成功的前提条件是stack最后两位的初始值为10或者11，可能的概率为16%+4%=20%，所以如果没有成功的话多尝试几次就可以了，exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> libnum <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">from</span> re <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect</span><span class="params">(host, port)</span>:</span></span><br><span class="line">    s = socket()</span><br><span class="line">    s.connect((host, port))</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cal</span><span class="params">(proof, ans, set)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> set:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> set:</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> set:</span><br><span class="line">                <span class="keyword">for</span> m <span class="keyword">in</span> set:</span><br><span class="line">                    <span class="keyword">if</span> sha256(i+j+k+m+proof).hexdigest() == ans:</span><br><span class="line">                        <span class="keyword">print</span> i+j+k+m</span><br><span class="line">                        <span class="keyword">return</span> i+j+k+m</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">proof_of_work</span><span class="params">(s)</span>:</span></span><br><span class="line">    msg = s.recv(<span class="number">1024</span>)</span><br><span class="line">    <span class="keyword">print</span> msg</span><br><span class="line">    set = string.ascii_letters+string.digits</span><br><span class="line"></span><br><span class="line">    reg = <span class="string">'sha256\(XXXX\+(.+)\) == (.+)\n'</span></span><br><span class="line">    regexp = compile(reg)</span><br><span class="line">    res = regexp.findall(msg)</span><br><span class="line"></span><br><span class="line">    proof = res[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">    ans = res[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line">    s.send(cal(proof, ans, set))</span><br><span class="line">    <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    host = <span class="string">'34.92.185.118'</span></span><br><span class="line">    port = <span class="number">10002</span></span><br><span class="line">    s = connect(host, port)</span><br><span class="line">    proof_of_work(s)</span><br><span class="line"></span><br><span class="line">    msg = chr(<span class="number">0</span>)*<span class="number">15</span>+chr(<span class="number">5</span>)+chr(<span class="number">0</span>)*<span class="number">15</span>+chr(<span class="number">0x50</span>)</span><br><span class="line">    <span class="keyword">print</span> msg.encode(<span class="string">'hex'</span>)</span><br><span class="line">    s.send(msg.encode(<span class="string">'hex'</span>)+<span class="string">'\n'</span>)</span><br><span class="line">    <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h3 id="官方的解法"><a href="#官方的解法" class="headerlink" title="官方的解法"></a>官方的解法</h3><p>先来看exp（稍微有改动，因为我觉得有一步貌似没必要= =）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msg = <span class="string">'\x02\x02\x05\01\x35\x02'</span>+<span class="string">'\x00'</span>*<span class="number">10</span>+<span class="string">'\x40'</span></span><br></pre></td></tr></table></figure>
+<p>上个自己画的图：</p>
+<p><img src="/2019/05/02/CTF-starCTF/0.jpg" alt=""></p>
+<p>可以看到流程就是利用跳转来实现循环语句，直到异或以后最后一位为1，然后删掉1，取倒数第二位10次，然后再删除这一位，继续异或，重复操作。</p>
+<p>通过异或使得最后一位为1只有两种可能10和01，且这两种情况等概率出现（均为16%），所以倒数第二位为0或者1的概率各为50%，也即算法等价于在每个周期等概率的取0或者1，这样的话成功的概率就很大了</p>
+<h2 id="babyprng2"><a href="#babyprng2" class="headerlink" title="babyprng2"></a>babyprng2</h2><p>核心代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self, code)</span>:</span></span><br><span class="line">        stack = []</span><br><span class="line">        sequence = []</span><br><span class="line">        out = []</span><br><span class="line">        cnt = <span class="number">0</span></span><br><span class="line">        random.seed(os.urandom(<span class="number">8</span>))</span><br><span class="line">        self.TH = <span class="number">0.7</span> + random.random()*<span class="number">0.25</span></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> xrange(self.SIZE):</span><br><span class="line">            stack.append(self.randbit())</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            pos = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> _ <span class="keyword">in</span> xrange(self.SIZE*<span class="number">0x10</span>):</span><br><span class="line">                c = code[pos]</span><br><span class="line">                pos += <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> c==<span class="string">'\x00'</span>:</span><br><span class="line">                    out.append(stack[<span class="number">-1</span>])</span><br><span class="line">                    <span class="keyword">del</span> stack[<span class="number">-1</span>]</span><br><span class="line">                <span class="keyword">elif</span> c==<span class="string">'\x01'</span>:</span><br><span class="line">                    <span class="keyword">if</span> stack[<span class="number">-1</span>]==<span class="number">1</span>:</span><br><span class="line">                        pos += <span class="number">1</span></span><br><span class="line">                <span class="keyword">elif</span> c==<span class="string">'\x02'</span>:</span><br><span class="line">                    stack[<span class="number">-1</span>] = stack[<span class="number">-1</span>]&amp;stack[<span class="number">-2</span>]</span><br><span class="line">                <span class="keyword">elif</span> c==<span class="string">'\x03'</span>:</span><br><span class="line">                    stack[<span class="number">-1</span>] = stack[<span class="number">-1</span>]|stack[<span class="number">-2</span>]</span><br><span class="line">                <span class="keyword">elif</span> c==<span class="string">'\x04'</span>:</span><br><span class="line">                    stack[<span class="number">-1</span>] = stack[<span class="number">-1</span>]^stack[<span class="number">-2</span>]</span><br><span class="line">                <span class="keyword">elif</span> c==<span class="string">'\x05'</span>:</span><br><span class="line">                    sequence.append(stack[<span class="number">-1</span>])</span><br><span class="line">                    <span class="keyword">del</span> stack[<span class="number">-1</span>]</span><br><span class="line">                <span class="keyword">elif</span> c==<span class="string">'\x06'</span>:</span><br><span class="line">                    sequence.insert(<span class="number">0</span>,stack[<span class="number">-1</span>])</span><br><span class="line">                    <span class="keyword">del</span> stack[<span class="number">-1</span>]</span><br><span class="line">                <span class="keyword">elif</span> c==<span class="string">'\x07'</span>:</span><br><span class="line">                    <span class="keyword">if</span> len(stack)&gt;=<span class="number">2</span>:</span><br><span class="line">                        pos += <span class="number">1</span></span><br><span class="line">                <span class="keyword">elif</span> c==<span class="string">'\x08'</span>:</span><br><span class="line">                    stack+=sequence[::<span class="number">-1</span>]</span><br><span class="line">                    sequence=[]</span><br><span class="line">                <span class="keyword">elif</span> ord(c)&gt;=<span class="number">0x10</span> <span class="keyword">and</span> ord(c)&lt;=<span class="number">0x1a</span>:</span><br><span class="line">                    pos += ord(c)<span class="number">-0x10</span></span><br><span class="line">                <span class="keyword">elif</span> ord(c)&gt;=<span class="number">0x30</span> <span class="keyword">and</span> ord(c)&lt;=<span class="number">0x3a</span>:</span><br><span class="line">                    pos -= ord(c)<span class="number">-0x30</span></span><br></pre></td></tr></table></figure>
+<p>这道题和上面题目的区别：</p>
+<p>delta更小、out append的时候每次还会把栈删除、多了对seq的操作，循环的次数更多，而要求out的元素更少</p>
+<h3 id="自己的解法-1"><a href="#自己的解法-1" class="headerlink" title="自己的解法"></a>自己的解法</h3><p>由于可以做判断是否为一，那么我可以在一个周期里第一步取0，如果不是0就丢弃然后重复判断（送入seq），如果是0就判断下一个是否为1，如果是1就进入下一个周期，如果不是的话就丢弃然后再重复判断，这样相当于每个周期都在重复的取01</p>
+<p>画成图就是这个样子：</p>
+<p><img src="/2019/05/02/CTF-starCTF/1.jpg" alt=""></p>
+<p>或者这个样子</p>
+<p><img src="/2019/05/02/CTF-starCTF/2.jpg" alt=""></p>
+<p>但是这样并不能实现，因为误删除元素（送入seq）的有很多，循环还没结束就会因为stack的元素全部没有了而报错，导致out的元素个数就不够了，本地测试最多也就在2万左右，达不到3万，但是我们有一个判断stack元素还剩多少的方法，当stack要空了的时候只要用第8个方法把seq的元素重新放回stack重复利用就行了，虽然构造有点麻烦，但总归是可以实现的：</p>
+<p><img src="/2019/05/02/CTF-starCTF/3.jpg" alt=""></p>
+<p>对应poc：01140708053607080001140708003a0708053a</p>
+<h2 id="notcurves"><a href="#notcurves" class="headerlink" title="notcurves"></a>notcurves</h2><p>题目有一个非常严重的Bug，导致了非常严重的非预期</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">self.dosend(<span class="string">"please give me a point(pi,qi): \n"</span>)</span><br><span class="line">R = self.recvpoint(<span class="number">30</span>)</span><br><span class="line">(u,v) = R</span><br><span class="line"><span class="keyword">print</span> R</span><br><span class="line"><span class="keyword">if</span> (u*v)%p == <span class="number">0</span>:</span><br><span class="line">    self.dosend(<span class="string">"%s\n"</span> % FLAG)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    self.dosend(<span class="string">"&gt;.&lt;\n"</span>)</span><br><span class="line">self.request.close()</span><br></pre></td></tr></table></figure>
+<p>没有检查参数R，所以R可以是(0, 0)，直接就能过，应该大部分人都是这样做出来的吧。。。</p>
+<p>比赛结束以后我还是很兴奋的重新看了一下，毕竟ECC椭圆曲线的题目很少，但是由于这道题没有官方wp，所以我也只能猜测一下出题人的预期解</p>
+<p>首先在循环里能做的操作其实只有3个，第一个是ADD方法，实现的功能是求椭圆曲线上两点相加的结果，第二个是MUL方法，实现的功能是在椭圆曲线上求一个点的倍数，而我觉得预期解法应该是最后一个DIV方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">DIV</span><span class="params">(self)</span>:</span></span><br><span class="line">    self.dosend(<span class="string">'input point A: \n'</span>)</span><br><span class="line">    A = self.recvpoint(<span class="number">30</span>)</span><br><span class="line">    self.dosend(<span class="string">'input number t: \n'</span>)</span><br><span class="line">    t = self.recvnum(<span class="number">10</span>)</span><br><span class="line">    C = div(t,A)</span><br><span class="line">    self.dosend(<span class="string">"the result is :"</span>+str(C)+<span class="string">'\n'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">div</span><span class="params">(t,A,B=<span class="number">0</span>)</span>:</span></span><br><span class="line">    (u,v) = A</span><br><span class="line">    <span class="keyword">if</span> (u*v) %p != <span class="number">1</span>:</span><br><span class="line">        <span class="comment">#print u*v*sub((p,t))%p</span></span><br><span class="line">        <span class="keyword">return</span> u*v*sub((p,t))%p</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> B</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sub</span><span class="params">(A)</span>:</span></span><br><span class="line">    (u,v) = A</span><br><span class="line">    v = v%p</span><br><span class="line">    <span class="keyword">if</span> v &gt; <span class="number">2</span>**<span class="number">11</span>:</span><br><span class="line">        <span class="keyword">print</span> u//v</span><br><span class="line">        <span class="keyword">return</span> u//v</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>仔细观察代码会发现这个方法并没有调用其他两个方法里的check_point方法，也就是不检查输入的点是否在椭圆曲线上，这就可以任意构造了，题目的要求是求出p的大小，而这个方法完全可以做到：</p>
+<p>由于检查u、v不能直接为(1, 1)，所以可以令uv为(1, 2)最后返回的结果除以2就能得到sub(p, t)的结果，而我们是大致知道p的范围的，因为p=getprime(15)*getprime(15)所以p的范围在pow(2, 29)到pow(2, 30)之间，如果令t也在pow(2, 29)到pow(2, 30)之间且p&gt;=t的话，那么p//t结果一定是返回1，否则的话返回其他结果，那么我们就可以通过二分法查找来缩小范围，从而确定p的值（所以这道题和ecc有啥关系？。。。）</p>
+<p>exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> libnum <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">from</span> re <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect</span><span class="params">(host, port)</span>:</span></span><br><span class="line">    s = socket()</span><br><span class="line">    s.connect((host, port))</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cal</span><span class="params">(proof, ans, set)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> set:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> set:</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> set:</span><br><span class="line">                <span class="keyword">for</span> m <span class="keyword">in</span> set:</span><br><span class="line">                    <span class="keyword">if</span> sha256(i+j+k+m+proof).hexdigest() == ans:</span><br><span class="line">                        <span class="keyword">print</span> i+j+k+m</span><br><span class="line">                        <span class="keyword">return</span> i+j+k+m</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">proof_of_work</span><span class="params">(s)</span>:</span></span><br><span class="line">    msg = s.recv(<span class="number">1024</span>)</span><br><span class="line">    <span class="keyword">print</span> msg</span><br><span class="line">    set = string.ascii_letters+string.digits</span><br><span class="line"></span><br><span class="line">    reg = <span class="string">'sha256\(XXXX\+(.+)\) == (.+)\n'</span></span><br><span class="line">    regexp = compile(reg)</span><br><span class="line">    res = regexp.findall(msg)</span><br><span class="line"></span><br><span class="line">    proof = res[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">    ans = res[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line">    s.send(cal(proof, ans, set))</span><br><span class="line">    <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send4</span><span class="params">(s, msg)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'4'</span></span><br><span class="line">    s.send(<span class="string">'4\n'</span>)</span><br><span class="line">    <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'(1,2)'</span></span><br><span class="line">    s.send(<span class="string">'(1,2)\n'</span>)</span><br><span class="line">    <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line">    <span class="keyword">print</span> str(msg)</span><br><span class="line">    s.send(str(msg) + <span class="string">'\n'</span>)</span><br><span class="line">    res = s.recv(<span class="number">1024</span>)</span><br><span class="line">    <span class="keyword">print</span> res</span><br><span class="line">    <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line">    reg = <span class="string">'the result is :(.+)'</span></span><br><span class="line">    regexp = compile(reg)</span><br><span class="line">    r = regexp.findall(res)</span><br><span class="line">    num = r[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> int(num)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    host =<span class="string">'127.0.0.1'</span></span><br><span class="line">    port = <span class="number">20005</span></span><br><span class="line">    s = connect(host, port)</span><br><span class="line">    proof_of_work(s)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line">    low = <span class="number">2</span>**<span class="number">29</span></span><br><span class="line">    high = <span class="number">2</span>**<span class="number">31</span></span><br><span class="line">    mid = (low + high) / <span class="number">2</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> high&gt;low:</span><br><span class="line">        <span class="keyword">if</span> send4(s, mid)==<span class="number">2</span>:</span><br><span class="line">            low = mid</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            high = mid</span><br><span class="line">        tmp = mid</span><br><span class="line">        mid = (low + high) / <span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> mid == tmp:</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            count = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> count &gt;<span class="number">5</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    mid += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> <span class="number">5</span></span><br><span class="line">    s.send(<span class="string">'5\n'</span>)</span><br><span class="line">    <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line">    <span class="keyword">print</span> (<span class="number">1</span>, mid)</span><br><span class="line">    s.send(<span class="string">'(1,%d)\n'</span>%mid)</span><br><span class="line">    <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line">    <span class="keyword">print</span> s.recv(<span class="number">1024</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>不管是出题人有心还是无意，这次题目都有很多非预期的解法，也给题目增加了许多乐趣</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#CTF" >
+    <span class="tag-code">CTF</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/04/05/反馈移位寄存器小结/">
+        <span class="nav-arrow">← </span>
+        
+          反馈移位寄存器小结
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/05/28/Rabin加密算法/">
+        
+          Rabin加密算法
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+  </br>
+  <span id='/2019/05/02/CTF-starCTF/' class="leancloud-visitors" data-flag-title="starCTF-crypto部分">
+      <em class="post-meta-item-text">这篇水文的阅读量 </em>
+      <i class="leancloud-visitors-count">1000000</i>
+  </span>
+    
+        <!-- valine START -->
+        <div id="vcomments"></div>
+        <!-- valine END -->
+    
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前言"><span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#babyprng"><span class="toc-nav-text">babyprng</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#自己的解法"><span class="toc-nav-text">自己的解法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#官方的解法"><span class="toc-nav-text">官方的解法</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#babyprng2"><span class="toc-nav-text">babyprng2</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#自己的解法-1"><span class="toc-nav-text">自己的解法</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#notcurves"><span class="toc-nav-text">notcurves</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#总结"><span class="toc-nav-text">总结</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://r1ngs.top/2019/05/02/CTF-starCTF/';
+    var banner = 'undefined'
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "undefined";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "starCTF-crypto部分",
+        owner: "undefined",
+        repo: "undefined",
+        oauth: {
+          client_id: "undefined",
+          client_secret: "undefined"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+<script>
+  var disqus_shortname = 'null';
+  
+  var disqus_url = 'https://r1ngs.top/2019/05/02/CTF-starCTF/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'U6Mi8KdqsN4W4eE3mdtxkGOb-gzGzoHsz',
+        appKey: 'pEaiuVgetU4E2j06NHtY0dn5',
+        notify: false, 
+        verify: false, 
+        avatar: 'mp', 
+        placeholder: '输入你的邮箱，我会在看到后尽快发邮件回复的哦。ヾﾉ≧∀≦)o',
+        pageSize: 12,
+        visitor: true // 阅读量统计,
+    })
+</script>
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+</body>
+</html>

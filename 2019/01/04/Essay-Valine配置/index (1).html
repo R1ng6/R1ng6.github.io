@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="r1ngs&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Valine的评论和阅读量统计功能配置 | r1ngs&#39;s blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/foundation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>r1ngs's blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<div id="article-banner">
+  <h2>Valine的评论和阅读量统计功能配置</h2>
+  <p class="post-date">2019-01-04</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>最近差不多把试考完了，终于有时间来配一下自己的博客了，由于最近比较喜欢绿色，所以选了这套主题，就是这个主题的作者貌似2017年就跑路不维护了有点难受= =</p>
+<p>看着别人的blog都有评论和阅读量，于是我也决定弄一个，最终我选择了用Valine来实现评论和统计阅读量，弄了一天也踩了很多坑，决定发出来分享给大家</p>
+<a id="more"></a>
+<h2 id="Valine简介"><a href="#Valine简介" class="headerlink" title="Valine简介"></a>Valine简介</h2><p><a href="https://valine.js.org/" target="_blank" rel="noopener">Valine官网</a></p>
+<p>Valine 诞生于2017年8月7日，是一款基于<a href="https://leancloud.cn/" target="_blank" rel="noopener">Leancloud</a>的快速、简洁且高效的无后端评论系统。</p>
+<p>理论上支持但不限于静态博客，目前已有<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>、<a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a>、<a href="http://typecho.org/" target="_blank" rel="noopener">Typecho</a>、<a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 等博客程序在使用Valine。</p>
+<h2 id="评论功能配置"><a href="#评论功能配置" class="headerlink" title="评论功能配置"></a>评论功能配置</h2><p>官网里已经有<a href="https://valine.js.org/quickstart.html" target="_blank" rel="noopener">快速开始的步骤</a>，但是说明不够详细，导致有的萌新抓不着头脑，另外hexo的新版next主题已经内置Valine</p>
+<p><a href="https://blog.csdn.net/blue_zy/article/details/79071414" target="_blank" rel="noopener">next主题的可以看这篇文章</a></p>
+<p>但是我的主题作者早就不更新了，所以是不支持的，那么就只能自己手动改了</p>
+<h3 id="HTML和JS代码配置"><a href="#HTML和JS代码配置" class="headerlink" title="HTML和JS代码配置"></a>HTML和JS代码配置</h3><p>第一个遇到的问题就是步骤里面的html代码在哪里加，这里每个主题都不同，我用自己的主题举例子</p>
+<p>主题下有一个layout文件夹里面有一个page.ejs文件，也就是模板的渲染文件，HTML应该加到加到这里</p>
+<p>两个引入外部js的script标签我是直接放到了最上面第1，2行</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'//unpkg.com/valine/dist/Valine.min.js'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//cdn1.lncld.net/static/js/3.0.4/av-min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后在原来增加评论的地方加上一个valine的判断</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span> (<span class="attr">theme.comment</span> === <span class="string">'gitment'</span>) &#123; %&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- Gitment START --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"comments"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- Gitment END --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%</span> &#125; <span class="attr">else</span> <span class="attr">if</span> (<span class="attr">theme.comment</span> === <span class="string">'uyan'</span>) &#123; %&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- UY START --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"uyan_frame"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"http://v2.uyan.cc/code/uyan.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- UY END --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%</span> &#125; <span class="attr">else</span> <span class="attr">if</span> (<span class="attr">theme.comment</span> === <span class="string">'disqus'</span>) &#123; %&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- Disqus START --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"disqus_thread"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- Disqus END --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%</span> &#125; </span></span><br><span class="line"><span class="tag">      <span class="attr">else</span> <span class="attr">if</span> (<span class="attr">theme.comment</span> === <span class="string">'valine'</span>)</span></span><br><span class="line"><span class="tag">      &#123; %&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- valine START --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"vcomments"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- valine END --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%</span> &#125; </span></span><br><span class="line"><span class="tag">    <span class="attr">else</span> &#123; %&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- No Comment --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在最后面加上js代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">new</span> Valine(&#123;</span><br><span class="line">        el: <span class="string">'#vcomments'</span>,</span><br><span class="line">        appId: <span class="string">'你的id'</span>,</span><br><span class="line">        appKey: <span class="string">'你的key'</span>,</span><br><span class="line">        notify: <span class="literal">false</span>, </span><br><span class="line">        verify: <span class="literal">false</span>, </span><br><span class="line">        avatar: <span class="string">'mp'</span>, </span><br><span class="line">        placeholder: <span class="string">'输入你的邮箱，我会在看到后尽快发邮件回复的哦。ヾﾉ≧∀≦)o'</span>,</span><br><span class="line">        pageSize: <span class="number">12</span>,</span><br><span class="line">        visitor: <span class="literal">true</span> <span class="comment">// 阅读量统计</span></span><br><span class="line">    &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>最后在主题的config里面做相同的配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">comment: valine</span><br><span class="line"></span><br><span class="line">valine:</span><br><span class="line">  enable: <span class="literal">true</span> <span class="comment">//打开valine评论功能</span></span><br><span class="line">  appid: 你的id</span><br><span class="line">  appkey: 你的key</span><br><span class="line">  notify: <span class="literal">false</span> <span class="comment">//邮件提醒</span></span><br><span class="line">  verify: <span class="literal">false</span> <span class="comment">//评论时是否有验证码，需要在Leancloud 设置-&gt;安全中心 中打开</span></span><br><span class="line">  placeholder: 输入你的邮箱，我会在看到后尽快发邮件回复的哦。ヾﾉ≧∀≦)o <span class="comment">//评论框默认显示</span></span><br><span class="line">  avatar: mp <span class="comment">//评论者的头像,</span></span><br><span class="line">  pageSize: <span class="number">12</span> </span><br><span class="line">  visitor: <span class="literal">true</span> <span class="comment">// 阅读量统计</span></span><br></pre></td></tr></table></figure>
+<p>这样的话就算是配置好了，评论功能就可以用了，如果不能的话，请查看前端源代码检查是否正常生成了这三处代码</p>
+<p><img src="/2019/01/04/Essay-Valine配置/5.png" alt=""></p>
+<p><img src="/2019/01/04/Essay-Valine配置/6.png" alt=""></p>
+<p><img src="/2019/01/04/Essay-Valine配置/7.png" alt=""></p>
+<h2 id="阅读量统计"><a href="#阅读量统计" class="headerlink" title="阅读量统计"></a>阅读量统计</h2><p><a href="https://valine.js.org/visitor.html" target="_blank" rel="noopener">官方配置文档</a></p>
+<p>这个配置比较简单，主要就是有一个坑点</p>
+<p>首先如果你已经按照我上面说的默认设置visitor为true了的话</p>
+<p>那么只需要在刚才的page.ejs找个合适的位置，比如你的评论区的上方插入这段代码就可以了</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">'/&lt;%= page.path %&gt;'</span> <span class="attr">class</span>=<span class="string">"leancloud-visitors"</span> <span class="attr">data-flag-title</span>=<span class="string">"&lt;%= page.title %&gt;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">em</span> <span class="attr">class</span>=<span class="string">"post-meta-item-text"</span>&gt;</span>阅读量 <span class="tag">&lt;/<span class="name">em</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"leancloud-visitors-count"</span>&gt;</span>1000000<span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意一定要配置好你的id的值，比如这篇文章的url是：<a href="https://r1ngs.top/2019/01/04/Essay-Valine配置/">https://r1ngs.top/2019/01/04/Essay-Valine配置/</a></p>
+<p>那么id的值只能是：/2019/01/04/Essay-Valine配置/</p>
+<p>多一个、少一个斜线都不行，可以参考我的配置，也可以参看<a href="https://hexo.io/zh-cn/docs/variables" target="_blank" rel="noopener">hexo的变量</a></p>
+<p>如果配置好了的话是会自动创建Counter类的，如果没有自动创建，那么极大的可能是你的id没有正确配置</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>至此，Valine配置也就结束了，真的非常方便和简单</p>
+<p>特别感谢官方群里给过我帮助的大佬~</p>
+<p>如果还是有小伙伴配置失败的话，可以留下邮箱在下面评论回复，我看到后会尽快用邮件方式回复你的</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#随笔" >
+    <span class="tag-code">随笔</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2018/11/12/CTF-HCTF-2018-crypto/">
+        <span class="nav-arrow">← </span>
+        
+          HCTF-2018-crypto和一些思考
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/02/03/CTF-hgame-2019/">
+        
+          hgame2019几道有意思的Crypto
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+  </br>
+  <span id='/2019/01/04/Essay-Valine配置/' class="leancloud-visitors" data-flag-title="Valine的评论和阅读量统计功能配置">
+      <em class="post-meta-item-text">这篇水文的阅读量 </em>
+      <i class="leancloud-visitors-count">1000000</i>
+  </span>
+    
+        <!-- valine START -->
+        <div id="vcomments"></div>
+        <!-- valine END -->
+    
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Valine简介"><span class="toc-nav-text">Valine简介</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#评论功能配置"><span class="toc-nav-text">评论功能配置</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#HTML和JS代码配置"><span class="toc-nav-text">HTML和JS代码配置</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#阅读量统计"><span class="toc-nav-text">阅读量统计</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#结语"><span class="toc-nav-text">结语</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://r1ngs.top/2019/01/04/Essay-Valine配置/';
+    var banner = 'undefined'
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "undefined";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "Valine的评论和阅读量统计功能配置",
+        owner: "undefined",
+        repo: "undefined",
+        oauth: {
+          client_id: "undefined",
+          client_secret: "undefined"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+<script>
+  var disqus_shortname = 'null';
+  
+  var disqus_url = 'https://r1ngs.top/2019/01/04/Essay-Valine配置/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'U6Mi8KdqsN4W4eE3mdtxkGOb-gzGzoHsz',
+        appKey: 'pEaiuVgetU4E2j06NHtY0dn5',
+        notify: false, 
+        verify: false, 
+        avatar: 'mp', 
+        placeholder: '输入你的邮箱，我会在看到后尽快发邮件回复的哦。ヾﾉ≧∀≦)o',
+        pageSize: 12,
+        visitor: true // 阅读量统计,
+    })
+</script>
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+</body>
+</html>

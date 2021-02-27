@@ -10,23 +10,19 @@
   
   <title>
     
-      About | r1ngs&#39;s blog
+      r1ngs&#39;s blog
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
   <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/foundation.min.css" rel="stylesheet">
-  
-<link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/plugins/gitment.css">
-
   <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
-  
-<script src="/js/qrious.js"></script>
+  <script src="/js/qrious.js"></script>
 <script src="/js/gitment.js"></script>
-
   
   
     <!-- MathJax support START -->
@@ -53,7 +49,7 @@
   
 
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+</head>
 <div class="wechat-share">
   <img src="/css/images/logo.png" />
 </div>
@@ -141,54 +137,106 @@
   </div>
 </header>
 
-    <div id="about-banner" style="background-image: url(https://www.yu.edu/sites/default/files/math-515606506.jpg)"></div>
-<div class="author">
-  <div class="head">
-    <img src="https://avatars.githubusercontent.com/u/47496495?s=400&u=6a3cab31bf9b184f222c72d728a5db254093d6bf&v=4" />
-  </div>
-  <h3>r1ngs</h3>
-  
-    <p class="description">如果不是真的废物，谁又愿意混吃等死呢？</p>
-  
-  <section class="share-icons">
-    
-    
-    
-      <a class="icon-github" href="https://github.com/0xr1ngs" target="_blank">
-        <span class="fa-stack fa-lg">
-          <i class="fa fa-circle fa-stack-2x"></i>
-          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-        </span>
-      </a>
-    
-    
-    
-    
-  </section>
+    <div id="article-banner">
+  <h2>Archives</h2>
+  <p class="post-date">文章归档</p>
 </div>
+<main class="app-body" id="archives">
+  
+  
+  
+    <section class="time-section">
+  <h1 class="section-year">
+    2019
+  </h1>
+  <div class="section-list">
+    
+    
+      <div class="section-list-item">
+        <a href="/2019/08/12/量子基础/" class="archive-title">量子基础</a>
+        <p class="archive-date">08-12</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/06/03/random方法的安全问题/" class="archive-title">Java random方法的安全问题</a>
+        <p class="archive-date">06-03</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/05/28/Rabin加密算法/" class="archive-title">Rabin加密算法</a>
+        <p class="archive-date">05-28</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/05/02/CTF-starCTF/" class="archive-title">starCTF-crypto部分</a>
+        <p class="archive-date">05-02</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/04/05/反馈移位寄存器小结/" class="archive-title">反馈移位寄存器小结</a>
+        <p class="archive-date">04-05</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/04/05/深入研究字节反转攻击/" class="archive-title">深入研究字节反转攻击</a>
+        <p class="archive-date">04-05</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/03/16/Essay-bbp算法/" class="archive-title">bbp算法求PI的小数点后第n位</a>
+        <p class="archive-date">03-16</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/02/03/CTF-hgame-2019/" class="archive-title">hgame2019几道有意思的Crypto</a>
+        <p class="archive-date">02-03</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/01/04/Essay-Valine配置/" class="archive-title">Valine的评论和阅读量统计功能配置</a>
+        <p class="archive-date">01-04</p>
+      </div>
+    
+  </div>
+</section>
+  
+    <section class="time-section">
+  <h1 class="section-year">
+    2018
+  </h1>
+  <div class="section-list">
+    
+    
+      <div class="section-list-item">
+        <a href="/2018/11/12/CTF-HCTF-2018-crypto/" class="archive-title">HCTF-2018-crypto和一些思考</a>
+        <p class="archive-date">11-12</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2018/11/05/CTF-上海杯-crypto/" class="archive-title">上海杯-2018-crypto</a>
+        <p class="archive-date">11-05</p>
+      </div>
+    
+  </div>
+</section>
+  
+</main>
 
 <script>
   (function () {
-    $('.header').removeClass('fixed-header')
-    var windowH = $(window).height();
-    var author = $('.author')
-    var bodyH = author.offset().top + author[0].offsetHeight + 71;
-    if (bodyH < windowH) {
-      author.css({
-        'margin-bottom': windowH - bodyH
-      })
-    }
+    var url = 'https://r1ngs.top/archives/2019/03/index.html';
+    $('#article-banner').geopattern(url);
+    $('.header').removeClass('fixed-header');
   })();
 </script>
-
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
     <footer class="app-footer">
   <p class="copyright">
-    &copy; 2021 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
     <br>
-    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
   </p>
 </footer>
 
@@ -229,9 +277,7 @@
 </script>
 <!-- Baidu Tongji -->
 
-
 <script src="/js/script.js"></script>
-
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         tex2jax: {

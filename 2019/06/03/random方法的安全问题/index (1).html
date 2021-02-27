@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="r1ngs&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Java random方法的安全问题 | r1ngs&#39;s blog
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/foundation.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>r1ngs's blog</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<div id="article-banner">
+  <h2>Java random方法的安全问题</h2>
+  <p class="post-date">2019-06-03</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><a href="https://xz.aliyun.com/t/5284" target="_blank" rel="noopener">先知已投，戳我跳转</a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>起源于强网杯的密码学题目random study</p>
+<a id="more"></a>
+<h2 id="java-util-Random"><a href="#java-util-Random" class="headerlink" title="java.util.Random"></a>java.util.Random</h2><p>题目中challenge two的主要代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">o = subprocess.check_output([<span class="string">"java"</span>, <span class="string">"Main"</span>])</span><br><span class="line">tmp=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> o.split(<span class="string">"\n"</span>)[<span class="number">0</span>:<span class="number">3</span>]:</span><br><span class="line">	tmp.append(int(i.strip()))</span><br><span class="line">v1=tmp[<span class="number">0</span>] % <span class="number">0xffffffff</span></span><br><span class="line">v2=tmp[<span class="number">1</span>] % <span class="number">0xffffffff</span></span><br><span class="line">v3=tmp[<span class="number">2</span>] % <span class="number">0xffffffff</span></span><br></pre></td></tr></table></figure>
+<p>还给了一个Main.class文件，打开发现是字节码，用jd-gui反编译得到源码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] paramArrayOfString)</span> </span>&#123;</span><br><span class="line">    Random random = <span class="keyword">new</span> Random();</span><br><span class="line">    System.out.println(random.nextInt());</span><br><span class="line">    System.out.println(random.nextInt());</span><br><span class="line">    System.out.println(random.nextInt());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码的意思很简单，调用random.nextInt方法生成三个连续的随机数，要求根据前两个随机数去预测第三个随机数</p>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p>为了了解这个方法出现的安全问题的原理，有必要去查看一下这个方法的源代码</p>
+<p>在eclipse中将光标移动到nextInt处按F3可以追踪到jdk包里的具体代码</p>
+<p><img src="/2019/06/03/random方法的安全问题/1.png" alt=""></p>
+<p>可以看到它直接调用了next方法，传递的参数是32。</p>
+<p>继续追踪next方法</p>
+<p><img src="/2019/06/03/random方法的安全问题/2.png" alt=""></p>
+<p>可以看到前一个随机数种子和后一个随机数种子都是定义为long类型的，方法返回的值就是下一个种子<strong>右移</strong>16位然后强转为<strong>int</strong>的结果</p>
+<p>while里的compareAndSet方法只是比较当前的种子值是否为oldseed，如果是的话就更新为nextseed而已，一般都会返回true</p>
+<p>而下一个种子的更新算法就在do-while循环里面：<code>nextseed = (oldseed * multiplier + addend) &amp; mask</code>，种子的初始值是将当前系统时间带入运算的结果</p>
+<p>可以在类定义的开头处看到这几个常量属性的值</p>
+<p><img src="/2019/06/03/random方法的安全问题/3.png" alt=""></p>
+<p>而这个种子的更新算法本质上就是一个线性同余生成器</p>
+<h2 id="线性同余生成器（LCG）"><a href="#线性同余生成器（LCG）" class="headerlink" title="线性同余生成器（LCG）"></a>线性同余生成器（LCG）</h2><p>LCG是形如这样的式子：</p>
+<p><img src="/2019/06/03/random方法的安全问题/4.png" alt=""></p>
+<p>和上面的代码对比可以看出是基本一致的，因为和mask常量做与运算就相当于是舍弃高位，保留2进制的低47位，也就相当于模2的48次方</p>
+<p>那么我们既然都有了常量的值了，我们就可以去做第三个随机数的预测了</p>
+<h2 id="预测"><a href="#预测" class="headerlink" title="预测"></a>预测</h2><p>方法很简单，如果把生成第一个随机数的种子定义为seed1，seed2、seed3往后顺延的话</p>
+<p>seed1<strong>右移</strong>16位就是第一个随机数的值，也就是说第一个随机数就丢失了16位，所以seed1就有2的16次方种可能，那么把这2的16次方种可能带入计算下一个seed2，并且<strong>右移</strong>查看是否和第二个随机数相等就能知道是否正确找到了seed1了</p>
+<p>先看一组简单的测试样例，输出的三个随机数都是正数</p>
+<p><img src="/2019/06/03/random方法的安全问题/5.png" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">0x5DEECE66DL</span></span><br><span class="line">b = <span class="number">0xBL</span></span><br><span class="line">mask = (<span class="number">1L</span> &lt;&lt; <span class="number">48</span>) - <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findseed</span><span class="params">(x1, x2)</span>:</span></span><br><span class="line">    seed = x1 &lt;&lt; <span class="number">16</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span> ** <span class="number">16</span>):</span><br><span class="line">        <span class="keyword">if</span> ((a * seed + b) &amp; mask) &gt;&gt; <span class="number">16</span> == x2:</span><br><span class="line">            <span class="keyword">return</span>  seed</span><br><span class="line">        seed += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    x1 = <span class="number">1564370740</span></span><br><span class="line">    x2 = <span class="number">2121441037</span></span><br><span class="line"></span><br><span class="line">    seed1 = findseed(x1, x2)</span><br><span class="line">    seed2 = (a * seed1 + b) &amp; mask</span><br><span class="line">    x3 = ((a * seed2 + b) &amp; mask) &gt;&gt; <span class="number">16</span></span><br><span class="line">    <span class="keyword">print</span> x3</span><br></pre></td></tr></table></figure>
+<p>通过测试，结果正确</p>
+<p>但是你可能会好奇为什么测试的java代码有时候会输出负数，因为右移1位是相当于除以2的，一个正数除以一个正数怎么会得到一个负数呢？</p>
+<p>实际上这是由于java代码中的int强制类型转换和&gt;&gt;&gt;无符号右移所造成的</p>
+<h2 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h2><p>先来回顾一下java的int类型，int类型占四个字节，也就是二进制的32位</p>
+<blockquote>
+<p>计算机中的数字通常用二进制补码表示，最高位为符号位，正数为0，负数为1，所以表示数值的一共有31位，故int类型的最小值为-2147483648（-2的31次方）最大值为 2147483647（2的31次方-1）</p>
+<p>你可能会好奇为什么负数比正数多表示了1位，因为自然数0就是用全为0（包括符号位）的二进制表示的，而到负数那里是没有负0的概念的，所以可以多表示一个数 </p>
+</blockquote>
+<p>接下来可以开始说&gt;&gt;&gt;的意思了</p>
+<p>java中有两种右移，一种是&gt;&gt;，代表逻辑上的右移(除以)，高位补为符号位；一种是&gt;&gt;&gt;代表无符号右移，高位直接补0</p>
+<p>看一下这种情况：</p>
+<p><img src="/2019/06/03/random方法的安全问题/6.png" alt=""></p>
+<p>前两个为正数，但是第三个为负数，我们先按照上面的方法计算出seed3和它右移16位的结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">0x5DEECE66DL</span></span><br><span class="line">b = <span class="number">0xBL</span></span><br><span class="line">mask = (<span class="number">1L</span> &lt;&lt; <span class="number">48</span>) - <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findseed</span><span class="params">(x1, x2)</span>:</span></span><br><span class="line">    seed = x1 &lt;&lt; <span class="number">16</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span> ** <span class="number">16</span>):</span><br><span class="line">        <span class="keyword">if</span> ((a * seed + b) &amp; mask) &gt;&gt; <span class="number">16</span> == x2:</span><br><span class="line">            <span class="keyword">return</span>  seed</span><br><span class="line">        seed += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    x1 = <span class="number">1135971603</span></span><br><span class="line">    x2 = <span class="number">1130772191</span></span><br><span class="line"></span><br><span class="line">    seed1 = findseed(x1, x2)</span><br><span class="line">    seed2 = (a * seed1 + b) &amp; mask</span><br><span class="line">    seed3 = (a * seed2 + b) &amp; mask</span><br><span class="line">    <span class="keyword">print</span> seed3</span><br><span class="line">    <span class="keyword">print</span> seed3.bit_length()</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'&#123;:064b&#125;'</span>.format(seed3)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'&#123;:064b&#125;'</span>.format(seed3&gt;&gt;<span class="number">16</span>)</span><br></pre></td></tr></table></figure>
+<p>输出结果为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">141635148990318</span></span><br><span class="line"><span class="number">48</span></span><br><span class="line"><span class="number">0000000000000000100000001101000100000000101111100100011101101110</span></span><br><span class="line"><span class="number">0000000000000000000000000000000010000000110100010000000010111110</span></span><br></pre></td></tr></table></figure>
+<p>这样就能看出问题在哪了，由于seed3右移了16位以后除了补0的高位就只有32位了，使用int强转以后java把它从long类型转换成了int，并且自动忽略了32位以后的高位，这就相当于我们得到的第三个随机数用补码表示为<code>10000000110100010000000010111110</code></p>
+<p>可以看出来最高位为1，也就是说这个补码代表了一个负数，那么我们怎么通过补码找到这个负数的真值呢？很简单，对补码再求一次补码就行了，也就是取反后加1。</p>
+<p>即<code>01111111001011101111111101000010</code>，对应的二进制位2133786434，所以第三个随机数应该为-2133786434，如此一来，我们就可以通过负数找到其对应的seed了</p>
+<h2 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h2><p>最终通过两个随机数预测第三个随机数的exp如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">0x5DEECE66DL</span></span><br><span class="line">b = <span class="number">0xBL</span></span><br><span class="line">mask = (<span class="number">1L</span> &lt;&lt; <span class="number">48</span>) - <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">n2p</span><span class="params">(x)</span>:</span></span><br><span class="line">    y = -x</span><br><span class="line">    y ^= <span class="number">2</span> ** <span class="number">32</span> - <span class="number">1</span> <span class="comment">#取反</span></span><br><span class="line">    y += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> y</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findseed</span><span class="params">(x1, x2)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> x1 &lt; <span class="number">0</span>:</span><br><span class="line">        x1 = n2p(x1)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> x2 &lt; <span class="number">0</span>:</span><br><span class="line">        x2 = n2p(x2)</span><br><span class="line"></span><br><span class="line">    seed = x1 &lt;&lt; <span class="number">16</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span> ** <span class="number">16</span>):</span><br><span class="line">        <span class="keyword">if</span> ((a * seed + b) &amp; mask) &gt;&gt; <span class="number">16</span> == x2:</span><br><span class="line">            <span class="keyword">return</span> seed</span><br><span class="line">        seed += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cal_x</span><span class="params">(seed)</span>:</span></span><br><span class="line">    x = seed&gt;&gt;<span class="number">16</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">'&#123;:032b&#125;'</span>.format(x).startswith(<span class="string">'1'</span>):</span><br><span class="line">        x ^= <span class="number">2</span> ** <span class="number">32</span> - <span class="number">1</span></span><br><span class="line">        x += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> -x</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    x1 = <span class="number">187562908</span></span><br><span class="line">    x2 = <span class="number">1663125607</span></span><br><span class="line"></span><br><span class="line">    seed1 = findseed(x1, x2)</span><br><span class="line">    seed2 = (a * seed1 + b) &amp; mask</span><br><span class="line">    seed3 = (a * seed2 + b) &amp; mask</span><br><span class="line">    x3 = cal_x(seed3)</span><br><span class="line">    <span class="keyword">print</span> x3</span><br></pre></td></tr></table></figure>
+<p>经过测试，无论x1或者x2是否为负数，都可以准确预测</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以前学习LCG的时候，只是知道了它的原理，并没有接触到它在实际情况中的应用，通过这次比赛，学到了java的random方法的安全漏洞，同时也十分感谢出题人提供的学习机会</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#分析" >
+    <span class="tag-code">分析</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/05/28/Rabin加密算法/">
+        <span class="nav-arrow">← </span>
+        
+          Rabin加密算法
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/08/12/量子基础/">
+        
+          量子基础
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+  </br>
+  <span id='/2019/06/03/random方法的安全问题/' class="leancloud-visitors" data-flag-title="Java random方法的安全问题">
+      <em class="post-meta-item-text">这篇水文的阅读量 </em>
+      <i class="leancloud-visitors-count">1000000</i>
+  </span>
+    
+        <!-- valine START -->
+        <div id="vcomments"></div>
+        <!-- valine END -->
+    
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前言"><span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#java-util-Random"><span class="toc-nav-text">java.util.Random</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#源码分析"><span class="toc-nav-text">源码分析</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#线性同余生成器（LCG）"><span class="toc-nav-text">线性同余生成器（LCG）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#预测"><span class="toc-nav-text">预测</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#补码"><span class="toc-nav-text">补码</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#exp"><span class="toc-nav-text">exp</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#总结"><span class="toc-nav-text">总结</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://r1ngs.top/2019/06/03/random方法的安全问题/';
+    var banner = 'undefined'
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "undefined";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "Java random方法的安全问题",
+        owner: "undefined",
+        repo: "undefined",
+        oauth: {
+          client_id: "undefined",
+          client_secret: "undefined"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+<script>
+  var disqus_shortname = 'null';
+  
+  var disqus_url = 'https://r1ngs.top/2019/06/03/random方法的安全问题/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'U6Mi8KdqsN4W4eE3mdtxkGOb-gzGzoHsz',
+        appKey: 'pEaiuVgetU4E2j06NHtY0dn5',
+        notify: false, 
+        verify: false, 
+        avatar: 'mp', 
+        placeholder: '输入你的邮箱，我会在看到后尽快发邮件回复的哦。ヾﾉ≧∀≦)o',
+        pageSize: 12,
+        visitor: true // 阅读量统计,
+    })
+</script>
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+</body>
+</html>
